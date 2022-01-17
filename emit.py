@@ -23,22 +23,22 @@ class AsmInstruction:
         return repr(self)
 
 
-class AsmRelocation:
-    asm_re = re.compile("([0-9a-f]{8})\s+(\S+)\s+(.+)")
+# class AsmRelocation:
+#     asm_re = re.compile("([0-9a-f]{8})\s+(\S+)\s+(.+)")
 
-    def __init__(self, objdump_str: str):
-        self.objdump_str = objdump_str
+#     def __init__(self, objdump_str: str):
+#         self.objdump_str = objdump_str
 
-        m = self.asm_re.search(objdump_str)
-        self.offset: int = int(m.group(1), base=16)
-        self.type: str = m.group(2)  # relocation type
-        self.value: str = m.group(3)  # mapped value
+#         m = self.asm_re.search(objdump_str)
+#         self.offset: int = int(m.group(1), base=16)
+#         self.type: str = m.group(2)  # relocation type
+#         self.value: str = m.group(3)  # mapped value
 
-    def __repr__(self):
-        return f"{{[{hex(self.offset)}] {self.type}: {self.value}}}"
+#     def __repr__(self):
+#         return f"{{[{hex(self.offset)}] {self.type}: {self.value}}}"
 
-    def __str__(self):
-        return repr(self)
+#     def __str__(self):
+#         return repr(self)
 
 
 def read_file_lines(file_path: str) -> List[str]:
@@ -66,14 +66,14 @@ def main():
 
     # obj_name = sys.argv[1]
 
-    obj_name = "main"
+    obj_name = "main.out"
 
     # Parse input files
 
     asm_path = obj_name + ".asm"
     asm_str_lines = read_file_lines(asm_path)
-    reloc_path = obj_name + ".reloc"
-    reloc_str_lines = read_file_lines(reloc_path)
+    # reloc_path = obj_name + ".reloc"
+    # reloc_str_lines = read_file_lines(reloc_path)
 
     read_func = ""
     read_section = ""
@@ -109,32 +109,32 @@ def main():
 
     print(parsed_asm_data)
 
-    read_section = ""
-    SectionAndOffset = Tuple[str, int]
-    parsed_relocs: Dict[SectionAndOffset, AsmRelocation] = {}
+    # read_section = ""
+    # SectionAndOffset = Tuple[str, int]
+    # parsed_relocs: Dict[SectionAndOffset, AsmRelocation] = {}
 
-    i = 0
-    while i < len(reloc_str_lines):
-        line = reloc_str_lines[i]
-        if line == "":
-            pass
-        elif line.startswith("RELOCATION"):
-            read_section = line[24:-2]
-        elif line.find("R_MIPS_26") > 0:
-            rel = AsmRelocation(line)
-            if rel.offset != 0:
-                parsed_relocs[(read_section, rel.offset)] = rel
+    # i = 0
+    # while i < len(reloc_str_lines):
+    #     line = reloc_str_lines[i]
+    #     if line == "":
+    #         pass
+    #     elif line.startswith("RELOCATION"):
+    #         read_section = line[24:-2]
+    #     elif line.find("R_MIPS_26") > 0:
+    #         rel = AsmRelocation(line)
+    #         if rel.offset != 0:
+    #             parsed_relocs[(read_section, rel.offset)] = rel
 
-        i += 1
+    #     i += 1
 
-    print(parsed_relocs)
+    # print(parsed_relocs)
 
     # TODO: setup()
 
     # Emit pnach
 
     pnach_str = f"// {asm_path}\n\n"
-    auto_func_addr = 0x1000000 - 0x1000  # - 0x96000
+    # auto_func_addr = 0x1000000 - 0x1000  # - 0x96000
 
     addr_mapping: Dict[int, int] = {}
     func_mapping: Dict[str, int] = {}
@@ -143,12 +143,9 @@ def main():
         pnach_str += f"// Function: {func}\n"
 
         # Determine func addr
-        use_auto_func_addr: bool = False
         func_addr = 0
         if section == ".text":
-            func_addr = auto_func_addr
-            use_auto_func_addr = True
-            # auto_func_addr += 4
+            func_addr = insns[0].offset
         elif section.startswith(".addr."):
             func_addr = int(section[8:], base=16)
         else:
@@ -160,34 +157,29 @@ def main():
         if func == "setup()":
             _start_addr = 0x00100008
             jump_code = asm_j_str(func_addr)
-            pnach_str += (
-                f"patch=0,EE,{_start_addr  :08X},word,{jump_code} // jal \tsetup()\n"
-            )
+            pnach_str += "// BOOTSTRAP\n"
+            pnach_str += f"patch=0,EE,{_start_addr  :08X},word,{jump_code} // jal\tsetup()\n"
             pnach_str += f"patch=0,EE,{_start_addr+4:08X},word,00000000 // nop\n"
+            pnach_str += "// BOOTSTRAP END\n"
 
         for insn in insns:
             # if insn.offset == 0x88:
             # breakpoint()
 
-            # Apply relocations if needed
-            if (section, insn.offset) in parsed_relocs:
-                target = parsed_relocs[(section, insn.offset)].value
-                relocated_addr = func_mapping[target]
+            # # Apply relocations if needed
+            # if (section, insn.offset) in parsed_relocs:
+            #     target = parsed_relocs[(section, insn.offset)].value
+            #     relocated_addr = func_mapping[target]
 
-                if insn.code == "0c000000":  # jal
-                    insn.code = asm_jal_str(relocated_addr)
-                elif insn.code == "08000000":  # j
-                    insn.code = asm_j_str(relocated_addr)
-                else:
-                    assert False
+            #     if insn.code == "0c000000":  # jal
+            #         insn.code = asm_jal_str(relocated_addr)
+            #     elif insn.code == "08000000":  # j
+            #         insn.code = asm_j_str(relocated_addr)
+            #     else:
+            #         assert False
 
             # Finally, emit pnach str
-            addr = 0
-            if use_auto_func_addr:
-                addr = auto_func_addr
-                auto_func_addr += 4
-            else:
-                addr = func_addr + insn.offset
+            addr = func_addr + insn.offset - insns[0].offset
 
             pnach_str += f"patch=0,EE,{addr:08X},word,{insn.code} // {insn.text}\n"
             addr_mapping[insn.offset] = addr

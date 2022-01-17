@@ -1,0 +1,70 @@
+// main.out.asm
+
+// Function: main
+patch=0,EE,00FF0000,word,03e00008 // jr	ra
+patch=0,EE,00FF0004,word,00001025 // move	v0,zero
+
+// Function: hook(unsigned long, unsigned long)
+patch=0,EE,00FF0008,word,8c860000 // lw	a2,0(a0)
+patch=0,EE,00FF000C,word,3c0200ff // lui	v0,0xff
+patch=0,EE,00FF0010,word,8c830004 // lw	v1,4(a0)
+patch=0,EE,00FF0014,word,00052882 // srl	a1,a1,0x2
+patch=0,EE,00FF0018,word,ac4601e8 // sw	a2,488(v0)
+patch=0,EE,00FF001C,word,244201e8 // addiu	v0,v0,488
+patch=0,EE,00FF0020,word,ac430004 // sw	v1,4(v0)
+patch=0,EE,00FF0024,word,3c020800 // lui	v0,0x800
+patch=0,EE,00FF0028,word,00a22825 // or	a1,a1,v0
+patch=0,EE,00FF002C,word,ac800004 // sw	zero,4(a0)
+patch=0,EE,00FF0030,word,03e00008 // jr	ra
+patch=0,EE,00FF0034,word,ac850000 // sw	a1,0(a0)
+
+// Function: unhook(unsigned long, unsigned long*)
+patch=0,EE,00FF0038,word,8ca20000 // lw	v0,0(a1)
+patch=0,EE,00FF003C,word,ac820000 // sw	v0,0(a0)
+patch=0,EE,00FF0040,word,8ca20004 // lw	v0,4(a1)
+patch=0,EE,00FF0044,word,03e00008 // jr	ra
+patch=0,EE,00FF0048,word,ac820004 // sw	v0,4(a0)
+
+// Function: replace_Startup()
+patch=0,EE,00FF004C,word,3c0500ff // lui	a1,0xff
+patch=0,EE,00FF0050,word,3c040019 // lui	a0,0x19
+patch=0,EE,00FF0054,word,27bdfff0 // addiu	sp,sp,-16
+patch=0,EE,00FF0058,word,24842770 // addiu	a0,a0,10096
+patch=0,EE,00FF005C,word,24a501e8 // addiu	a1,a1,488
+patch=0,EE,00FF0060,word,ffbf0008 // sd	ra,8(sp)
+patch=0,EE,00FF0064,word,0c3fc00e // jal	ff0038 <unhook(unsigned long, unsigned long*)>
+patch=0,EE,00FF0068,word,ffb00000 // sd	s0,0(sp)
+patch=0,EE,00FF006C,word,0080f809 // jalr	a0
+patch=0,EE,00FF0070,word,00808025 // move	s0,a0
+patch=0,EE,00FF0074,word,3c0500ff // lui	a1,0xff
+patch=0,EE,00FF0078,word,dfbf0008 // ld	ra,8(sp)
+patch=0,EE,00FF007C,word,02002025 // move	a0,s0
+patch=0,EE,00FF0080,word,24a5004c // addiu	a1,a1,76
+patch=0,EE,00FF0084,word,dfb00000 // ld	s0,0(sp)
+patch=0,EE,00FF0088,word,083fc002 // j	ff0008 <hook(unsigned long, unsigned long)>
+patch=0,EE,00FF008C,word,27bd0010 // addiu	sp,sp,16
+
+// Function: setup()
+// BOOTSTRAP
+patch=0,EE,00100008,word,083fc024 // jal	setup()
+patch=0,EE,0010000C,word,00000000 // nop
+// BOOTSTRAP END
+patch=0,EE,00FF0090,word,3c0500ff // lui	a1,0xff
+patch=0,EE,00FF0094,word,3c040019 // lui	a0,0x19
+patch=0,EE,00FF0098,word,27bdfff0 // addiu	sp,sp,-16
+patch=0,EE,00FF009C,word,24a5004c // addiu	a1,a1,76
+patch=0,EE,00FF00A0,word,ffbf0008 // sd	ra,8(sp)
+patch=0,EE,00FF00A4,word,0c3fc002 // jal	ff0008 <hook(unsigned long, unsigned long)>
+patch=0,EE,00FF00A8,word,24842770 // addiu	a0,a0,10096
+patch=0,EE,00FF00AC,word,3c033c02 // lui	v1,0x3c02
+patch=0,EE,00FF00B0,word,3c020010 // lui	v0,0x10
+patch=0,EE,00FF00B4,word,2463002a // addiu	v1,v1,42
+patch=0,EE,00FF00B8,word,ac430008 // sw	v1,8(v0)
+patch=0,EE,00FF00BC,word,3c033c03 // lui	v1,0x3c03
+patch=0,EE,00FF00C0,word,24630068 // addiu	v1,v1,104
+patch=0,EE,00FF00C4,word,dfbf0008 // ld	ra,8(sp)
+patch=0,EE,00FF00C8,word,ac43000c // sw	v1,12(v0)
+patch=0,EE,00FF00CC,word,24590008 // addiu	t9,v0,8
+patch=0,EE,00FF00D0,word,03200008 // jr	t9
+patch=0,EE,00FF00D4,word,27bd0010 // addiu	sp,sp,16
+

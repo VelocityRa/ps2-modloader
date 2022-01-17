@@ -16,7 +16,7 @@ Disassembly of section .text:
   ff0018:	ac4601e8 	sw	a2,488(v0)
   ff001c:	244201e8 	addiu	v0,v0,488
   ff0020:	ac430004 	sw	v1,4(v0)
-  ff0024:	3c020c00 	lui	v0,0xc00
+  ff0024:	3c020800 	lui	v0,0x800
   ff0028:	00a22825 	or	a1,a1,v0
   ff002c:	ac800004 	sw	zero,4(a0)
   ff0030:	03e00008 	jr	ra

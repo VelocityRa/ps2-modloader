@@ -1,6 +1,3 @@
-// TODO: emit to pnach
-// TODO: func hooking
-
 #include "types.hpp"
 
 using namespace std;
@@ -16,17 +13,9 @@ using namespace std;
 // };
 // DECLARE_STATIC(myvec, vec_t, 0x10000000);
 
-// int func1() {
-//     return myvec.x;
-// }
+void (* const orig__start)() = (void(*)())0x00100008;
+void (* const orig_Startup)() = (void(*)())0x00192770;
 
-// int func2() {
-//     return func1() + 42;
-// }
-
-// int func3() {
-//     return func1() + myvec.y;
-// }
 
 // todo: storage for these
 u32 g_orig_code[2]{};
@@ -37,8 +26,8 @@ void hook(address orig_func, address replace_addr) {
     g_orig_code[0] = orig_code[0];
     g_orig_code[1] = orig_code[1];
 
-    orig_code_ptr[0] = 0x0C000000 | (replace_addr >> 2);
-    orig_code_ptr[1] = 0x00000000; // Place nop in branch delay slot
+    orig_code_ptr[0] = 0x08000000 | (replace_addr >> 2); // j
+    orig_code_ptr[1] = 0x00000000; // nop
 }
 
 void unhook(address func, u32 orig_code[2]) {
@@ -46,11 +35,6 @@ void unhook(address func, u32 orig_code[2]) {
     func_code_ptr[0] = orig_code[0];
     func_code_ptr[1] = orig_code[1];
 }
-
-constexpr address _start_addr = 0x00100008;
-
-void (* const orig__start)() = (void(*)())_start_addr;
-void (* const orig_Startup)() = (void(*)())0x00192770;
 
 void replace_Startup() {
     // temporarily unhook so we can call orig
@@ -62,20 +46,22 @@ void replace_Startup() {
     // todo stuff
 
     // re-hook
-    hook((address)orig_Startup, (address)replace_Startup);
+    hook((address)orig_Startup, (address)&replace_Startup);
 }
 
 // todo: figure out hook target addr resolution
 
 
 void setup() {
-    hook((address)orig_Startup, (address)replace_Startup);
+    hook((address)orig_Startup, (address)&replace_Startup);
 
+
+    // Setup epilogue
 
     // Restore orig bytes
     // TODO: Don't hardcode these, maybe they're different in other games?
-    *(u32*)_start_addr = 0x3C02002A; // lui	v0,0x002A
-    *(u32*)(_start_addr + 4) = 0x3C030068; // lui v1,0x0068
+    *(u32*)(orig__start + 0) = 0x3C02002A; // lui v0,0x002A
+    *(u32*)(orig__start + 4) = 0x3C030068; // lui v1,0x0068
 
     orig__start();
 }
