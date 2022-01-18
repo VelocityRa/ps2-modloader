@@ -1,70 +1,1579 @@
 // main.out.asm
 
-// Function: main
-patch=0,EE,00FF0000,word,03e00008 // jr	ra
-patch=0,EE,00FF0004,word,00001025 // move	v0,zero
+// Function: _GLOBAL__sub_D__Z7ta_initPKvS0_jjj
+patch=0,EE,00FF0000,word,083fc33f // j	ff0cfc <__static_initialization_and_destruction_0(int, int) [clone .constprop.0]>
+patch=0,EE,00FF0004,word,00002025 // move	a0,zero
+
+// Function: _GLOBAL__sub_I__Z7ta_initPKvS0_jjj
+patch=0,EE,00FF0008,word,083fc33f // j	ff0cfc <__static_initialization_and_destruction_0(int, int) [clone .constprop.0]>
+patch=0,EE,00FF000C,word,24040001 // li	a0,1
+
+// Function: insert_block(Block*)
+patch=0,EE,00FF0010,word,8f86802c // lw	a2,-32724(gp)
+patch=0,EE,00FF0014,word,00001825 // move	v1,zero
+patch=0,EE,00FF0018,word,8cc20000 // lw	v0,0(a2)
+patch=0,EE,00FF001C,word,14400006 // bnez	v0,ff0038 <insert_block(Block*)+0x28>
+patch=0,EE,00FF0020,word,00000000 // nop
+patch=0,EE,00FF0024,word,1060000c // beqz	v1,ff0058 <insert_block(Block*)+0x48>
+patch=0,EE,00FF0028,word,00000000 // nop
+patch=0,EE,00FF002C,word,ac640004 // sw	a0,4(v1)
+patch=0,EE,00FF0030,word,03e00008 // jr	ra
+patch=0,EE,00FF0034,word,ac820004 // sw	v0,4(a0)
+patch=0,EE,00FF0038,word,8c850000 // lw	a1,0(a0)
+patch=0,EE,00FF003C,word,8c470000 // lw	a3,0(v0)
+patch=0,EE,00FF0040,word,00e5282b // sltu	a1,a3,a1
+patch=0,EE,00FF0044,word,10a0fff7 // beqz	a1,ff0024 <insert_block(Block*)+0x14>
+patch=0,EE,00FF0048,word,00000000 // nop
+patch=0,EE,00FF004C,word,00401825 // move	v1,v0
+patch=0,EE,00FF0050,word,1000fff2 // b	ff001c <insert_block(Block*)+0xc>
+patch=0,EE,00FF0054,word,8c420004 // lw	v0,4(v0)
+patch=0,EE,00FF0058,word,1000fff5 // b	ff0030 <insert_block(Block*)+0x20>
+patch=0,EE,00FF005C,word,acc40000 // sw	a0,0(a2)
+
+// Function: release_blocks(Block*, Block*)
+patch=0,EE,00FF0060,word,8f82802c // lw	v0,-32724(gp)
+patch=0,EE,00FF0064,word,14850003 // bne	a0,a1,ff0074 <release_blocks(Block*, Block*)+0x14>
+patch=0,EE,00FF0068,word,00000000 // nop
+patch=0,EE,00FF006C,word,03e00008 // jr	ra
+patch=0,EE,00FF0070,word,00000000 // nop
+patch=0,EE,00FF0074,word,8c460008 // lw	a2,8(v0)
+patch=0,EE,00FF0078,word,8c830004 // lw	v1,4(a0)
+patch=0,EE,00FF007C,word,ac860004 // sw	a2,4(a0)
+patch=0,EE,00FF0080,word,ac440008 // sw	a0,8(v0)
+patch=0,EE,00FF0084,word,ac800000 // sw	zero,0(a0)
+patch=0,EE,00FF0088,word,ac800008 // sw	zero,8(a0)
+patch=0,EE,00FF008C,word,1000fff5 // b	ff0064 <release_blocks(Block*, Block*)+0x4>
+patch=0,EE,00FF0090,word,00602025 // move	a0,v1
+
+// Function: compact()
+patch=0,EE,00FF0094,word,27bdfff0 // addiu	sp,sp,-16
+patch=0,EE,00FF0098,word,8f82802c // lw	v0,-32724(gp)
+patch=0,EE,00FF009C,word,8c470000 // lw	a3,0(v0)
+patch=0,EE,00FF00A0,word,ffbf0008 // sd	ra,8(sp)
+patch=0,EE,00FF00A4,word,14e00004 // bnez	a3,ff00b8 <compact()+0x24>
+patch=0,EE,00FF00A8,word,00000000 // nop
+patch=0,EE,00FF00AC,word,dfbf0008 // ld	ra,8(sp)
+patch=0,EE,00FF00B0,word,03e00008 // jr	ra
+patch=0,EE,00FF00B4,word,27bd0010 // addiu	sp,sp,16
+patch=0,EE,00FF00B8,word,8ce40004 // lw	a0,4(a3)
+patch=0,EE,00FF00BC,word,00e01025 // move	v0,a3
+patch=0,EE,00FF00C0,word,00801825 // move	v1,a0
+patch=0,EE,00FF00C4,word,14600005 // bnez	v1,ff00dc <compact()+0x48>
+patch=0,EE,00FF00C8,word,00000000 // nop
+patch=0,EE,00FF00CC,word,14e2000c // bne	a3,v0,ff0100 <compact()+0x6c>
+patch=0,EE,00FF00D0,word,00000000 // nop
+patch=0,EE,00FF00D4,word,1000fff3 // b	ff00a4 <compact()+0x10>
+patch=0,EE,00FF00D8,word,8ce70004 // lw	a3,4(a3)
+patch=0,EE,00FF00DC,word,8c460008 // lw	a2,8(v0)
+patch=0,EE,00FF00E0,word,8c450000 // lw	a1,0(v0)
+patch=0,EE,00FF00E4,word,00a62821 // addu	a1,a1,a2
+patch=0,EE,00FF00E8,word,8c660000 // lw	a2,0(v1)
+patch=0,EE,00FF00EC,word,14c5fff7 // bne	a2,a1,ff00cc <compact()+0x38>
+patch=0,EE,00FF00F0,word,00000000 // nop
+patch=0,EE,00FF00F4,word,00601025 // move	v0,v1
+patch=0,EE,00FF00F8,word,1000fff2 // b	ff00c4 <compact()+0x30>
+patch=0,EE,00FF00FC,word,8c630004 // lw	v1,4(v1)
+patch=0,EE,00FF0100,word,8c450008 // lw	a1,8(v0)
+patch=0,EE,00FF0104,word,8ce30000 // lw	v1,0(a3)
+patch=0,EE,00FF0108,word,00a32823 // subu	a1,a1,v1
+patch=0,EE,00FF010C,word,8c430000 // lw	v1,0(v0)
+patch=0,EE,00FF0110,word,00651821 // addu	v1,v1,a1
+patch=0,EE,00FF0114,word,8c450004 // lw	a1,4(v0)
+patch=0,EE,00FF0118,word,0c3fc018 // jal	ff0060 <release_blocks(Block*, Block*)>
+patch=0,EE,00FF011C,word,ace30008 // sw	v1,8(a3)
+patch=0,EE,00FF0120,word,1000ffec // b	ff00d4 <compact()+0x40>
+patch=0,EE,00FF0124,word,ace50004 // sw	a1,4(a3)
+
+// Function: alloc_block(unsigned int)
+patch=0,EE,00FF0128,word,8f838028 // lw	v1,-32728(gp)
+patch=0,EE,00FF012C,word,27bdfff0 // addiu	sp,sp,-16
+patch=0,EE,00FF0130,word,2465ffff // addiu	a1,v1,-1
+patch=0,EE,00FF0134,word,8f88802c // lw	a4,-32724(gp)
+patch=0,EE,00FF0138,word,00a42821 // addu	a1,a1,a0
+patch=0,EE,00FF013C,word,00031823 // negu	v1,v1
+patch=0,EE,00FF0140,word,8d090000 // lw	a5,0(a4)
+patch=0,EE,00FF0144,word,00651824 // and	v1,v1,a1
+patch=0,EE,00FF0148,word,ffbf0008 // sd	ra,8(sp)
+patch=0,EE,00FF014C,word,00002025 // move	a0,zero
+patch=0,EE,00FF0150,word,8d02000c // lw	v0,12(a4)
+patch=0,EE,00FF0154,word,8f878024 // lw	a3,-32732(gp)
+patch=0,EE,00FF0158,word,15200011 // bnez	a5,ff01a0 <alloc_block(unsigned int)+0x78>
+patch=0,EE,00FF015C,word,00000000 // nop
+patch=0,EE,00FF0160,word,8d040008 // lw	a0,8(a4)
+patch=0,EE,00FF0164,word,10800027 // beqz	a0,ff0204 <alloc_block(unsigned int)+0xdc>
+patch=0,EE,00FF0168,word,00432821 // addu	a1,v0,v1
+patch=0,EE,00FF016C,word,00e5382b // sltu	a3,a3,a1
+patch=0,EE,00FF0170,word,14e00024 // bnez	a3,ff0204 <alloc_block(unsigned int)+0xdc>
+patch=0,EE,00FF0174,word,00000000 // nop
+patch=0,EE,00FF0178,word,8c860004 // lw	a2,4(a0)
+patch=0,EE,00FF017C,word,00804825 // move	a5,a0
+patch=0,EE,00FF0180,word,ad060008 // sw	a2,8(a4)
+patch=0,EE,00FF0184,word,ac820000 // sw	v0,0(a0)
+patch=0,EE,00FF0188,word,8d020004 // lw	v0,4(a4)
+patch=0,EE,00FF018C,word,ac820004 // sw	v0,4(a0)
+patch=0,EE,00FF0190,word,ac830008 // sw	v1,8(a0)
+patch=0,EE,00FF0194,word,ad040004 // sw	a0,4(a4)
+patch=0,EE,00FF0198,word,1000001a // b	ff0204 <alloc_block(unsigned int)+0xdc>
+patch=0,EE,00FF019C,word,ad05000c // sw	a1,12(a4)
+patch=0,EE,00FF01A0,word,8d250000 // lw	a1,0(a5)
+patch=0,EE,00FF01A4,word,8d260008 // lw	a2,8(a5)
+patch=0,EE,00FF01A8,word,00a65821 // addu	a7,a1,a2
+patch=0,EE,00FF01AC,word,8d2a0004 // lw	a6,4(a5)
+patch=0,EE,00FF01B0,word,0162582b // sltu	a7,a7,v0
+patch=0,EE,00FF01B4,word,15600005 // bnez	a7,ff01cc <alloc_block(unsigned int)+0xa4>
+patch=0,EE,00FF01B8,word,00000000 // nop
+patch=0,EE,00FF01BC,word,00a35821 // addu	a7,a1,v1
+patch=0,EE,00FF01C0,word,00eb582b // sltu	a7,a3,a7
+patch=0,EE,00FF01C4,word,11600013 // beqz	a7,ff0214 <alloc_block(unsigned int)+0xec>
+patch=0,EE,00FF01C8,word,00000000 // nop
+patch=0,EE,00FF01CC,word,00c3582b // sltu	a7,a2,v1
+patch=0,EE,00FF01D0,word,15600027 // bnez	a7,ff0270 <alloc_block(unsigned int)+0x148>
+patch=0,EE,00FF01D4,word,00000000 // nop
+patch=0,EE,00FF01D8,word,00001025 // move	v0,zero
+patch=0,EE,00FF01DC,word,1080000f // beqz	a0,ff021c <alloc_block(unsigned int)+0xf4>
+patch=0,EE,00FF01E0,word,00000000 // nop
+patch=0,EE,00FF01E4,word,ac8a0004 // sw	a6,4(a0)
+patch=0,EE,00FF01E8,word,8d040004 // lw	a0,4(a4)
+patch=0,EE,00FF01EC,word,ad240004 // sw	a0,4(a5)
+patch=0,EE,00FF01F0,word,1040000c // beqz	v0,ff0224 <alloc_block(unsigned int)+0xfc>
+patch=0,EE,00FF01F4,word,ad090004 // sw	a5,4(a4)
+patch=0,EE,00FF01F8,word,00a32821 // addu	a1,a1,v1
+patch=0,EE,00FF01FC,word,ad230008 // sw	v1,8(a5)
+patch=0,EE,00FF0200,word,ad05000c // sw	a1,12(a4)
+patch=0,EE,00FF0204,word,dfbf0008 // ld	ra,8(sp)
+patch=0,EE,00FF0208,word,01201025 // move	v0,a5
+patch=0,EE,00FF020C,word,03e00008 // jr	ra
+patch=0,EE,00FF0210,word,27bd0010 // addiu	sp,sp,16
+patch=0,EE,00FF0214,word,1000fff1 // b	ff01dc <alloc_block(unsigned int)+0xb4>
+patch=0,EE,00FF0218,word,24020001 // li	v0,1
+patch=0,EE,00FF021C,word,1000fff2 // b	ff01e8 <alloc_block(unsigned int)+0xc0>
+patch=0,EE,00FF0220,word,ad0a0000 // sw	a6,0(a4)
+patch=0,EE,00FF0224,word,8d040008 // lw	a0,8(a4)
+patch=0,EE,00FF0228,word,1080fff6 // beqz	a0,ff0204 <alloc_block(unsigned int)+0xdc>
+patch=0,EE,00FF022C,word,00000000 // nop
+patch=0,EE,00FF0230,word,00c33023 // subu	a2,a2,v1
+patch=0,EE,00FF0234,word,8f828020 // lw	v0,-32736(gp)
+patch=0,EE,00FF0238,word,00c2102b // sltu	v0,a2,v0
+patch=0,EE,00FF023C,word,1440fff1 // bnez	v0,ff0204 <alloc_block(unsigned int)+0xdc>
+patch=0,EE,00FF0240,word,00000000 // nop
+patch=0,EE,00FF0244,word,8c820004 // lw	v0,4(a0)
+patch=0,EE,00FF0248,word,00a32821 // addu	a1,a1,v1
+patch=0,EE,00FF024C,word,ad230008 // sw	v1,8(a5)
+patch=0,EE,00FF0250,word,ad020008 // sw	v0,8(a4)
+patch=0,EE,00FF0254,word,ac850000 // sw	a1,0(a0)
+patch=0,EE,00FF0258,word,0c3fc004 // jal	ff0010 <insert_block(Block*)>
+patch=0,EE,00FF025C,word,ac860008 // sw	a2,8(a0)
+patch=0,EE,00FF0260,word,0c3fc025 // jal	ff0094 <compact()>
+patch=0,EE,00FF0264,word,00000000 // nop
+patch=0,EE,00FF0268,word,1000ffe6 // b	ff0204 <alloc_block(unsigned int)+0xdc>
+patch=0,EE,00FF026C,word,00000000 // nop
+patch=0,EE,00FF0270,word,01202025 // move	a0,a5
+patch=0,EE,00FF0274,word,1000ffb8 // b	ff0158 <alloc_block(unsigned int)+0x30>
+patch=0,EE,00FF0278,word,01404825 // move	a5,a6
+
+// Function: ta_alloc(unsigned int)
+patch=0,EE,00FF027C,word,27bdfff0 // addiu	sp,sp,-16
+patch=0,EE,00FF0280,word,ffbf0008 // sd	ra,8(sp)
+patch=0,EE,00FF0284,word,0c3fc04a // jal	ff0128 <alloc_block(unsigned int)>
+patch=0,EE,00FF0288,word,00000000 // nop
+patch=0,EE,00FF028C,word,10400002 // beqz	v0,ff0298 <ta_alloc(unsigned int)+0x1c>
+patch=0,EE,00FF0290,word,00000000 // nop
+patch=0,EE,00FF0294,word,8c420000 // lw	v0,0(v0)
+patch=0,EE,00FF0298,word,dfbf0008 // ld	ra,8(sp)
+patch=0,EE,00FF029C,word,03e00008 // jr	ra
+patch=0,EE,00FF02A0,word,27bd0010 // addiu	sp,sp,16
+
+// Function: etl::exception::exception(char const*, char const*, int)
+patch=0,EE,00FF02A4,word,ac850000 // sw	a1,0(a0)
+patch=0,EE,00FF02A8,word,ac860004 // sw	a2,4(a0)
+patch=0,EE,00FF02AC,word,03e00008 // jr	ra
+patch=0,EE,00FF02B0,word,ac870008 // sw	a3,8(a0)
+
+// Function: etl::pvoidvector::push_back(void*)
+patch=0,EE,00FF02B4,word,8c820008 // lw	v0,8(a0)
+patch=0,EE,00FF02B8,word,24430004 // addiu	v1,v0,4
+patch=0,EE,00FF02BC,word,ac830008 // sw	v1,8(a0)
+patch=0,EE,00FF02C0,word,03e00008 // jr	ra
+patch=0,EE,00FF02C4,word,ac450000 // sw	a1,0(v0)
+
+// Function: etl::pvoidvector::size() const
+patch=0,EE,00FF02C8,word,8c820008 // lw	v0,8(a0)
+patch=0,EE,00FF02CC,word,8c830004 // lw	v1,4(a0)
+patch=0,EE,00FF02D0,word,00431023 // subu	v0,v0,v1
+patch=0,EE,00FF02D4,word,03e00008 // jr	ra
+patch=0,EE,00FF02D8,word,00021083 // sra	v0,v0,0x2
+
+// Function: etl::pvoidvector::full() const
+patch=0,EE,00FF02DC,word,27bdfff0 // addiu	sp,sp,-16
+patch=0,EE,00FF02E0,word,ffbf0008 // sd	ra,8(sp)
+patch=0,EE,00FF02E4,word,0c3fc0b2 // jal	ff02c8 <etl::pvoidvector::size() const>
+patch=0,EE,00FF02E8,word,00000000 // nop
+patch=0,EE,00FF02EC,word,8c830000 // lw	v1,0(a0)
+patch=0,EE,00FF02F0,word,dfbf0008 // ld	ra,8(sp)
+patch=0,EE,00FF02F4,word,00621026 // xor	v0,v1,v0
+patch=0,EE,00FF02F8,word,2c420001 // sltiu	v0,v0,1
+patch=0,EE,00FF02FC,word,03e00008 // jr	ra
+patch=0,EE,00FF0300,word,27bd0010 // addiu	sp,sp,16
+
+// Function: etl::pvoidvector::initialise()
+patch=0,EE,00FF0304,word,8c820004 // lw	v0,4(a0)
+patch=0,EE,00FF0308,word,03e00008 // jr	ra
+patch=0,EE,00FF030C,word,ac820008 // sw	v0,8(a0)
+
+// Function: etl::pvoidvector::clear()
+patch=0,EE,00FF0310,word,083fc0c1 // j	ff0304 <etl::pvoidvector::initialise()>
+patch=0,EE,00FF0314,word,00000000 // nop
+
+// Function: etl::ipool::is_item_in_pool(char const*) const
+patch=0,EE,00FF0318,word,8c820000 // lw	v0,0(a0)
+patch=0,EE,00FF031C,word,00a22823 // subu	a1,a1,v0
+patch=0,EE,00FF0320,word,8c860010 // lw	a2,16(a0)
+patch=0,EE,00FF0324,word,04a0000b // bltz	a1,ff0354 <etl::ipool::is_item_in_pool(char const*) const+0x3c>
+patch=0,EE,00FF0328,word,00001025 // move	v0,zero
+patch=0,EE,00FF032C,word,8c830014 // lw	v1,20(a0)
+patch=0,EE,00FF0330,word,2463ffff // addiu	v1,v1,-1
+patch=0,EE,00FF0334,word,00661818 // mult	v1,v1,a2
+patch=0,EE,00FF0338,word,0065182a // slt	v1,v1,a1
+patch=0,EE,00FF033C,word,14600005 // bnez	v1,ff0354 <etl::ipool::is_item_in_pool(char const*) const+0x3c>
+patch=0,EE,00FF0340,word,00000000 // nop
+patch=0,EE,00FF0344,word,00a6001b // divu	zero,a1,a2
+patch=0,EE,00FF0348,word,00c001f4 // teq	a2,zero,0x7
+patch=0,EE,00FF034C,word,00002810 // mfhi	a1
+patch=0,EE,00FF0350,word,2ca20001 // sltiu	v0,a1,1
+patch=0,EE,00FF0354,word,03e00008 // jr	ra
+patch=0,EE,00FF0358,word,00000000 // nop
+
+// Function: etl::remove_reference<etl::pair<unsigned long const, HookData>&>::type&& etl::move<etl::pair<unsigned long const, HookData>&>(etl::pair<unsigned long const, HookData>&)
+patch=0,EE,00FF035C,word,03e00008 // jr	ra
+patch=0,EE,00FF0360,word,00801025 // move	v0,a0
+
+// Function: etl::pair<unsigned long const, HookData>::pair<unsigned long const&, HookData>(etl::pair<unsigned long const&, HookData>&&)
+patch=0,EE,00FF0364,word,27bdfff0 // addiu	sp,sp,-16
+patch=0,EE,00FF0368,word,00801825 // move	v1,a0
+patch=0,EE,00FF036C,word,8ca40000 // lw	a0,0(a1)
+patch=0,EE,00FF0370,word,ffbf0008 // sd	ra,8(sp)
+patch=0,EE,00FF0374,word,0c3fc0d7 // jal	ff035c <etl::remove_reference<etl::pair<unsigned long const, HookData>&>::type&& etl::move<etl::pair<unsigned long const, HookData>&>(etl::pair<unsigned long const, HookData>&)>
+patch=0,EE,00FF0378,word,00000000 // nop
+patch=0,EE,00FF037C,word,8c420000 // lw	v0,0(v0)
+patch=0,EE,00FF0380,word,24a40004 // addiu	a0,a1,4
+patch=0,EE,00FF0384,word,0c3fc0d7 // jal	ff035c <etl::remove_reference<etl::pair<unsigned long const, HookData>&>::type&& etl::move<etl::pair<unsigned long const, HookData>&>(etl::pair<unsigned long const, HookData>&)>
+patch=0,EE,00FF0388,word,ac620000 // sw	v0,0(v1)
+patch=0,EE,00FF038C,word,dfbf0008 // ld	ra,8(sp)
+patch=0,EE,00FF0390,word,8c440000 // lw	a0,0(v0)
+patch=0,EE,00FF0394,word,ac640004 // sw	a0,4(v1)
+patch=0,EE,00FF0398,word,8c440004 // lw	a0,4(v0)
+patch=0,EE,00FF039C,word,8c420008 // lw	v0,8(v0)
+patch=0,EE,00FF03A0,word,27bd0010 // addiu	sp,sp,16
+patch=0,EE,00FF03A4,word,ac640008 // sw	a0,8(v1)
+patch=0,EE,00FF03A8,word,03e00008 // jr	ra
+patch=0,EE,00FF03AC,word,ac62000c // sw	v0,12(v1)
+
+// Function: etl::pair<unsigned long const&, HookData>::pair<unsigned long const&, HookData>(unsigned long const&, HookData&&)
+patch=0,EE,00FF03B0,word,27bdfff0 // addiu	sp,sp,-16
+patch=0,EE,00FF03B4,word,00801825 // move	v1,a0
+patch=0,EE,00FF03B8,word,ffbf0008 // sd	ra,8(sp)
+patch=0,EE,00FF03BC,word,0c3fc0d7 // jal	ff035c <etl::remove_reference<etl::pair<unsigned long const, HookData>&>::type&& etl::move<etl::pair<unsigned long const, HookData>&>(etl::pair<unsigned long const, HookData>&)>
+patch=0,EE,00FF03C0,word,00a02025 // move	a0,a1
+patch=0,EE,00FF03C4,word,00c02025 // move	a0,a2
+patch=0,EE,00FF03C8,word,0c3fc0d7 // jal	ff035c <etl::remove_reference<etl::pair<unsigned long const, HookData>&>::type&& etl::move<etl::pair<unsigned long const, HookData>&>(etl::pair<unsigned long const, HookData>&)>
+patch=0,EE,00FF03CC,word,ac620000 // sw	v0,0(v1)
+patch=0,EE,00FF03D0,word,dfbf0008 // ld	ra,8(sp)
+patch=0,EE,00FF03D4,word,8c440000 // lw	a0,0(v0)
+patch=0,EE,00FF03D8,word,ac640004 // sw	a0,4(v1)
+patch=0,EE,00FF03DC,word,8c440004 // lw	a0,4(v0)
+patch=0,EE,00FF03E0,word,8c420008 // lw	v0,8(v0)
+patch=0,EE,00FF03E4,word,27bd0010 // addiu	sp,sp,16
+patch=0,EE,00FF03E8,word,ac640008 // sw	a0,8(v1)
+patch=0,EE,00FF03EC,word,03e00008 // jr	ra
+patch=0,EE,00FF03F0,word,ac62000c // sw	v0,12(v1)
+
+// Function: etl::pair<unsigned long const&, HookData> etl::make_pair<unsigned long const&, HookData>(unsigned long const&, HookData&&)
+patch=0,EE,00FF03F4,word,27bdfff0 // addiu	sp,sp,-16
+patch=0,EE,00FF03F8,word,00803825 // move	a3,a0
+patch=0,EE,00FF03FC,word,ffbf0008 // sd	ra,8(sp)
+patch=0,EE,00FF0400,word,0c3fc0d7 // jal	ff035c <etl::remove_reference<etl::pair<unsigned long const, HookData>&>::type&& etl::move<etl::pair<unsigned long const, HookData>&>(etl::pair<unsigned long const, HookData>&)>
+patch=0,EE,00FF0404,word,00a02025 // move	a0,a1
+patch=0,EE,00FF0408,word,00c02025 // move	a0,a2
+patch=0,EE,00FF040C,word,0c3fc0d7 // jal	ff035c <etl::remove_reference<etl::pair<unsigned long const, HookData>&>::type&& etl::move<etl::pair<unsigned long const, HookData>&>(etl::pair<unsigned long const, HookData>&)>
+patch=0,EE,00FF0410,word,00402825 // move	a1,v0
+patch=0,EE,00FF0414,word,00403025 // move	a2,v0
+patch=0,EE,00FF0418,word,0c3fc0ec // jal	ff03b0 <etl::pair<unsigned long const&, HookData>::pair<unsigned long const&, HookData>(unsigned long const&, HookData&&)>
+patch=0,EE,00FF041C,word,00e02025 // move	a0,a3
+patch=0,EE,00FF0420,word,dfbf0008 // ld	ra,8(sp)
+patch=0,EE,00FF0424,word,00e01025 // move	v0,a3
+patch=0,EE,00FF0428,word,03e00008 // jr	ra
+patch=0,EE,00FF042C,word,27bd0010 // addiu	sp,sp,16
+
+// Function: etl::pair<unsigned long const, HookData>::pair<unsigned long const, HookData>(etl::pair<unsigned long const, HookData>&&)
+patch=0,EE,00FF0430,word,27bdfff0 // addiu	sp,sp,-16
+patch=0,EE,00FF0434,word,00801825 // move	v1,a0
+patch=0,EE,00FF0438,word,ffbf0008 // sd	ra,8(sp)
+patch=0,EE,00FF043C,word,0c3fc0d7 // jal	ff035c <etl::remove_reference<etl::pair<unsigned long const, HookData>&>::type&& etl::move<etl::pair<unsigned long const, HookData>&>(etl::pair<unsigned long const, HookData>&)>
+patch=0,EE,00FF0440,word,00a02025 // move	a0,a1
+patch=0,EE,00FF0444,word,24a40004 // addiu	a0,a1,4
+patch=0,EE,00FF0448,word,8c420000 // lw	v0,0(v0)
+patch=0,EE,00FF044C,word,0c3fc0d7 // jal	ff035c <etl::remove_reference<etl::pair<unsigned long const, HookData>&>::type&& etl::move<etl::pair<unsigned long const, HookData>&>(etl::pair<unsigned long const, HookData>&)>
+patch=0,EE,00FF0450,word,ac620000 // sw	v0,0(v1)
+patch=0,EE,00FF0454,word,dfbf0008 // ld	ra,8(sp)
+patch=0,EE,00FF0458,word,8c440000 // lw	a0,0(v0)
+patch=0,EE,00FF045C,word,ac640004 // sw	a0,4(v1)
+patch=0,EE,00FF0460,word,8c440004 // lw	a0,4(v0)
+patch=0,EE,00FF0464,word,8c420008 // lw	v0,8(v0)
+patch=0,EE,00FF0468,word,27bd0010 // addiu	sp,sp,16
+patch=0,EE,00FF046C,word,ac640008 // sw	a0,8(v1)
+patch=0,EE,00FF0470,word,03e00008 // jr	ra
+patch=0,EE,00FF0474,word,ac62000c // sw	v0,12(v1)
+
+// Function: etl::pair<unsigned long const, HookData>* etl::addressof<etl::pair<unsigned long const, HookData> >(etl::pair<unsigned long const, HookData>&)
+patch=0,EE,00FF0478,word,03e00008 // jr	ra
+patch=0,EE,00FF047C,word,00801025 // move	v0,a0
+
+// Function: etl::ivector<etl::pair<unsigned long const, HookData>*>::push_back(etl::pair<unsigned long const, HookData>*)
+patch=0,EE,00FF0480,word,083fc0ad // j	ff02b4 <etl::pvoidvector::push_back(void*)>
+patch=0,EE,00FF0484,word,00000000 // nop
+
+// Function: etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator::operator--()
+patch=0,EE,00FF0488,word,8c830000 // lw	v1,0(a0)
+patch=0,EE,00FF048C,word,00801025 // move	v0,a0
+patch=0,EE,00FF0490,word,2463fffc // addiu	v1,v1,-4
+patch=0,EE,00FF0494,word,03e00008 // jr	ra
+patch=0,EE,00FF0498,word,ac830000 // sw	v1,0(a0)
+
+// Function: etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator::iterator(etl::pair<unsigned long const, HookData>**)
+patch=0,EE,00FF049C,word,03e00008 // jr	ra
+patch=0,EE,00FF04A0,word,ac850000 // sw	a1,0(a0)
+
+// Function: etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator::operator++()
+patch=0,EE,00FF04A4,word,8c830000 // lw	v1,0(a0)
+patch=0,EE,00FF04A8,word,00801025 // move	v0,a0
+patch=0,EE,00FF04AC,word,24630004 // addiu	v1,v1,4
+patch=0,EE,00FF04B0,word,03e00008 // jr	ra
+patch=0,EE,00FF04B4,word,ac830000 // sw	v1,0(a0)
+
+// Function: etl::ivector<etl::pair<unsigned long const, HookData>*>::clear()
+patch=0,EE,00FF04B8,word,083fc0c4 // j	ff0310 <etl::pvoidvector::clear()>
+patch=0,EE,00FF04BC,word,00000000 // nop
+
+// Function: etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::clear() [clone .constprop.0]
+patch=0,EE,00FF04C0,word,3c0200ff // lui	v0,0xff
+patch=0,EE,00FF04C4,word,083fc12e // j	ff04b8 <etl::ivector<etl::pair<unsigned long const, HookData>*>::clear()>
+patch=0,EE,00FF04C8,word,8c4413f0 // lw	a0,5104(v0)
+
+// Function: void etl::advance_helper<etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator, int>(etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator&, int, etl::bidirectional_iterator_tag) [clone .constprop.0]
+patch=0,EE,00FF04CC,word,14a00003 // bnez	a1,ff04dc <void etl::advance_helper<etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator, int>(etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator&, int, etl::bidirectional_iterator_tag) [clone .constprop.0]+0x10>
+patch=0,EE,00FF04D0,word,00000000 // nop
+patch=0,EE,00FF04D4,word,03e00008 // jr	ra
+patch=0,EE,00FF04D8,word,00000000 // nop
+patch=0,EE,00FF04DC,word,2406ffff // li	a2,-1
+patch=0,EE,00FF04E0,word,24a5ffff // addiu	a1,a1,-1
+patch=0,EE,00FF04E4,word,14a60003 // bne	a1,a2,ff04f4 <void etl::advance_helper<etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator, int>(etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator&, int, etl::bidirectional_iterator_tag) [clone .constprop.0]+0x28>
+patch=0,EE,00FF04E8,word,00000000 // nop
+patch=0,EE,00FF04EC,word,03e00008 // jr	ra
+patch=0,EE,00FF04F0,word,00000000 // nop
+patch=0,EE,00FF04F4,word,27bdfff0 // addiu	sp,sp,-16
+patch=0,EE,00FF04F8,word,ffbf0008 // sd	ra,8(sp)
+patch=0,EE,00FF04FC,word,0c3fc129 // jal	ff04a4 <etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator::operator++()>
+patch=0,EE,00FF0500,word,24a5ffff // addiu	a1,a1,-1
+patch=0,EE,00FF0504,word,14a6fffd // bne	a1,a2,ff04fc <void etl::advance_helper<etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator, int>(etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator&, int, etl::bidirectional_iterator_tag) [clone .constprop.0]+0x30>
+patch=0,EE,00FF0508,word,00000000 // nop
+patch=0,EE,00FF050C,word,dfbf0008 // ld	ra,8(sp)
+patch=0,EE,00FF0510,word,03e00008 // jr	ra
+patch=0,EE,00FF0514,word,27bd0010 // addiu	sp,sp,16
+
+// Function: void etl::advance<etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator, int>(etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator&, int)
+patch=0,EE,00FF0518,word,083fc133 // j	ff04cc <void etl::advance_helper<etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator, int>(etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator&, int, etl::bidirectional_iterator_tag) [clone .constprop.0]>
+patch=0,EE,00FF051C,word,00000000 // nop
+
+// Function: etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::full() const [clone .constprop.0]
+patch=0,EE,00FF0520,word,3c0200ff // lui	v0,0xff
+patch=0,EE,00FF0524,word,083fc0b7 // j	ff02dc <etl::pvoidvector::full() const>
+patch=0,EE,00FF0528,word,8c4413f0 // lw	a0,5104(v0)
+
+// Function: etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::~ireference_flat_map() [clone .constprop.0]
+patch=0,EE,00FF052C,word,03e00008 // jr	ra
+patch=0,EE,00FF0530,word,00000000 // nop
+
+// Function: etl::iflat_map<unsigned long, HookData, etl::less<unsigned long> >::~iflat_map() [clone .constprop.0]
+patch=0,EE,00FF0534,word,03e00008 // jr	ra
+patch=0,EE,00FF0538,word,00000000 // nop
+
+// Function: etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::ireference_flat_map(etl::ivector<etl::pair<unsigned long const, HookData>*>&) [clone .constprop.0]
+patch=0,EE,00FF053C,word,3c0200ff // lui	v0,0xff
+patch=0,EE,00FF0540,word,3c0300ff // lui	v1,0xff
+patch=0,EE,00FF0544,word,24421468 // addiu	v0,v0,5224
+patch=0,EE,00FF0548,word,03e00008 // jr	ra
+patch=0,EE,00FF054C,word,ac6213f0 // sw	v0,5104(v1)
+
+// Function: etl::iflat_map<unsigned long, HookData, etl::less<unsigned long> >::iflat_map(etl::ivector<etl::pair<unsigned long const, HookData>*>&, etl::ipool&) [clone .constprop.0]
+patch=0,EE,00FF0550,word,27bdfff0 // addiu	sp,sp,-16
+patch=0,EE,00FF0554,word,ffbf0008 // sd	ra,8(sp)
+patch=0,EE,00FF0558,word,0c3fc14f // jal	ff053c <etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::ireference_flat_map(etl::ivector<etl::pair<unsigned long const, HookData>*>&) [clone .constprop.0]>
+patch=0,EE,00FF055C,word,00000000 // nop
+patch=0,EE,00FF0560,word,3c0200ff // lui	v0,0xff
+patch=0,EE,00FF0564,word,dfbf0008 // ld	ra,8(sp)
+patch=0,EE,00FF0568,word,3c0300ff // lui	v1,0xff
+patch=0,EE,00FF056C,word,24421400 // addiu	v0,v0,5120
+patch=0,EE,00FF0570,word,ac6213f8 // sw	v0,5112(v1)
+patch=0,EE,00FF0574,word,03e00008 // jr	ra
+patch=0,EE,00FF0578,word,27bd0010 // addiu	sp,sp,16
+
+// Function: etl::ipool::~ipool() [clone .constprop.0]
+patch=0,EE,00FF057C,word,03e00008 // jr	ra
+patch=0,EE,00FF0580,word,00000000 // nop
+
+// Function: etl::generic_pool<16u, 4u, 5u>::~generic_pool() [clone .constprop.0]
+patch=0,EE,00FF0584,word,03e00008 // jr	ra
+patch=0,EE,00FF0588,word,00000000 // nop
+
+// Function: etl::pool<etl::pair<unsigned long const, HookData>, 5u>::~pool() [clone .constprop.0]
+patch=0,EE,00FF058C,word,03e00008 // jr	ra
+patch=0,EE,00FF0590,word,00000000 // nop
+
+// Function: etl::ipool::ipool(char*, unsigned long, unsigned long) [clone .constprop.0]
+patch=0,EE,00FF0594,word,3c0200ff // lui	v0,0xff
+patch=0,EE,00FF0598,word,3c0300ff // lui	v1,0xff
+patch=0,EE,00FF059C,word,244213f0 // addiu	v0,v0,5104
+patch=0,EE,00FF05A0,word,24631418 // addiu	v1,v1,5144
+patch=0,EE,00FF05A4,word,ac430010 // sw	v1,16(v0)
+patch=0,EE,00FF05A8,word,ac430014 // sw	v1,20(v0)
+patch=0,EE,00FF05AC,word,3c035000 // lui	v1,0x5000
+patch=0,EE,00FF05B0,word,64630001 // daddiu	v1,v1,1
+patch=0,EE,00FF05B4,word,fc400018 // sd	zero,24(v0)
+patch=0,EE,00FF05B8,word,00031938 // dsll	v1,v1,0x4
+patch=0,EE,00FF05BC,word,03e00008 // jr	ra
+patch=0,EE,00FF05C0,word,fc430020 // sd	v1,32(v0)
+
+// Function: etl::generic_pool<16u, 4u, 5u>::generic_pool() [clone .constprop.0]
+patch=0,EE,00FF05C4,word,083fc165 // j	ff0594 <etl::ipool::ipool(char*, unsigned long, unsigned long) [clone .constprop.0]>
+patch=0,EE,00FF05C8,word,00000000 // nop
+
+// Function: etl::pool<etl::pair<unsigned long const, HookData>, 5u>::pool() [clone .constprop.0]
+patch=0,EE,00FF05CC,word,083fc171 // j	ff05c4 <etl::generic_pool<16u, 4u, 5u>::generic_pool() [clone .constprop.0]>
+patch=0,EE,00FF05D0,word,00000000 // nop
+
+// Function: etl::pool_exception::pool_exception(char const*, char const*, int) [clone .constprop.0]
+patch=0,EE,00FF05D4,word,00c03825 // move	a3,a2
+patch=0,EE,00FF05D8,word,3c0600ff // lui	a2,0xff
+patch=0,EE,00FF05DC,word,083fc0a9 // j	ff02a4 <etl::exception::exception(char const*, char const*, int)>
+patch=0,EE,00FF05E0,word,24c61488 // addiu	a2,a2,5256
+
+// Function: etl::pool_element_size::pool_element_size(char const*, int) [clone .constprop.0]
+patch=0,EE,00FF05E4,word,3c0500ff // lui	a1,0xff
+patch=0,EE,00FF05E8,word,24060075 // li	a2,117
+patch=0,EE,00FF05EC,word,083fc175 // j	ff05d4 <etl::pool_exception::pool_exception(char const*, char const*, int) [clone .constprop.0]>
+patch=0,EE,00FF05F0,word,24a514a8 // addiu	a1,a1,5288
+
+// Function: etl::pool_object_not_in_pool::pool_object_not_in_pool(char const*, int) [clone .constprop.0]
+patch=0,EE,00FF05F4,word,3c0500ff // lui	a1,0xff
+patch=0,EE,00FF05F8,word,2406017d // li	a2,381
+patch=0,EE,00FF05FC,word,083fc175 // j	ff05d4 <etl::pool_exception::pool_exception(char const*, char const*, int) [clone .constprop.0]>
+patch=0,EE,00FF0600,word,24a514c0 // addiu	a1,a1,5312
+
+// Function: etl::pool_no_allocation::pool_no_allocation(char const*, int) [clone .constprop.0]
+patch=0,EE,00FF0604,word,3c0500ff // lui	a1,0xff
+patch=0,EE,00FF0608,word,24060171 // li	a2,369
+patch=0,EE,00FF060C,word,083fc175 // j	ff05d4 <etl::pool_exception::pool_exception(char const*, char const*, int) [clone .constprop.0]>
+patch=0,EE,00FF0610,word,24a514d8 // addiu	a1,a1,5336
+
+// Function: etl::flat_map_exception::flat_map_exception(char const*, char const*, int) [clone .constprop.0]
+patch=0,EE,00FF0614,word,00c03825 // move	a3,a2
+patch=0,EE,00FF0618,word,00a03025 // move	a2,a1
+patch=0,EE,00FF061C,word,3c0500ff // lui	a1,0xff
+patch=0,EE,00FF0620,word,083fc0a9 // j	ff02a4 <etl::exception::exception(char const*, char const*, int)>
+patch=0,EE,00FF0624,word,24a514e8 // addiu	a1,a1,5352
+
+// Function: etl::flat_map_full::flat_map_full(char const*, int)
+patch=0,EE,00FF0628,word,083fc185 // j	ff0614 <etl::flat_map_exception::flat_map_exception(char const*, char const*, int) [clone .constprop.0]>
+patch=0,EE,00FF062C,word,00000000 // nop
+
+// Function: etl::pvoidvector::to_iterator(void* const*) const [clone .constprop.0]
+patch=0,EE,00FF0630,word,03e00008 // jr	ra
+patch=0,EE,00FF0634,word,00801025 // move	v0,a0
+
+// Function: etl::vector_base::~vector_base() [clone .constprop.0]
+patch=0,EE,00FF0638,word,03e00008 // jr	ra
+patch=0,EE,00FF063C,word,00000000 // nop
+
+// Function: etl::pvoidvector::~pvoidvector() [clone .constprop.0]
+patch=0,EE,00FF0640,word,03e00008 // jr	ra
+patch=0,EE,00FF0644,word,00000000 // nop
+
+// Function: etl::ivector<etl::pair<unsigned long const, HookData>*>::~ivector() [clone .constprop.0]
+patch=0,EE,00FF0648,word,03e00008 // jr	ra
+patch=0,EE,00FF064C,word,00000000 // nop
+
+// Function: etl::vector<etl::pair<unsigned long const, HookData>*, 5u>::~vector() [clone .constprop.0]
+patch=0,EE,00FF0650,word,03e00008 // jr	ra
+patch=0,EE,00FF0654,word,00000000 // nop
+
+// Function: etl::vector_base::vector_base(unsigned int) [clone .constprop.0]
+patch=0,EE,00FF0658,word,3c0200ff // lui	v0,0xff
+patch=0,EE,00FF065C,word,24030005 // li	v1,5
+patch=0,EE,00FF0660,word,03e00008 // jr	ra
+patch=0,EE,00FF0664,word,ac431468 // sw	v1,5224(v0)
+
+// Function: etl::pvoidvector::pvoidvector(void**, unsigned int) [clone .constprop.0]
+patch=0,EE,00FF0668,word,27bdfff0 // addiu	sp,sp,-16
+patch=0,EE,00FF066C,word,ffbf0008 // sd	ra,8(sp)
+patch=0,EE,00FF0670,word,0c3fc196 // jal	ff0658 <etl::vector_base::vector_base(unsigned int) [clone .constprop.0]>
+patch=0,EE,00FF0674,word,00000000 // nop
+patch=0,EE,00FF0678,word,3c0200ff // lui	v0,0xff
+patch=0,EE,00FF067C,word,3c0300ff // lui	v1,0xff
+patch=0,EE,00FF0680,word,244213f0 // addiu	v0,v0,5104
+patch=0,EE,00FF0684,word,24631474 // addiu	v1,v1,5236
+patch=0,EE,00FF0688,word,dfbf0008 // ld	ra,8(sp)
+patch=0,EE,00FF068C,word,27bd0010 // addiu	sp,sp,16
+patch=0,EE,00FF0690,word,ac43007c // sw	v1,124(v0)
+patch=0,EE,00FF0694,word,03e00008 // jr	ra
+patch=0,EE,00FF0698,word,ac430080 // sw	v1,128(v0)
+
+// Function: etl::ivector<etl::pair<unsigned long const, HookData>*>::ivector(etl::pair<unsigned long const, HookData>**, unsigned int) [clone .constprop.0]
+patch=0,EE,00FF069C,word,083fc19a // j	ff0668 <etl::pvoidvector::pvoidvector(void**, unsigned int) [clone .constprop.0]>
+patch=0,EE,00FF06A0,word,00000000 // nop
+
+// Function: etl::vector<etl::pair<unsigned long const, HookData>*, 5u>::vector() [clone .constprop.0]
+patch=0,EE,00FF06A4,word,27bdfff0 // addiu	sp,sp,-16
+patch=0,EE,00FF06A8,word,3c0400ff // lui	a0,0xff
+patch=0,EE,00FF06AC,word,ffbf0008 // sd	ra,8(sp)
+patch=0,EE,00FF06B0,word,0c3fc1a7 // jal	ff069c <etl::ivector<etl::pair<unsigned long const, HookData>*>::ivector(etl::pair<unsigned long const, HookData>**, unsigned int) [clone .constprop.0]>
+patch=0,EE,00FF06B4,word,24841468 // addiu	a0,a0,5224
+patch=0,EE,00FF06B8,word,dfbf0008 // ld	ra,8(sp)
+patch=0,EE,00FF06BC,word,083fc0c1 // j	ff0304 <etl::pvoidvector::initialise()>
+patch=0,EE,00FF06C0,word,27bd0010 // addiu	sp,sp,16
+
+// Function: etl::flat_map<unsigned long, HookData, 5u, etl::less<unsigned long> >::flat_map() [clone .constprop.0]
+patch=0,EE,00FF06C4,word,27bdfff0 // addiu	sp,sp,-16
+patch=0,EE,00FF06C8,word,ffbf0008 // sd	ra,8(sp)
+patch=0,EE,00FF06CC,word,0c3fc154 // jal	ff0550 <etl::iflat_map<unsigned long, HookData, etl::less<unsigned long> >::iflat_map(etl::ivector<etl::pair<unsigned long const, HookData>*>&, etl::ipool&) [clone .constprop.0]>
+patch=0,EE,00FF06D0,word,00000000 // nop
+patch=0,EE,00FF06D4,word,0c3fc173 // jal	ff05cc <etl::pool<etl::pair<unsigned long const, HookData>, 5u>::pool() [clone .constprop.0]>
+patch=0,EE,00FF06D8,word,00000000 // nop
+patch=0,EE,00FF06DC,word,dfbf0008 // ld	ra,8(sp)
+patch=0,EE,00FF06E0,word,083fc1a9 // j	ff06a4 <etl::vector<etl::pair<unsigned long const, HookData>*, 5u>::vector() [clone .constprop.0]>
+patch=0,EE,00FF06E4,word,27bd0010 // addiu	sp,sp,16
+
+// Function: etl::vector_exception::vector_exception(char const*, char const*, int) [clone .constprop.0]
+patch=0,EE,00FF06E8,word,3c0600ff // lui	a2,0xff
+patch=0,EE,00FF06EC,word,3c0500ff // lui	a1,0xff
+patch=0,EE,00FF06F0,word,240701c0 // li	a3,448
+patch=0,EE,00FF06F4,word,24c614f8 // addiu	a2,a2,5368
+patch=0,EE,00FF06F8,word,083fc0a9 // j	ff02a4 <etl::exception::exception(char const*, char const*, int)>
+patch=0,EE,00FF06FC,word,24a51528 // addiu	a1,a1,5416
+
+// Function: etl::vector_full::vector_full(char const*, int) [clone .constprop.0]
+patch=0,EE,00FF0700,word,083fc1ba // j	ff06e8 <etl::vector_exception::vector_exception(char const*, char const*, int) [clone .constprop.0]>
+patch=0,EE,00FF0704,word,00000000 // nop
+
+// Function: etl::error_handler::invocation_element::invocation_element() [clone .constprop.0]
+patch=0,EE,00FF0708,word,27828010 // addiu	v0,gp,-32752
+patch=0,EE,00FF070C,word,ac400000 // sw	zero,0(v0)
+patch=0,EE,00FF0710,word,03e00008 // jr	ra
+patch=0,EE,00FF0714,word,ac400004 // sw	zero,4(v0)
+
+// Function: etl::error_handler::get_invocation_element()
+patch=0,EE,00FF0718,word,27bdfff0 // addiu	sp,sp,-16
+patch=0,EE,00FF071C,word,83828018 // lb	v0,-32744(gp)
+patch=0,EE,00FF0720,word,14400005 // bnez	v0,ff0738 <etl::error_handler::get_invocation_element()+0x20>
+patch=0,EE,00FF0724,word,ffbf0008 // sd	ra,8(sp)
+patch=0,EE,00FF0728,word,0c3fc1c2 // jal	ff0708 <etl::error_handler::invocation_element::invocation_element() [clone .constprop.0]>
+patch=0,EE,00FF072C,word,00000000 // nop
+patch=0,EE,00FF0730,word,24020001 // li	v0,1
+patch=0,EE,00FF0734,word,a3828018 // sb	v0,-32744(gp)
+patch=0,EE,00FF0738,word,dfbf0008 // ld	ra,8(sp)
+patch=0,EE,00FF073C,word,27828010 // addiu	v0,gp,-32752
+patch=0,EE,00FF0740,word,03e00008 // jr	ra
+patch=0,EE,00FF0744,word,27bd0010 // addiu	sp,sp,16
+
+// Function: etl::error_handler::error(etl::exception const&)
+patch=0,EE,00FF0748,word,27bdfff0 // addiu	sp,sp,-16
+patch=0,EE,00FF074C,word,ffbf0008 // sd	ra,8(sp)
+patch=0,EE,00FF0750,word,0c3fc1c6 // jal	ff0718 <etl::error_handler::get_invocation_element()>
+patch=0,EE,00FF0754,word,00000000 // nop
+patch=0,EE,00FF0758,word,8c590004 // lw	t9,4(v0)
+patch=0,EE,00FF075C,word,13200006 // beqz	t9,ff0778 <etl::error_handler::error(etl::exception const&)+0x30>
+patch=0,EE,00FF0760,word,00000000 // nop
+patch=0,EE,00FF0764,word,dfbf0008 // ld	ra,8(sp)
+patch=0,EE,00FF0768,word,00802825 // move	a1,a0
+patch=0,EE,00FF076C,word,8c440000 // lw	a0,0(v0)
+patch=0,EE,00FF0770,word,03200008 // jr	t9
+patch=0,EE,00FF0774,word,27bd0010 // addiu	sp,sp,16
+patch=0,EE,00FF0778,word,dfbf0008 // ld	ra,8(sp)
+patch=0,EE,00FF077C,word,03e00008 // jr	ra
+patch=0,EE,00FF0780,word,27bd0010 // addiu	sp,sp,16
+
+// Function: etl::ipool::allocate_item()
+patch=0,EE,00FF0784,word,8c850008 // lw	a1,8(a0)
+patch=0,EE,00FF0788,word,8c830014 // lw	v1,20(a0)
+patch=0,EE,00FF078C,word,00a3102b // sltu	v0,a1,v1
+patch=0,EE,00FF0790,word,10400017 // beqz	v0,ff07f0 <etl::ipool::allocate_item()+0x6c>
+patch=0,EE,00FF0794,word,00000000 // nop
+patch=0,EE,00FF0798,word,8c82000c // lw	v0,12(a0)
+patch=0,EE,00FF079C,word,0043302b // sltu	a2,v0,v1
+patch=0,EE,00FF07A0,word,10c00009 // beqz	a2,ff07c8 <etl::ipool::allocate_item()+0x44>
+patch=0,EE,00FF07A4,word,00000000 // nop
+patch=0,EE,00FF07A8,word,8c870010 // lw	a3,16(a0)
+patch=0,EE,00FF07AC,word,00474018 // mult	a4,v0,a3
+patch=0,EE,00FF07B0,word,8c860000 // lw	a2,0(a0)
+patch=0,EE,00FF07B4,word,24420001 // addiu	v0,v0,1
+patch=0,EE,00FF07B8,word,01063021 // addu	a2,a4,a2
+patch=0,EE,00FF07BC,word,00c73821 // addu	a3,a2,a3
+patch=0,EE,00FF07C0,word,acc70000 // sw	a3,0(a2)
+patch=0,EE,00FF07C4,word,ac82000c // sw	v0,12(a0)
+patch=0,EE,00FF07C8,word,24a50001 // addiu	a1,a1,1
+patch=0,EE,00FF07CC,word,8c820004 // lw	v0,4(a0)
+patch=0,EE,00FF07D0,word,00a3182b // sltu	v1,a1,v1
+patch=0,EE,00FF07D4,word,10600004 // beqz	v1,ff07e8 <etl::ipool::allocate_item()+0x64>
+patch=0,EE,00FF07D8,word,ac850008 // sw	a1,8(a0)
+patch=0,EE,00FF07DC,word,8c430000 // lw	v1,0(v0)
+patch=0,EE,00FF07E0,word,03e00008 // jr	ra
+patch=0,EE,00FF07E4,word,ac830004 // sw	v1,4(a0)
+patch=0,EE,00FF07E8,word,03e00008 // jr	ra
+patch=0,EE,00FF07EC,word,ac800004 // sw	zero,4(a0)
+patch=0,EE,00FF07F0,word,27bdffe0 // addiu	sp,sp,-32
+patch=0,EE,00FF07F4,word,ffbf0018 // sd	ra,24(sp)
+patch=0,EE,00FF07F8,word,0c3fc181 // jal	ff0604 <etl::pool_no_allocation::pool_no_allocation(char const*, int) [clone .constprop.0]>
+patch=0,EE,00FF07FC,word,03a02025 // move	a0,sp
+patch=0,EE,00FF0800,word,0c3fc1d2 // jal	ff0748 <etl::error_handler::error(etl::exception const&)>
+patch=0,EE,00FF0804,word,00000000 // nop
+patch=0,EE,00FF0808,word,dfbf0018 // ld	ra,24(sp)
+patch=0,EE,00FF080C,word,00001025 // move	v0,zero
+patch=0,EE,00FF0810,word,03e00008 // jr	ra
+patch=0,EE,00FF0814,word,27bd0020 // addiu	sp,sp,32
+
+// Function: etl::ipool::release_item(char*)
+patch=0,EE,00FF0818,word,27bdffd0 // addiu	sp,sp,-48
+patch=0,EE,00FF081C,word,ffb10020 // sd	s1,32(sp)
+patch=0,EE,00FF0820,word,00a08825 // move	s1,a1
+patch=0,EE,00FF0824,word,ffb00018 // sd	s0,24(sp)
+patch=0,EE,00FF0828,word,ffbf0028 // sd	ra,40(sp)
+patch=0,EE,00FF082C,word,0c3fc0c6 // jal	ff0318 <etl::ipool::is_item_in_pool(char const*) const>
+patch=0,EE,00FF0830,word,00808025 // move	s0,a0
+patch=0,EE,00FF0834,word,14400005 // bnez	v0,ff084c <etl::ipool::release_item(char*)+0x34>
+patch=0,EE,00FF0838,word,00000000 // nop
+patch=0,EE,00FF083C,word,0c3fc17d // jal	ff05f4 <etl::pool_object_not_in_pool::pool_object_not_in_pool(char const*, int) [clone .constprop.0]>
+patch=0,EE,00FF0840,word,03a02025 // move	a0,sp
+patch=0,EE,00FF0844,word,0c3fc1d2 // jal	ff0748 <etl::error_handler::error(etl::exception const&)>
+patch=0,EE,00FF0848,word,00000000 // nop
+patch=0,EE,00FF084C,word,8e020004 // lw	v0,4(s0)
+patch=0,EE,00FF0850,word,ae220000 // sw	v0,0(s1)
+patch=0,EE,00FF0854,word,8e020008 // lw	v0,8(s0)
+patch=0,EE,00FF0858,word,dfbf0028 // ld	ra,40(sp)
+patch=0,EE,00FF085C,word,2442ffff // addiu	v0,v0,-1
+patch=0,EE,00FF0860,word,ae110004 // sw	s1,4(s0)
+patch=0,EE,00FF0864,word,ae020008 // sw	v0,8(s0)
+patch=0,EE,00FF0868,word,dfb10020 // ld	s1,32(sp)
+patch=0,EE,00FF086C,word,dfb00018 // ld	s0,24(sp)
+patch=0,EE,00FF0870,word,03e00008 // jr	ra
+patch=0,EE,00FF0874,word,27bd0030 // addiu	sp,sp,48
+
+// Function: etl::ipool::release(void const*)
+patch=0,EE,00FF0878,word,083fc206 // j	ff0818 <etl::ipool::release_item(char*)>
+patch=0,EE,00FF087C,word,00000000 // nop
+
+// Function: etl::pair<unsigned long const, HookData>* etl::ipool::allocate<etl::pair<unsigned long const, HookData> >()
+patch=0,EE,00FF0880,word,8c820010 // lw	v0,16(a0)
+patch=0,EE,00FF0884,word,27bdffe0 // addiu	sp,sp,-32
+patch=0,EE,00FF0888,word,2c420010 // sltiu	v0,v0,16
+patch=0,EE,00FF088C,word,ffb00010 // sd	s0,16(sp)
+patch=0,EE,00FF0890,word,ffbf0018 // sd	ra,24(sp)
+patch=0,EE,00FF0894,word,10400005 // beqz	v0,ff08ac <etl::pair<unsigned long const, HookData>* etl::ipool::allocate<etl::pair<unsigned long const, HookData> >()+0x2c>
+patch=0,EE,00FF0898,word,00808025 // move	s0,a0
+patch=0,EE,00FF089C,word,0c3fc179 // jal	ff05e4 <etl::pool_element_size::pool_element_size(char const*, int) [clone .constprop.0]>
+patch=0,EE,00FF08A0,word,03a02025 // move	a0,sp
+patch=0,EE,00FF08A4,word,0c3fc1d2 // jal	ff0748 <etl::error_handler::error(etl::exception const&)>
+patch=0,EE,00FF08A8,word,00000000 // nop
+patch=0,EE,00FF08AC,word,dfbf0018 // ld	ra,24(sp)
+patch=0,EE,00FF08B0,word,02002025 // move	a0,s0
+patch=0,EE,00FF08B4,word,dfb00010 // ld	s0,16(sp)
+patch=0,EE,00FF08B8,word,083fc1e1 // j	ff0784 <etl::ipool::allocate_item()>
+patch=0,EE,00FF08BC,word,27bd0020 // addiu	sp,sp,32
+
+// Function: etl::error_handler::create(void*, void (*)(void*, etl::exception const&)) [clone .constprop.0]
+patch=0,EE,00FF08C0,word,27bdfff0 // addiu	sp,sp,-16
+patch=0,EE,00FF08C4,word,3c0300ff // lui	v1,0xff
+patch=0,EE,00FF08C8,word,ffbf0008 // sd	ra,8(sp)
+patch=0,EE,00FF08CC,word,0c3fc1c6 // jal	ff0718 <etl::error_handler::get_invocation_element()>
+patch=0,EE,00FF08D0,word,2463126c // addiu	v1,v1,4716
+patch=0,EE,00FF08D4,word,dfbf0008 // ld	ra,8(sp)
+patch=0,EE,00FF08D8,word,ac400000 // sw	zero,0(v0)
+patch=0,EE,00FF08DC,word,ac430004 // sw	v1,4(v0)
+patch=0,EE,00FF08E0,word,03e00008 // jr	ra
+patch=0,EE,00FF08E4,word,27bd0010 // addiu	sp,sp,16
+
+// Function: void etl::error_handler::set_callback<&(etl_error_handler(etl::exception const&))>()
+patch=0,EE,00FF08E8,word,083fc230 // j	ff08c0 <etl::error_handler::create(void*, void (*)(void*, etl::exception const&)) [clone .constprop.0]>
+patch=0,EE,00FF08EC,word,00000000 // nop
+
+// Function: operator new(unsigned int, void*) [clone .constprop.0]
+patch=0,EE,00FF08F0,word,03e00008 // jr	ra
+patch=0,EE,00FF08F4,word,00801025 // move	v0,a0
+
+// Function: ta_init(void const*, void const*, unsigned int, unsigned int, unsigned int) [clone .constprop.0] [clone .isra.0]
+patch=0,EE,00FF08F8,word,3c030009 // lui	v1,0x9
+patch=0,EE,00FF08FC,word,24647000 // addiu	a0,v1,28672
+patch=0,EE,00FF0900,word,24822000 // addiu	v0,a0,8192
+patch=0,EE,00FF0904,word,af84802c // sw	a0,-32724(gp)
+patch=0,EE,00FF0908,word,af828024 // sw	v0,-32732(gp)
+patch=0,EE,00FF090C,word,24020010 // li	v0,16
+patch=0,EE,00FF0910,word,af828020 // sw	v0,-32736(gp)
+patch=0,EE,00FF0914,word,24020004 // li	v0,4
+patch=0,EE,00FF0918,word,af828028 // sw	v0,-32728(gp)
+patch=0,EE,00FF091C,word,340297c1 // li	v0,0x97c1
+patch=0,EE,00FF0920,word,0002103c // dsll32	v0,v0,0x0
+patch=0,EE,00FF0924,word,fc607000 // sd	zero,28672(v1)
+patch=0,EE,00FF0928,word,34429701 // ori	v0,v0,0x9701
+patch=0,EE,00FF092C,word,00021138 // dsll	v0,v0,0x4
+patch=0,EE,00FF0930,word,fc627008 // sd	v0,28680(v1)
+patch=0,EE,00FF0934,word,24627010 // addiu	v0,v1,28688
+patch=0,EE,00FF0938,word,24637c04 // addiu	v1,v1,31748
+patch=0,EE,00FF093C,word,00402025 // move	a0,v0
+patch=0,EE,00FF0940,word,2442000c // addiu	v0,v0,12
+patch=0,EE,00FF0944,word,ac820004 // sw	v0,4(a0)
+patch=0,EE,00FF0948,word,1443fffc // bne	v0,v1,ff093c <ta_init(void const*, void const*, unsigned int, unsigned int, unsigned int) [clone .constprop.0] [clone .isra.0]+0x44>
+patch=0,EE,00FF094C,word,00000000 // nop
+patch=0,EE,00FF0950,word,03e00008 // jr	ra
+patch=0,EE,00FF0954,word,ac400004 // sw	zero,4(v0)
+
+// Function: etl::less<unsigned long>::operator()(unsigned long const&, unsigned long const&) const [clone .constprop.0] [clone .isra.0]
+patch=0,EE,00FF0958,word,03e00008 // jr	ra
+patch=0,EE,00FF095C,word,0085102b // sltu	v0,a0,a1
+
+// Function: etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::keys_are_equal(unsigned long const&, unsigned long const&) const [clone .constprop.0] [clone .isra.0]
+patch=0,EE,00FF0960,word,27bdfff0 // addiu	sp,sp,-16
+patch=0,EE,00FF0964,word,ffbf0008 // sd	ra,8(sp)
+patch=0,EE,00FF0968,word,0c3fc256 // jal	ff0958 <etl::less<unsigned long>::operator()(unsigned long const&, unsigned long const&) const [clone .constprop.0] [clone .isra.0]>
+patch=0,EE,00FF096C,word,00001825 // move	v1,zero
+patch=0,EE,00FF0970,word,14400007 // bnez	v0,ff0990 <etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::keys_are_equal(unsigned long const&, unsigned long const&) const [clone .constprop.0] [clone .isra.0]+0x30>
+patch=0,EE,00FF0974,word,00000000 // nop
+patch=0,EE,00FF0978,word,00a03025 // move	a2,a1
+patch=0,EE,00FF097C,word,00802825 // move	a1,a0
+patch=0,EE,00FF0980,word,0c3fc256 // jal	ff0958 <etl::less<unsigned long>::operator()(unsigned long const&, unsigned long const&) const [clone .constprop.0] [clone .isra.0]>
+patch=0,EE,00FF0984,word,00c02025 // move	a0,a2
+patch=0,EE,00FF0988,word,38420001 // xori	v0,v0,0x1
+patch=0,EE,00FF098C,word,304300ff // andi	v1,v0,0xff
+patch=0,EE,00FF0990,word,dfbf0008 // ld	ra,8(sp)
+patch=0,EE,00FF0994,word,00601025 // move	v0,v1
+patch=0,EE,00FF0998,word,03e00008 // jr	ra
+patch=0,EE,00FF099C,word,27bd0010 // addiu	sp,sp,16
+
+// Function: etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::Compare::operator()(etl::pair<unsigned long const, HookData> const&, unsigned long const&) const [clone .isra.0]
+patch=0,EE,00FF09A0,word,083fc256 // j	ff0958 <etl::less<unsigned long>::operator()(unsigned long const&, unsigned long const&) const [clone .constprop.0] [clone .isra.0]>
+patch=0,EE,00FF09A4,word,8c840000 // lw	a0,0(a0)
+
+// Function: etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator::operator*() const [clone .isra.0]
+patch=0,EE,00FF09A8,word,03e00008 // jr	ra
+patch=0,EE,00FF09AC,word,8c820000 // lw	v0,0(a0)
+
+// Function: etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator::operator=(etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator const&) [clone .isra.0]
+patch=0,EE,00FF09B0,word,03e00008 // jr	ra
+patch=0,EE,00FF09B4,word,ac850000 // sw	a1,0(a0)
+
+// Function: etl::pair<etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator, bool>::operator=(etl::pair<etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator, bool>&&) [clone .isra.0]
+patch=0,EE,00FF09B8,word,27bdfff0 // addiu	sp,sp,-16
+patch=0,EE,00FF09BC,word,00801825 // move	v1,a0
+patch=0,EE,00FF09C0,word,ffbf0008 // sd	ra,8(sp)
+patch=0,EE,00FF09C4,word,0c3fc0d7 // jal	ff035c <etl::remove_reference<etl::pair<unsigned long const, HookData>&>::type&& etl::move<etl::pair<unsigned long const, HookData>&>(etl::pair<unsigned long const, HookData>&)>
+patch=0,EE,00FF09C8,word,00a02025 // move	a0,a1
+patch=0,EE,00FF09CC,word,00a03025 // move	a2,a1
+patch=0,EE,00FF09D0,word,00602025 // move	a0,v1
+patch=0,EE,00FF09D4,word,0c3fc26c // jal	ff09b0 <etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator::operator=(etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator const&) [clone .isra.0]>
+patch=0,EE,00FF09D8,word,8c450000 // lw	a1,0(v0)
+patch=0,EE,00FF09DC,word,0c3fc0d7 // jal	ff035c <etl::remove_reference<etl::pair<unsigned long const, HookData>&>::type&& etl::move<etl::pair<unsigned long const, HookData>&>(etl::pair<unsigned long const, HookData>&)>
+patch=0,EE,00FF09E0,word,24c40004 // addiu	a0,a2,4
+patch=0,EE,00FF09E4,word,dfbf0008 // ld	ra,8(sp)
+patch=0,EE,00FF09E8,word,90420000 // lbu	v0,0(v0)
+patch=0,EE,00FF09EC,word,27bd0010 // addiu	sp,sp,16
+patch=0,EE,00FF09F0,word,03e00008 // jr	ra
+patch=0,EE,00FF09F4,word,a0620004 // sb	v0,4(v1)
+
+// Function: etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator::operator->() const [clone .isra.0]
+patch=0,EE,00FF09F8,word,083fc11e // j	ff0478 <etl::pair<unsigned long const, HookData>* etl::addressof<etl::pair<unsigned long const, HookData> >(etl::pair<unsigned long const, HookData>&)>
+patch=0,EE,00FF09FC,word,8c840000 // lw	a0,0(a0)
+
+// Function: etl::operator==(etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator const&, etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator const&) [clone .isra.0]
+patch=0,EE,00FF0A00,word,00a41026 // xor	v0,a1,a0
+patch=0,EE,00FF0A04,word,03e00008 // jr	ra
+patch=0,EE,00FF0A08,word,2c420001 // sltiu	v0,v0,1
+
+// Function: etl::operator!=(etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator const&, etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator const&) [clone .isra.0]
+patch=0,EE,00FF0A0C,word,27bdfff0 // addiu	sp,sp,-16
+patch=0,EE,00FF0A10,word,ffbf0008 // sd	ra,8(sp)
+patch=0,EE,00FF0A14,word,0c3fc280 // jal	ff0a00 <etl::operator==(etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator const&, etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator const&) [clone .isra.0]>
+patch=0,EE,00FF0A18,word,00000000 // nop
+patch=0,EE,00FF0A1C,word,38420001 // xori	v0,v0,0x1
+patch=0,EE,00FF0A20,word,dfbf0008 // ld	ra,8(sp)
+patch=0,EE,00FF0A24,word,304200ff // andi	v0,v0,0xff
+patch=0,EE,00FF0A28,word,03e00008 // jr	ra
+patch=0,EE,00FF0A2C,word,27bd0010 // addiu	sp,sp,16
+
+// Function: etl::iterator_traits<etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator>::difference_type etl::distance_helper<etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator>(etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator, etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator, etl::bidirectional_iterator_tag) [clone .constprop.0]
+patch=0,EE,00FF0A30,word,27bdfff0 // addiu	sp,sp,-16
+patch=0,EE,00FF0A34,word,00803025 // move	a2,a0
+patch=0,EE,00FF0A38,word,00a04025 // move	a4,a1
+patch=0,EE,00FF0A3C,word,ffbf0008 // sd	ra,8(sp)
+patch=0,EE,00FF0A40,word,00003825 // move	a3,zero
+patch=0,EE,00FF0A44,word,8d050000 // lw	a1,0(a4)
+patch=0,EE,00FF0A48,word,0c3fc283 // jal	ff0a0c <etl::operator!=(etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator const&, etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator const&) [clone .isra.0]>
+patch=0,EE,00FF0A4C,word,8cc40000 // lw	a0,0(a2)
+patch=0,EE,00FF0A50,word,14400005 // bnez	v0,ff0a68 <etl::iterator_traits<etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator>::difference_type etl::distance_helper<etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator>(etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator, etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator, etl::bidirectional_iterator_tag) [clone .constprop.0]+0x38>
+patch=0,EE,00FF0A54,word,00000000 // nop
+patch=0,EE,00FF0A58,word,dfbf0008 // ld	ra,8(sp)
+patch=0,EE,00FF0A5C,word,00e01025 // move	v0,a3
+patch=0,EE,00FF0A60,word,03e00008 // jr	ra
+patch=0,EE,00FF0A64,word,27bd0010 // addiu	sp,sp,16
+patch=0,EE,00FF0A68,word,00c02025 // move	a0,a2
+patch=0,EE,00FF0A6C,word,0c3fc129 // jal	ff04a4 <etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator::operator++()>
+patch=0,EE,00FF0A70,word,24e70001 // addiu	a3,a3,1
+patch=0,EE,00FF0A74,word,1000fff3 // b	ff0a44 <etl::iterator_traits<etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator>::difference_type etl::distance_helper<etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator>(etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator, etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator, etl::bidirectional_iterator_tag) [clone .constprop.0]+0x14>
+patch=0,EE,00FF0A78,word,00000000 // nop
+
+// Function: etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator::iterator(etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator const&) [clone .isra.0]
+patch=0,EE,00FF0A7C,word,03e00008 // jr	ra
+patch=0,EE,00FF0A80,word,ac850000 // sw	a1,0(a0)
+
+// Function: etl::pair<etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator, bool>::pair<etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator&, bool>(etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator&, bool&&) [clone .constprop.0]
+patch=0,EE,00FF0A84,word,27bdfff0 // addiu	sp,sp,-16
+patch=0,EE,00FF0A88,word,00801825 // move	v1,a0
+patch=0,EE,00FF0A8C,word,ffbf0008 // sd	ra,8(sp)
+patch=0,EE,00FF0A90,word,0c3fc0d7 // jal	ff035c <etl::remove_reference<etl::pair<unsigned long const, HookData>&>::type&& etl::move<etl::pair<unsigned long const, HookData>&>(etl::pair<unsigned long const, HookData>&)>
+patch=0,EE,00FF0A94,word,00a02025 // move	a0,a1
+patch=0,EE,00FF0A98,word,00602025 // move	a0,v1
+patch=0,EE,00FF0A9C,word,0c3fc29f // jal	ff0a7c <etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator::iterator(etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator const&) [clone .isra.0]>
+patch=0,EE,00FF0AA0,word,8c450000 // lw	a1,0(v0)
+patch=0,EE,00FF0AA4,word,0c3fc0d7 // jal	ff035c <etl::remove_reference<etl::pair<unsigned long const, HookData>&>::type&& etl::move<etl::pair<unsigned long const, HookData>&>(etl::pair<unsigned long const, HookData>&)>
+patch=0,EE,00FF0AA8,word,00c02025 // move	a0,a2
+patch=0,EE,00FF0AAC,word,dfbf0008 // ld	ra,8(sp)
+patch=0,EE,00FF0AB0,word,90420000 // lbu	v0,0(v0)
+patch=0,EE,00FF0AB4,word,27bd0010 // addiu	sp,sp,16
+patch=0,EE,00FF0AB8,word,03e00008 // jr	ra
+patch=0,EE,00FF0ABC,word,a0620004 // sb	v0,4(v1)
+
+// Function: etl::iterator_traits<etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator>::difference_type etl::distance<etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator>(etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator, etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator) [clone .isra.0]
+patch=0,EE,00FF0AC0,word,27bdffe0 // addiu	sp,sp,-32
+patch=0,EE,00FF0AC4,word,00a01025 // move	v0,a1
+patch=0,EE,00FF0AC8,word,00802825 // move	a1,a0
+patch=0,EE,00FF0ACC,word,ffbf0018 // sd	ra,24(sp)
+patch=0,EE,00FF0AD0,word,0c3fc29f // jal	ff0a7c <etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator::iterator(etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator const&) [clone .isra.0]>
+patch=0,EE,00FF0AD4,word,03a02025 // move	a0,sp
+patch=0,EE,00FF0AD8,word,27a40008 // addiu	a0,sp,8
+patch=0,EE,00FF0ADC,word,0c3fc29f // jal	ff0a7c <etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator::iterator(etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator const&) [clone .isra.0]>
+patch=0,EE,00FF0AE0,word,8c450000 // lw	a1,0(v0)
+patch=0,EE,00FF0AE4,word,00802825 // move	a1,a0
+patch=0,EE,00FF0AE8,word,0c3fc28c // jal	ff0a30 <etl::iterator_traits<etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator>::difference_type etl::distance_helper<etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator>(etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator, etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator, etl::bidirectional_iterator_tag) [clone .constprop.0]>
+patch=0,EE,00FF0AEC,word,03a02025 // move	a0,sp
+patch=0,EE,00FF0AF0,word,dfbf0018 // ld	ra,24(sp)
+patch=0,EE,00FF0AF4,word,03e00008 // jr	ra
+patch=0,EE,00FF0AF8,word,27bd0020 // addiu	sp,sp,32
+
+// Function: etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator etl::lower_bound<etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator, unsigned long, etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::Compare>(etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator, etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator, unsigned long const&, etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::Compare)
+patch=0,EE,00FF0AFC,word,27bdffe0 // addiu	sp,sp,-32
+patch=0,EE,00FF0B00,word,00805825 // move	a7,a0
+patch=0,EE,00FF0B04,word,00a05025 // move	a6,a1
+patch=0,EE,00FF0B08,word,27a40008 // addiu	a0,sp,8
+patch=0,EE,00FF0B0C,word,8ca50000 // lw	a1,0(a1)
+patch=0,EE,00FF0B10,word,ffbf0018 // sd	ra,24(sp)
+patch=0,EE,00FF0B14,word,0c3fc29f // jal	ff0a7c <etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator::iterator(etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator const&) [clone .isra.0]>
+patch=0,EE,00FF0B18,word,00e06025 // move	t0,a3
+patch=0,EE,00FF0B1C,word,8cc50000 // lw	a1,0(a2)
+patch=0,EE,00FF0B20,word,0c3fc29f // jal	ff0a7c <etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator::iterator(etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator const&) [clone .isra.0]>
+patch=0,EE,00FF0B24,word,03a02025 // move	a0,sp
+patch=0,EE,00FF0B28,word,03a02825 // move	a1,sp
+patch=0,EE,00FF0B2C,word,0c3fc2b0 // jal	ff0ac0 <etl::iterator_traits<etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator>::difference_type etl::distance<etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator>(etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator, etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator) [clone .isra.0]>
+patch=0,EE,00FF0B30,word,8fa40008 // lw	a0,8(sp)
+patch=0,EE,00FF0B34,word,00404025 // move	a4,v0
+patch=0,EE,00FF0B38,word,1d000007 // bgtz	a4,ff0b58 <etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator etl::lower_bound<etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator, unsigned long, etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::Compare>(etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator, etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator, unsigned long const&, etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::Compare)+0x5c>
+patch=0,EE,00FF0B3C,word,8d450000 // lw	a1,0(a6)
+patch=0,EE,00FF0B40,word,01602025 // move	a0,a7
+patch=0,EE,00FF0B44,word,0c3fc29f // jal	ff0a7c <etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator::iterator(etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator const&) [clone .isra.0]>
+patch=0,EE,00FF0B48,word,01601025 // move	v0,a7
+patch=0,EE,00FF0B4C,word,dfbf0018 // ld	ra,24(sp)
+patch=0,EE,00FF0B50,word,03e00008 // jr	ra
+patch=0,EE,00FF0B54,word,27bd0020 // addiu	sp,sp,32
+patch=0,EE,00FF0B58,word,03a02025 // move	a0,sp
+patch=0,EE,00FF0B5C,word,0c3fc29f // jal	ff0a7c <etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator::iterator(etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator const&) [clone .isra.0]>
+patch=0,EE,00FF0B60,word,00084843 // sra	a5,a4,0x1
+patch=0,EE,00FF0B64,word,0c3fc146 // jal	ff0518 <void etl::advance<etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator, int>(etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator&, int)>
+patch=0,EE,00FF0B68,word,01202825 // move	a1,a5
+patch=0,EE,00FF0B6C,word,0c3fc26a // jal	ff09a8 <etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator::operator*() const [clone .isra.0]>
+patch=0,EE,00FF0B70,word,8fa40000 // lw	a0,0(sp)
+patch=0,EE,00FF0B74,word,8d850000 // lw	a1,0(t0)
+patch=0,EE,00FF0B78,word,0c3fc268 // jal	ff09a0 <etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::Compare::operator()(etl::pair<unsigned long const, HookData> const&, unsigned long const&) const [clone .isra.0]>
+patch=0,EE,00FF0B7C,word,00402025 // move	a0,v0
+patch=0,EE,00FF0B80,word,10400008 // beqz	v0,ff0ba4 <etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator etl::lower_bound<etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator, unsigned long, etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::Compare>(etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator, etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator, unsigned long const&, etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::Compare)+0xa8>
+patch=0,EE,00FF0B84,word,00000000 // nop
+patch=0,EE,00FF0B88,word,03a02025 // move	a0,sp
+patch=0,EE,00FF0B8C,word,0c3fc129 // jal	ff04a4 <etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator::operator++()>
+patch=0,EE,00FF0B90,word,25290001 // addiu	a5,a5,1
+patch=0,EE,00FF0B94,word,01402025 // move	a0,a6
+patch=0,EE,00FF0B98,word,8c450000 // lw	a1,0(v0)
+patch=0,EE,00FF0B9C,word,0c3fc26c // jal	ff09b0 <etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator::operator=(etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator const&) [clone .isra.0]>
+patch=0,EE,00FF0BA0,word,01094823 // subu	a5,a4,a5
+patch=0,EE,00FF0BA4,word,1000ffe4 // b	ff0b38 <etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator etl::lower_bound<etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator, unsigned long, etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::Compare>(etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator, etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator, unsigned long const&, etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::Compare)+0x3c>
+patch=0,EE,00FF0BA8,word,01204025 // move	a4,a5
+
+// Function: etl::pvoidvector::end() [clone .isra.0]
+patch=0,EE,00FF0BAC,word,03e00008 // jr	ra
+patch=0,EE,00FF0BB0,word,00801025 // move	v0,a0
+
+// Function: etl::ivector<etl::pair<unsigned long const, HookData>*>::end()
+patch=0,EE,00FF0BB4,word,083fc2eb // j	ff0bac <etl::pvoidvector::end() [clone .isra.0]>
+patch=0,EE,00FF0BB8,word,8c840008 // lw	a0,8(a0)
+
+// Function: etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::end() [clone .isra.0]
+patch=0,EE,00FF0BBC,word,27bdfff0 // addiu	sp,sp,-16
+patch=0,EE,00FF0BC0,word,00801825 // move	v1,a0
+patch=0,EE,00FF0BC4,word,ffbf0008 // sd	ra,8(sp)
+patch=0,EE,00FF0BC8,word,0c3fc2ed // jal	ff0bb4 <etl::ivector<etl::pair<unsigned long const, HookData>*>::end()>
+patch=0,EE,00FF0BCC,word,00a02025 // move	a0,a1
+patch=0,EE,00FF0BD0,word,00602025 // move	a0,v1
+patch=0,EE,00FF0BD4,word,00402825 // move	a1,v0
+patch=0,EE,00FF0BD8,word,0c3fc127 // jal	ff049c <etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator::iterator(etl::pair<unsigned long const, HookData>**)>
+patch=0,EE,00FF0BDC,word,00601025 // move	v0,v1
+patch=0,EE,00FF0BE0,word,dfbf0008 // ld	ra,8(sp)
+patch=0,EE,00FF0BE4,word,03e00008 // jr	ra
+patch=0,EE,00FF0BE8,word,27bd0010 // addiu	sp,sp,16
+
+// Function: etl::iflat_map<unsigned long, HookData, etl::less<unsigned long> >::end()
+patch=0,EE,00FF0BEC,word,27bdffe0 // addiu	sp,sp,-32
+patch=0,EE,00FF0BF0,word,8ca50000 // lw	a1,0(a1)
+patch=0,EE,00FF0BF4,word,ffbf0018 // sd	ra,24(sp)
+patch=0,EE,00FF0BF8,word,0c3fc2ef // jal	ff0bbc <etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::end() [clone .isra.0]>
+patch=0,EE,00FF0BFC,word,afa40000 // sw	a0,0(sp)
+patch=0,EE,00FF0C00,word,dfbf0018 // ld	ra,24(sp)
+patch=0,EE,00FF0C04,word,8fa20000 // lw	v0,0(sp)
+patch=0,EE,00FF0C08,word,03e00008 // jr	ra
+patch=0,EE,00FF0C0C,word,27bd0020 // addiu	sp,sp,32
+
+// Function: etl::pvoidvector::begin() [clone .isra.0]
+patch=0,EE,00FF0C10,word,03e00008 // jr	ra
+patch=0,EE,00FF0C14,word,00801025 // move	v0,a0
+
+// Function: etl::ivector<etl::pair<unsigned long const, HookData>*>::begin()
+patch=0,EE,00FF0C18,word,083fc304 // j	ff0c10 <etl::pvoidvector::begin() [clone .isra.0]>
+patch=0,EE,00FF0C1C,word,8c840004 // lw	a0,4(a0)
+
+// Function: etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::begin() [clone .isra.0]
+patch=0,EE,00FF0C20,word,27bdfff0 // addiu	sp,sp,-16
+patch=0,EE,00FF0C24,word,00801825 // move	v1,a0
+patch=0,EE,00FF0C28,word,ffbf0008 // sd	ra,8(sp)
+patch=0,EE,00FF0C2C,word,0c3fc306 // jal	ff0c18 <etl::ivector<etl::pair<unsigned long const, HookData>*>::begin()>
+patch=0,EE,00FF0C30,word,00a02025 // move	a0,a1
+patch=0,EE,00FF0C34,word,00602025 // move	a0,v1
+patch=0,EE,00FF0C38,word,00402825 // move	a1,v0
+patch=0,EE,00FF0C3C,word,0c3fc127 // jal	ff049c <etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator::iterator(etl::pair<unsigned long const, HookData>**)>
+patch=0,EE,00FF0C40,word,00601025 // move	v0,v1
+patch=0,EE,00FF0C44,word,dfbf0008 // ld	ra,8(sp)
+patch=0,EE,00FF0C48,word,03e00008 // jr	ra
+patch=0,EE,00FF0C4C,word,27bd0010 // addiu	sp,sp,16
+
+// Function: etl::iflat_map<unsigned long, HookData, etl::less<unsigned long> >::begin() [clone .constprop.0]
+patch=0,EE,00FF0C50,word,3c0300ff // lui	v1,0xff
+patch=0,EE,00FF0C54,word,27bdffe0 // addiu	sp,sp,-32
+patch=0,EE,00FF0C58,word,8c6513f0 // lw	a1,5104(v1)
+patch=0,EE,00FF0C5C,word,ffbf0018 // sd	ra,24(sp)
+patch=0,EE,00FF0C60,word,0c3fc308 // jal	ff0c20 <etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::begin() [clone .isra.0]>
+patch=0,EE,00FF0C64,word,afa40000 // sw	a0,0(sp)
+patch=0,EE,00FF0C68,word,dfbf0018 // ld	ra,24(sp)
+patch=0,EE,00FF0C6C,word,8fa20000 // lw	v0,0(sp)
+patch=0,EE,00FF0C70,word,03e00008 // jr	ra
+patch=0,EE,00FF0C74,word,27bd0020 // addiu	sp,sp,32
+
+// Function: etl::iflat_map<unsigned long, HookData, etl::less<unsigned long> >::clear() [clone .constprop.0]
+patch=0,EE,00FF0C78,word,27bdffe0 // addiu	sp,sp,-32
+patch=0,EE,00FF0C7C,word,27a40008 // addiu	a0,sp,8
+patch=0,EE,00FF0C80,word,ffb00010 // sd	s0,16(sp)
+patch=0,EE,00FF0C84,word,3c1000ff // lui	s0,0xff
+patch=0,EE,00FF0C88,word,ffbf0018 // sd	ra,24(sp)
+patch=0,EE,00FF0C8C,word,0c3fc314 // jal	ff0c50 <etl::iflat_map<unsigned long, HookData, etl::less<unsigned long> >::begin() [clone .constprop.0]>
+patch=0,EE,00FF0C90,word,261013f0 // addiu	s0,s0,5104
+patch=0,EE,00FF0C94,word,02002825 // move	a1,s0
+patch=0,EE,00FF0C98,word,0c3fc2fb // jal	ff0bec <etl::iflat_map<unsigned long, HookData, etl::less<unsigned long> >::end()>
+patch=0,EE,00FF0C9C,word,03a02025 // move	a0,sp
+patch=0,EE,00FF0CA0,word,8fa50000 // lw	a1,0(sp)
+patch=0,EE,00FF0CA4,word,0c3fc283 // jal	ff0a0c <etl::operator!=(etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator const&, etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator const&) [clone .isra.0]>
+patch=0,EE,00FF0CA8,word,8fa40008 // lw	a0,8(sp)
+patch=0,EE,00FF0CAC,word,14400005 // bnez	v0,ff0cc4 <etl::iflat_map<unsigned long, HookData, etl::less<unsigned long> >::clear() [clone .constprop.0]+0x4c>
+patch=0,EE,00FF0CB0,word,00000000 // nop
+patch=0,EE,00FF0CB4,word,dfbf0018 // ld	ra,24(sp)
+patch=0,EE,00FF0CB8,word,dfb00010 // ld	s0,16(sp)
+patch=0,EE,00FF0CBC,word,083fc130 // j	ff04c0 <etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::clear() [clone .constprop.0]>
+patch=0,EE,00FF0CC0,word,27bd0020 // addiu	sp,sp,32
+patch=0,EE,00FF0CC4,word,0c3fc26a // jal	ff09a8 <etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator::operator*() const [clone .isra.0]>
+patch=0,EE,00FF0CC8,word,00000000 // nop
+patch=0,EE,00FF0CCC,word,8e030008 // lw	v1,8(s0)
+patch=0,EE,00FF0CD0,word,0c3fc11e // jal	ff0478 <etl::pair<unsigned long const, HookData>* etl::addressof<etl::pair<unsigned long const, HookData> >(etl::pair<unsigned long const, HookData>&)>
+patch=0,EE,00FF0CD4,word,00402025 // move	a0,v0
+patch=0,EE,00FF0CD8,word,00602025 // move	a0,v1
+patch=0,EE,00FF0CDC,word,0c3fc21e // jal	ff0878 <etl::ipool::release(void const*)>
+patch=0,EE,00FF0CE0,word,00402825 // move	a1,v0
+patch=0,EE,00FF0CE4,word,0c3fc129 // jal	ff04a4 <etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator::operator++()>
+patch=0,EE,00FF0CE8,word,27a40008 // addiu	a0,sp,8
+patch=0,EE,00FF0CEC,word,1000ffe9 // b	ff0c94 <etl::iflat_map<unsigned long, HookData, etl::less<unsigned long> >::clear() [clone .constprop.0]+0x1c>
+patch=0,EE,00FF0CF0,word,00000000 // nop
+
+// Function: etl::flat_map<unsigned long, HookData, 5u, etl::less<unsigned long> >::~flat_map() [clone .constprop.0]
+patch=0,EE,00FF0CF4,word,083fc31e // j	ff0c78 <etl::iflat_map<unsigned long, HookData, etl::less<unsigned long> >::clear() [clone .constprop.0]>
+patch=0,EE,00FF0CF8,word,00000000 // nop
+
+// Function: __static_initialization_and_destruction_0(int, int) [clone .constprop.0]
+patch=0,EE,00FF0CFC,word,24020001 // li	v0,1
+patch=0,EE,00FF0D00,word,14820003 // bne	a0,v0,ff0d10 <__static_initialization_and_destruction_0(int, int) [clone .constprop.0]+0x14>
+patch=0,EE,00FF0D04,word,00000000 // nop
+patch=0,EE,00FF0D08,word,083fc1b1 // j	ff06c4 <etl::flat_map<unsigned long, HookData, 5u, etl::less<unsigned long> >::flat_map() [clone .constprop.0]>
+patch=0,EE,00FF0D0C,word,00000000 // nop
+patch=0,EE,00FF0D10,word,083fc33d // j	ff0cf4 <etl::flat_map<unsigned long, HookData, 5u, etl::less<unsigned long> >::~flat_map() [clone .constprop.0]>
+patch=0,EE,00FF0D14,word,00000000 // nop
+
+// Function: etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::lower_bound(unsigned long const&) [clone .constprop.0]
+patch=0,EE,00FF0D18,word,27bdffd0 // addiu	sp,sp,-48
+patch=0,EE,00FF0D1C,word,3c0600ff // lui	a2,0xff
+patch=0,EE,00FF0D20,word,00806825 // move	t1,a0
+patch=0,EE,00FF0D24,word,00a03825 // move	a3,a1
+patch=0,EE,00FF0D28,word,03a02025 // move	a0,sp
+patch=0,EE,00FF0D2C,word,8cc513f0 // lw	a1,5104(a2)
+patch=0,EE,00FF0D30,word,24c613f0 // addiu	a2,a2,5104
+patch=0,EE,00FF0D34,word,ffbf0028 // sd	ra,40(sp)
+patch=0,EE,00FF0D38,word,0c3fc308 // jal	ff0c20 <etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::begin() [clone .isra.0]>
+patch=0,EE,00FF0D3C,word,afa50010 // sw	a1,16(sp)
+patch=0,EE,00FF0D40,word,8fa50010 // lw	a1,16(sp)
+patch=0,EE,00FF0D44,word,0c3fc2ef // jal	ff0bbc <etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::end() [clone .isra.0]>
+patch=0,EE,00FF0D48,word,27a40008 // addiu	a0,sp,8
+patch=0,EE,00FF0D4C,word,90c80004 // lbu	a4,4(a2)
+patch=0,EE,00FF0D50,word,03a02825 // move	a1,sp
+patch=0,EE,00FF0D54,word,27a60008 // addiu	a2,sp,8
+patch=0,EE,00FF0D58,word,0c3fc2bf // jal	ff0afc <etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator etl::lower_bound<etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator, unsigned long, etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::Compare>(etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator, etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator, unsigned long const&, etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::Compare)>
+patch=0,EE,00FF0D5C,word,01a02025 // move	a0,t1
+patch=0,EE,00FF0D60,word,dfbf0028 // ld	ra,40(sp)
+patch=0,EE,00FF0D64,word,01a01025 // move	v0,t1
+patch=0,EE,00FF0D68,word,03e00008 // jr	ra
+patch=0,EE,00FF0D6C,word,27bd0030 // addiu	sp,sp,48
+
+// Function: etl::iflat_map<unsigned long, HookData, etl::less<unsigned long> >::lower_bound(unsigned long const&) [clone .constprop.0]
+patch=0,EE,00FF0D70,word,27bdffe0 // addiu	sp,sp,-32
+patch=0,EE,00FF0D74,word,ffbf0018 // sd	ra,24(sp)
+patch=0,EE,00FF0D78,word,0c3fc346 // jal	ff0d18 <etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::lower_bound(unsigned long const&) [clone .constprop.0]>
+patch=0,EE,00FF0D7C,word,afa40000 // sw	a0,0(sp)
+patch=0,EE,00FF0D80,word,dfbf0018 // ld	ra,24(sp)
+patch=0,EE,00FF0D84,word,8fa20000 // lw	v0,0(sp)
+patch=0,EE,00FF0D88,word,03e00008 // jr	ra
+patch=0,EE,00FF0D8C,word,27bd0020 // addiu	sp,sp,32
+
+// Function: etl::exception::what() const [clone .isra.0]
+patch=0,EE,00FF0D90,word,03e00008 // jr	ra
+patch=0,EE,00FF0D94,word,00801025 // move	v0,a0
+
+// Function: ta_free(void*) [clone .isra.0]
+patch=0,EE,00FF0D98,word,27bdfff0 // addiu	sp,sp,-16
+patch=0,EE,00FF0D9C,word,8f86802c // lw	a2,-32724(gp)
+patch=0,EE,00FF0DA0,word,00801825 // move	v1,a0
+patch=0,EE,00FF0DA4,word,8cc40004 // lw	a0,4(a2)
+patch=0,EE,00FF0DA8,word,ffbf0008 // sd	ra,8(sp)
+patch=0,EE,00FF0DAC,word,00001025 // move	v0,zero
+patch=0,EE,00FF0DB0,word,14800004 // bnez	a0,ff0dc4 <ta_free(void*) [clone .isra.0]+0x2c>
+patch=0,EE,00FF0DB4,word,00000000 // nop
+patch=0,EE,00FF0DB8,word,dfbf0008 // ld	ra,8(sp)
+patch=0,EE,00FF0DBC,word,03e00008 // jr	ra
+patch=0,EE,00FF0DC0,word,27bd0010 // addiu	sp,sp,16
+patch=0,EE,00FF0DC4,word,8c870000 // lw	a3,0(a0)
+patch=0,EE,00FF0DC8,word,14e3000b // bne	a3,v1,ff0df8 <ta_free(void*) [clone .isra.0]+0x60>
+patch=0,EE,00FF0DCC,word,8c850004 // lw	a1,4(a0)
+patch=0,EE,00FF0DD0,word,10400007 // beqz	v0,ff0df0 <ta_free(void*) [clone .isra.0]+0x58>
+patch=0,EE,00FF0DD4,word,00000000 // nop
+patch=0,EE,00FF0DD8,word,ac450004 // sw	a1,4(v0)
+patch=0,EE,00FF0DDC,word,0c3fc004 // jal	ff0010 <insert_block(Block*)>
+patch=0,EE,00FF0DE0,word,00000000 // nop
+patch=0,EE,00FF0DE4,word,dfbf0008 // ld	ra,8(sp)
+patch=0,EE,00FF0DE8,word,083fc025 // j	ff0094 <compact()>
+patch=0,EE,00FF0DEC,word,27bd0010 // addiu	sp,sp,16
+patch=0,EE,00FF0DF0,word,1000fffa // b	ff0ddc <ta_free(void*) [clone .isra.0]+0x44>
+patch=0,EE,00FF0DF4,word,acc50004 // sw	a1,4(a2)
+patch=0,EE,00FF0DF8,word,00801025 // move	v0,a0
+patch=0,EE,00FF0DFC,word,1000ffec // b	ff0db0 <ta_free(void*) [clone .isra.0]+0x18>
+patch=0,EE,00FF0E00,word,00a02025 // move	a0,a1
+
+// Function: mymemmove(void*, void const*, unsigned int) [clone .isra.0]
+patch=0,EE,00FF0E04,word,27bdfff0 // addiu	sp,sp,-16
+patch=0,EE,00FF0E08,word,00806825 // move	t1,a0
+patch=0,EE,00FF0E0C,word,00c02025 // move	a0,a2
+patch=0,EE,00FF0E10,word,00a07025 // move	t2,a1
+patch=0,EE,00FF0E14,word,ffbf0008 // sd	ra,8(sp)
+patch=0,EE,00FF0E18,word,0c3fc09f // jal	ff027c <ta_alloc(unsigned int)>
+patch=0,EE,00FF0E1C,word,00c06025 // move	t0,a2
+patch=0,EE,00FF0E20,word,00001825 // move	v1,zero
+patch=0,EE,00FF0E24,word,146c0008 // bne	v1,t0,ff0e48 <mymemmove(void*, void const*, unsigned int) [clone .isra.0]+0x44>
+patch=0,EE,00FF0E28,word,00000000 // nop
+patch=0,EE,00FF0E2C,word,00001825 // move	v1,zero
+patch=0,EE,00FF0E30,word,146c000b // bne	v1,t0,ff0e60 <mymemmove(void*, void const*, unsigned int) [clone .isra.0]+0x5c>
+patch=0,EE,00FF0E34,word,00000000 // nop
+patch=0,EE,00FF0E38,word,dfbf0008 // ld	ra,8(sp)
+patch=0,EE,00FF0E3C,word,00402025 // move	a0,v0
+patch=0,EE,00FF0E40,word,083fc366 // j	ff0d98 <ta_free(void*) [clone .isra.0]>
+patch=0,EE,00FF0E44,word,27bd0010 // addiu	sp,sp,16
+patch=0,EE,00FF0E48,word,01c32021 // addu	a0,t2,v1
+patch=0,EE,00FF0E4C,word,80850000 // lb	a1,0(a0)
+patch=0,EE,00FF0E50,word,00432021 // addu	a0,v0,v1
+patch=0,EE,00FF0E54,word,a0850000 // sb	a1,0(a0)
+patch=0,EE,00FF0E58,word,1000fff2 // b	ff0e24 <mymemmove(void*, void const*, unsigned int) [clone .isra.0]+0x20>
+patch=0,EE,00FF0E5C,word,24630001 // addiu	v1,v1,1
+patch=0,EE,00FF0E60,word,00432021 // addu	a0,v0,v1
+patch=0,EE,00FF0E64,word,80850000 // lb	a1,0(a0)
+patch=0,EE,00FF0E68,word,01a32021 // addu	a0,t1,v1
+patch=0,EE,00FF0E6C,word,a0850000 // sb	a1,0(a0)
+patch=0,EE,00FF0E70,word,1000ffef // b	ff0e30 <mymemmove(void*, void const*, unsigned int) [clone .isra.0]+0x2c>
+patch=0,EE,00FF0E74,word,24630001 // addiu	v1,v1,1
+
+// Function: etl::enable_if<(etl::is_pointer<void**>::value&&etl::is_pointer<void**>::value)&&etl::is_trivially_copyable<etl::iterator_traits<void**>::value_type>::value, void**>::type etl::copy_backward<void**, void**>(void**, void**, void**) [clone .isra.0]
+patch=0,EE,00FF0E78,word,00c01025 // move	v0,a2
+patch=0,EE,00FF0E7C,word,00a43023 // subu	a2,a1,a0
+patch=0,EE,00FF0E80,word,00802825 // move	a1,a0
+patch=0,EE,00FF0E84,word,083fc381 // j	ff0e04 <mymemmove(void*, void const*, unsigned int) [clone .isra.0]>
+patch=0,EE,00FF0E88,word,00462023 // subu	a0,v0,a2
+
+// Function: etl::pvoidvector::insert(void* const*, void*) [clone .isra.0]
+patch=0,EE,00FF0E8C,word,27bdffd0 // addiu	sp,sp,-48
+patch=0,EE,00FF0E90,word,ffb00010 // sd	s0,16(sp)
+patch=0,EE,00FF0E94,word,00808025 // move	s0,a0
+patch=0,EE,00FF0E98,word,00a02025 // move	a0,a1
+patch=0,EE,00FF0E9C,word,ffbf0028 // sd	ra,40(sp)
+patch=0,EE,00FF0EA0,word,ffb20020 // sd	s2,32(sp)
+patch=0,EE,00FF0EA4,word,00c09025 // move	s2,a2
+patch=0,EE,00FF0EA8,word,0c3fc18c // jal	ff0630 <etl::pvoidvector::to_iterator(void* const*) const [clone .constprop.0]>
+patch=0,EE,00FF0EAC,word,ffb10018 // sd	s1,24(sp)
+patch=0,EE,00FF0EB0,word,02002025 // move	a0,s0
+patch=0,EE,00FF0EB4,word,0c3fc0b2 // jal	ff02c8 <etl::pvoidvector::size() const>
+patch=0,EE,00FF0EB8,word,00408825 // move	s1,v0
+patch=0,EE,00FF0EBC,word,8e030000 // lw	v1,0(s0)
+patch=0,EE,00FF0EC0,word,14430005 // bne	v0,v1,ff0ed8 <etl::pvoidvector::insert(void* const*, void*) [clone .isra.0]+0x4c>
+patch=0,EE,00FF0EC4,word,00000000 // nop
+patch=0,EE,00FF0EC8,word,0c3fc1c0 // jal	ff0700 <etl::vector_full::vector_full(char const*, int) [clone .constprop.0]>
+patch=0,EE,00FF0ECC,word,03a02025 // move	a0,sp
+patch=0,EE,00FF0ED0,word,0c3fc1d2 // jal	ff0748 <etl::error_handler::error(etl::exception const&)>
+patch=0,EE,00FF0ED4,word,00000000 // nop
+patch=0,EE,00FF0ED8,word,8e030008 // lw	v1,8(s0)
+patch=0,EE,00FF0EDC,word,0c3fc2eb // jal	ff0bac <etl::pvoidvector::end() [clone .isra.0]>
+patch=0,EE,00FF0EE0,word,00602025 // move	a0,v1
+patch=0,EE,00FF0EE4,word,24640004 // addiu	a0,v1,4
+patch=0,EE,00FF0EE8,word,1222000e // beq	s1,v0,ff0f24 <etl::pvoidvector::insert(void* const*, void*) [clone .isra.0]+0x98>
+patch=0,EE,00FF0EEC,word,ae040008 // sw	a0,8(s0)
+patch=0,EE,00FF0EF0,word,0c3fc2eb // jal	ff0bac <etl::pvoidvector::end() [clone .isra.0]>
+patch=0,EE,00FF0EF4,word,00000000 // nop
+patch=0,EE,00FF0EF8,word,02202025 // move	a0,s1
+patch=0,EE,00FF0EFC,word,00403025 // move	a2,v0
+patch=0,EE,00FF0F00,word,0c3fc39e // jal	ff0e78 <etl::enable_if<(etl::is_pointer<void**>::value&&etl::is_pointer<void**>::value)&&etl::is_trivially_copyable<etl::iterator_traits<void**>::value_type>::value, void**>::type etl::copy_backward<void**, void**>(void**, void**, void**) [clone .isra.0]>
+patch=0,EE,00FF0F04,word,2445fffc // addiu	a1,v0,-4
+patch=0,EE,00FF0F08,word,ae320000 // sw	s2,0(s1)
+patch=0,EE,00FF0F0C,word,dfbf0028 // ld	ra,40(sp)
+patch=0,EE,00FF0F10,word,dfb20020 // ld	s2,32(sp)
+patch=0,EE,00FF0F14,word,dfb10018 // ld	s1,24(sp)
+patch=0,EE,00FF0F18,word,dfb00010 // ld	s0,16(sp)
+patch=0,EE,00FF0F1C,word,03e00008 // jr	ra
+patch=0,EE,00FF0F20,word,27bd0030 // addiu	sp,sp,48
+patch=0,EE,00FF0F24,word,1000fff9 // b	ff0f0c <etl::pvoidvector::insert(void* const*, void*) [clone .isra.0]+0x80>
+patch=0,EE,00FF0F28,word,ac720000 // sw	s2,0(v1)
+
+// Function: etl::ivector<etl::pair<unsigned long const, HookData>*>::insert(etl::pair<unsigned long const, HookData>* const*, etl::pair<unsigned long const, HookData>*) [clone .isra.0]
+patch=0,EE,00FF0F2C,word,083fc3a3 // j	ff0e8c <etl::pvoidvector::insert(void* const*, void*) [clone .isra.0]>
+patch=0,EE,00FF0F30,word,00000000 // nop
+
+// Function: etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::insert_at(etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator, etl::pair<unsigned long const, HookData>&) [clone .constprop.0]
+patch=0,EE,00FF0F34,word,27bdffc0 // addiu	sp,sp,-64
+patch=0,EE,00FF0F38,word,ffb30030 // sd	s3,48(sp)
+patch=0,EE,00FF0F3C,word,3c1300ff // lui	s3,0xff
+patch=0,EE,00FF0F40,word,8e6713f0 // lw	a3,5104(s3)
+patch=0,EE,00FF0F44,word,ffb10020 // sd	s1,32(sp)
+patch=0,EE,00FF0F48,word,00a08825 // move	s1,a1
+patch=0,EE,00FF0F4C,word,ffb00018 // sd	s0,24(sp)
+patch=0,EE,00FF0F50,word,00e02825 // move	a1,a3
+patch=0,EE,00FF0F54,word,00808025 // move	s0,a0
+patch=0,EE,00FF0F58,word,03a02025 // move	a0,sp
+patch=0,EE,00FF0F5C,word,ffbf0038 // sd	ra,56(sp)
+patch=0,EE,00FF0F60,word,0c3fc2ef // jal	ff0bbc <etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::end() [clone .isra.0]>
+patch=0,EE,00FF0F64,word,ffb20028 // sd	s2,40(sp)
+patch=0,EE,00FF0F68,word,00c09025 // move	s2,a2
+patch=0,EE,00FF0F6C,word,03a02825 // move	a1,sp
+patch=0,EE,00FF0F70,word,02002025 // move	a0,s0
+patch=0,EE,00FF0F74,word,27a6000c // addiu	a2,sp,12
+patch=0,EE,00FF0F78,word,0c3fc2a1 // jal	ff0a84 <etl::pair<etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator, bool>::pair<etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator&, bool>(etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator&, bool&&) [clone .constprop.0]>
+patch=0,EE,00FF0F7C,word,a3a0000c // sb	zero,12(sp)
+patch=0,EE,00FF0F80,word,00e02825 // move	a1,a3
+patch=0,EE,00FF0F84,word,0c3fc2ef // jal	ff0bbc <etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::end() [clone .isra.0]>
+patch=0,EE,00FF0F88,word,03a02025 // move	a0,sp
+patch=0,EE,00FF0F8C,word,8e240000 // lw	a0,0(s1)
+patch=0,EE,00FF0F90,word,0c3fc280 // jal	ff0a00 <etl::operator==(etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator const&, etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator const&) [clone .isra.0]>
+patch=0,EE,00FF0F94,word,8fa50000 // lw	a1,0(sp)
+patch=0,EE,00FF0F98,word,10400021 // beqz	v0,ff1020 <etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::insert_at(etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator, etl::pair<unsigned long const, HookData>&) [clone .constprop.0]+0xec>
+patch=0,EE,00FF0F9C,word,00000000 // nop
+patch=0,EE,00FF0FA0,word,0c3fc0b7 // jal	ff02dc <etl::pvoidvector::full() const>
+patch=0,EE,00FF0FA4,word,00e02025 // move	a0,a3
+patch=0,EE,00FF0FA8,word,10400008 // beqz	v0,ff0fcc <etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::insert_at(etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator, etl::pair<unsigned long const, HookData>&) [clone .constprop.0]+0x98>
+patch=0,EE,00FF0FAC,word,00000000 // nop
+patch=0,EE,00FF0FB0,word,3c0500ff // lui	a1,0xff
+patch=0,EE,00FF0FB4,word,240603f8 // li	a2,1016
+patch=0,EE,00FF0FB8,word,24a51538 // addiu	a1,a1,5432
+patch=0,EE,00FF0FBC,word,0c3fc18a // jal	ff0628 <etl::flat_map_full::flat_map_full(char const*, int)>
+patch=0,EE,00FF0FC0,word,03a02025 // move	a0,sp
+patch=0,EE,00FF0FC4,word,0c3fc1d2 // jal	ff0748 <etl::error_handler::error(etl::exception const&)>
+patch=0,EE,00FF0FC8,word,00000000 // nop
+patch=0,EE,00FF0FCC,word,02402825 // move	a1,s2
+patch=0,EE,00FF0FD0,word,0c3fc120 // jal	ff0480 <etl::ivector<etl::pair<unsigned long const, HookData>*>::push_back(etl::pair<unsigned long const, HookData>*)>
+patch=0,EE,00FF0FD4,word,8e6413f0 // lw	a0,5104(s3)
+patch=0,EE,00FF0FD8,word,8e6513f0 // lw	a1,5104(s3)
+patch=0,EE,00FF0FDC,word,0c3fc2ef // jal	ff0bbc <etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::end() [clone .isra.0]>
+patch=0,EE,00FF0FE0,word,03a02025 // move	a0,sp
+patch=0,EE,00FF0FE4,word,0c3fc122 // jal	ff0488 <etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator::operator--()>
+patch=0,EE,00FF0FE8,word,03a02025 // move	a0,sp
+patch=0,EE,00FF0FEC,word,02002025 // move	a0,s0
+patch=0,EE,00FF0FF0,word,0c3fc26c // jal	ff09b0 <etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator::operator=(etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator const&) [clone .isra.0]>
+patch=0,EE,00FF0FF4,word,8c450000 // lw	a1,0(v0)
+patch=0,EE,00FF0FF8,word,24020001 // li	v0,1
+patch=0,EE,00FF0FFC,word,a2020004 // sb	v0,4(s0)
+patch=0,EE,00FF1000,word,dfbf0038 // ld	ra,56(sp)
+patch=0,EE,00FF1004,word,02001025 // move	v0,s0
+patch=0,EE,00FF1008,word,dfb30030 // ld	s3,48(sp)
+patch=0,EE,00FF100C,word,dfb20028 // ld	s2,40(sp)
+patch=0,EE,00FF1010,word,dfb10020 // ld	s1,32(sp)
+patch=0,EE,00FF1014,word,dfb00018 // ld	s0,24(sp)
+patch=0,EE,00FF1018,word,03e00008 // jr	ra
+patch=0,EE,00FF101C,word,27bd0040 // addiu	sp,sp,64
+patch=0,EE,00FF1020,word,00802825 // move	a1,a0
+patch=0,EE,00FF1024,word,0c3fc26c // jal	ff09b0 <etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator::operator=(etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator const&) [clone .isra.0]>
+patch=0,EE,00FF1028,word,02002025 // move	a0,s0
+patch=0,EE,00FF102C,word,0c3fc27e // jal	ff09f8 <etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator::operator->() const [clone .isra.0]>
+patch=0,EE,00FF1030,word,8e240000 // lw	a0,0(s1)
+patch=0,EE,00FF1034,word,8e450000 // lw	a1,0(s2)
+patch=0,EE,00FF1038,word,0c3fc258 // jal	ff0960 <etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::keys_are_equal(unsigned long const&, unsigned long const&) const [clone .constprop.0] [clone .isra.0]>
+patch=0,EE,00FF103C,word,8c440000 // lw	a0,0(v0)
+patch=0,EE,00FF1040,word,1440ffef // bnez	v0,ff1000 <etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::insert_at(etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator, etl::pair<unsigned long const, HookData>&) [clone .constprop.0]+0xcc>
+patch=0,EE,00FF1044,word,00000000 // nop
+patch=0,EE,00FF1048,word,0c3fc0b7 // jal	ff02dc <etl::pvoidvector::full() const>
+patch=0,EE,00FF104C,word,00e02025 // move	a0,a3
+patch=0,EE,00FF1050,word,10400008 // beqz	v0,ff1074 <etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::insert_at(etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator, etl::pair<unsigned long const, HookData>&) [clone .constprop.0]+0x140>
+patch=0,EE,00FF1054,word,00000000 // nop
+patch=0,EE,00FF1058,word,3c0500ff // lui	a1,0xff
+patch=0,EE,00FF105C,word,24060407 // li	a2,1031
+patch=0,EE,00FF1060,word,24a51538 // addiu	a1,a1,5432
+patch=0,EE,00FF1064,word,0c3fc18a // jal	ff0628 <etl::flat_map_full::flat_map_full(char const*, int)>
+patch=0,EE,00FF1068,word,03a02025 // move	a0,sp
+patch=0,EE,00FF106C,word,0c3fc1d2 // jal	ff0748 <etl::error_handler::error(etl::exception const&)>
+patch=0,EE,00FF1070,word,00000000 // nop
+patch=0,EE,00FF1074,word,02403025 // move	a2,s2
+patch=0,EE,00FF1078,word,8e250000 // lw	a1,0(s1)
+patch=0,EE,00FF107C,word,0c3fc3cb // jal	ff0f2c <etl::ivector<etl::pair<unsigned long const, HookData>*>::insert(etl::pair<unsigned long const, HookData>* const*, etl::pair<unsigned long const, HookData>*) [clone .isra.0]>
+patch=0,EE,00FF1080,word,8e6413f0 // lw	a0,5104(s3)
+patch=0,EE,00FF1084,word,1000ffdc // b	ff0ff8 <etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::insert_at(etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator, etl::pair<unsigned long const, HookData>&) [clone .constprop.0]+0xc4>
+patch=0,EE,00FF1088,word,00000000 // nop
+
+// Function: etl::iflat_map<unsigned long, HookData, etl::less<unsigned long> >::insert(etl::pair<unsigned long const, HookData>&&) [clone .constprop.0]
+patch=0,EE,00FF108C,word,27bdffc0 // addiu	sp,sp,-64
+patch=0,EE,00FF1090,word,ffb00020 // sd	s0,32(sp)
+patch=0,EE,00FF1094,word,00808025 // move	s0,a0
+patch=0,EE,00FF1098,word,27a40018 // addiu	a0,sp,24
+patch=0,EE,00FF109C,word,ffbf0038 // sd	ra,56(sp)
+patch=0,EE,00FF10A0,word,ffb20030 // sd	s2,48(sp)
+patch=0,EE,00FF10A4,word,3c1200ff // lui	s2,0xff
+patch=0,EE,00FF10A8,word,ffb10028 // sd	s1,40(sp)
+patch=0,EE,00FF10AC,word,0c3fc35c // jal	ff0d70 <etl::iflat_map<unsigned long, HookData, etl::less<unsigned long> >::lower_bound(unsigned long const&) [clone .constprop.0]>
+patch=0,EE,00FF10B0,word,00a08825 // move	s1,a1
+patch=0,EE,00FF10B4,word,27a50018 // addiu	a1,sp,24
+patch=0,EE,00FF10B8,word,02002025 // move	a0,s0
+patch=0,EE,00FF10BC,word,03a03025 // move	a2,sp
+patch=0,EE,00FF10C0,word,0c3fc2a1 // jal	ff0a84 <etl::pair<etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator, bool>::pair<etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator&, bool>(etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator&, bool&&) [clone .constprop.0]>
+patch=0,EE,00FF10C4,word,a3a00000 // sb	zero,0(sp)
+patch=0,EE,00FF10C8,word,264513f0 // addiu	a1,s2,5104
+patch=0,EE,00FF10CC,word,0c3fc2fb // jal	ff0bec <etl::iflat_map<unsigned long, HookData, etl::less<unsigned long> >::end()>
+patch=0,EE,00FF10D0,word,03a02025 // move	a0,sp
+patch=0,EE,00FF10D4,word,8fa50000 // lw	a1,0(sp)
+patch=0,EE,00FF10D8,word,0c3fc280 // jal	ff0a00 <etl::operator==(etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator const&, etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator const&) [clone .isra.0]>
+patch=0,EE,00FF10DC,word,8fa40018 // lw	a0,24(sp)
+patch=0,EE,00FF10E0,word,14400008 // bnez	v0,ff1104 <etl::iflat_map<unsigned long, HookData, etl::less<unsigned long> >::insert(etl::pair<unsigned long const, HookData>&&) [clone .constprop.0]+0x78>
+patch=0,EE,00FF10E4,word,00000000 // nop
+patch=0,EE,00FF10E8,word,0c3fc27e // jal	ff09f8 <etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator::operator->() const [clone .isra.0]>
+patch=0,EE,00FF10EC,word,00000000 // nop
+patch=0,EE,00FF10F0,word,8e240000 // lw	a0,0(s1)
+patch=0,EE,00FF10F4,word,0c3fc256 // jal	ff0958 <etl::less<unsigned long>::operator()(unsigned long const&, unsigned long const&) const [clone .constprop.0] [clone .isra.0]>
+patch=0,EE,00FF10F8,word,8c450000 // lw	a1,0(v0)
+patch=0,EE,00FF10FC,word,10400020 // beqz	v0,ff1180 <etl::iflat_map<unsigned long, HookData, etl::less<unsigned long> >::insert(etl::pair<unsigned long const, HookData>&&) [clone .constprop.0]+0xf4>
+patch=0,EE,00FF1100,word,00000000 // nop
+patch=0,EE,00FF1104,word,0c3fc148 // jal	ff0520 <etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::full() const [clone .constprop.0]>
+patch=0,EE,00FF1108,word,00000000 // nop
+patch=0,EE,00FF110C,word,10400008 // beqz	v0,ff1130 <etl::iflat_map<unsigned long, HookData, etl::less<unsigned long> >::insert(etl::pair<unsigned long const, HookData>&&) [clone .constprop.0]+0xa4>
+patch=0,EE,00FF1110,word,00000000 // nop
+patch=0,EE,00FF1114,word,3c0500ff // lui	a1,0xff
+patch=0,EE,00FF1118,word,2406015a // li	a2,346
+patch=0,EE,00FF111C,word,24a51568 // addiu	a1,a1,5480
+patch=0,EE,00FF1120,word,0c3fc18a // jal	ff0628 <etl::flat_map_full::flat_map_full(char const*, int)>
+patch=0,EE,00FF1124,word,03a02025 // move	a0,sp
+patch=0,EE,00FF1128,word,0c3fc1d2 // jal	ff0748 <etl::error_handler::error(etl::exception const&)>
+patch=0,EE,00FF112C,word,00000000 // nop
+patch=0,EE,00FF1130,word,265213f0 // addiu	s2,s2,5104
+patch=0,EE,00FF1134,word,0c3fc220 // jal	ff0880 <etl::pair<unsigned long const, HookData>* etl::ipool::allocate<etl::pair<unsigned long const, HookData> >()>
+patch=0,EE,00FF1138,word,8e440008 // lw	a0,8(s2)
+patch=0,EE,00FF113C,word,02202025 // move	a0,s1
+patch=0,EE,00FF1140,word,0c3fc0d7 // jal	ff035c <etl::remove_reference<etl::pair<unsigned long const, HookData>&>::type&& etl::move<etl::pair<unsigned long const, HookData>&>(etl::pair<unsigned long const, HookData>&)>
+patch=0,EE,00FF1144,word,00403025 // move	a2,v0
+patch=0,EE,00FF1148,word,00c02025 // move	a0,a2
+patch=0,EE,00FF114C,word,0c3fc23c // jal	ff08f0 <operator new(unsigned int, void*) [clone .constprop.0]>
+patch=0,EE,00FF1150,word,00402825 // move	a1,v0
+patch=0,EE,00FF1154,word,0c3fc10c // jal	ff0430 <etl::pair<unsigned long const, HookData>::pair<unsigned long const, HookData>(etl::pair<unsigned long const, HookData>&&)>
+patch=0,EE,00FF1158,word,00402025 // move	a0,v0
+patch=0,EE,00FF115C,word,27a40010 // addiu	a0,sp,16
+patch=0,EE,00FF1160,word,0c3fc29f // jal	ff0a7c <etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator::iterator(etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator const&) [clone .isra.0]>
+patch=0,EE,00FF1164,word,8fa50018 // lw	a1,24(sp)
+patch=0,EE,00FF1168,word,00802825 // move	a1,a0
+patch=0,EE,00FF116C,word,0c3fc3cd // jal	ff0f34 <etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::insert_at(etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator, etl::pair<unsigned long const, HookData>&) [clone .constprop.0]>
+patch=0,EE,00FF1170,word,03a02025 // move	a0,sp
+patch=0,EE,00FF1174,word,03a02825 // move	a1,sp
+patch=0,EE,00FF1178,word,0c3fc26e // jal	ff09b8 <etl::pair<etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator, bool>::operator=(etl::pair<etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator, bool>&&) [clone .isra.0]>
+patch=0,EE,00FF117C,word,02002025 // move	a0,s0
+patch=0,EE,00FF1180,word,dfbf0038 // ld	ra,56(sp)
+patch=0,EE,00FF1184,word,02001025 // move	v0,s0
+patch=0,EE,00FF1188,word,dfb20030 // ld	s2,48(sp)
+patch=0,EE,00FF118C,word,dfb10028 // ld	s1,40(sp)
+patch=0,EE,00FF1190,word,dfb00020 // ld	s0,32(sp)
+patch=0,EE,00FF1194,word,03e00008 // jr	ra
+patch=0,EE,00FF1198,word,27bd0040 // addiu	sp,sp,64
+
+// Function: etl::iflat_map<unsigned long, HookData, etl::less<unsigned long> >::operator[](unsigned long const&) [clone .constprop.0]
+patch=0,EE,00FF119C,word,27bdffb0 // addiu	sp,sp,-80
+patch=0,EE,00FF11A0,word,00802825 // move	a1,a0
+patch=0,EE,00FF11A4,word,27a60020 // addiu	a2,sp,32
+patch=0,EE,00FF11A8,word,27a40010 // addiu	a0,sp,16
+patch=0,EE,00FF11AC,word,ffbf0048 // sd	ra,72(sp)
+patch=0,EE,00FF11B0,word,ffa00020 // sd	zero,32(sp)
+patch=0,EE,00FF11B4,word,0c3fc0fd // jal	ff03f4 <etl::pair<unsigned long const&, HookData> etl::make_pair<unsigned long const&, HookData>(unsigned long const&, HookData&&)>
+patch=0,EE,00FF11B8,word,afa00028 // sw	zero,40(sp)
+patch=0,EE,00FF11BC,word,27a50010 // addiu	a1,sp,16
+patch=0,EE,00FF11C0,word,0c3fc0d9 // jal	ff0364 <etl::pair<unsigned long const, HookData>::pair<unsigned long const&, HookData>(etl::pair<unsigned long const&, HookData>&&)>
+patch=0,EE,00FF11C4,word,03a02025 // move	a0,sp
+patch=0,EE,00FF11C8,word,27a40030 // addiu	a0,sp,48
+patch=0,EE,00FF11CC,word,0c3fc423 // jal	ff108c <etl::iflat_map<unsigned long, HookData, etl::less<unsigned long> >::insert(etl::pair<unsigned long const, HookData>&&) [clone .constprop.0]>
+patch=0,EE,00FF11D0,word,03a02825 // move	a1,sp
+patch=0,EE,00FF11D4,word,0c3fc27e // jal	ff09f8 <etl::ireference_flat_map<unsigned long, HookData, etl::less<unsigned long> >::iterator::operator->() const [clone .isra.0]>
+patch=0,EE,00FF11D8,word,8fa40030 // lw	a0,48(sp)
+patch=0,EE,00FF11DC,word,dfbf0048 // ld	ra,72(sp)
+patch=0,EE,00FF11E0,word,24420004 // addiu	v0,v0,4
+patch=0,EE,00FF11E4,word,03e00008 // jr	ra
+patch=0,EE,00FF11E8,word,27bd0050 // addiu	sp,sp,80
+
+// Function: puts(char const*)
+patch=0,EE,00FF11EC,word,27bdffe0 // addiu	sp,sp,-32
+patch=0,EE,00FF11F0,word,ffb10010 // sd	s1,16(sp)
+patch=0,EE,00FF11F4,word,3c110021 // lui	s1,0x21
+patch=0,EE,00FF11F8,word,ffb00008 // sd	s0,8(sp)
+patch=0,EE,00FF11FC,word,263135f8 // addiu	s1,s1,13816
+patch=0,EE,00FF1200,word,ffbf0018 // sd	ra,24(sp)
+patch=0,EE,00FF1204,word,00808025 // move	s0,a0
+patch=0,EE,00FF1208,word,82040000 // lb	a0,0(s0)
+patch=0,EE,00FF120C,word,14800008 // bnez	a0,ff1230 <puts(char const*)+0x44>
+patch=0,EE,00FF1210,word,00000000 // nop
+patch=0,EE,00FF1214,word,dfbf0018 // ld	ra,24(sp)
+patch=0,EE,00FF1218,word,0220c825 // move	t9,s1
+patch=0,EE,00FF121C,word,dfb00008 // ld	s0,8(sp)
+patch=0,EE,00FF1220,word,2404000a // li	a0,10
+patch=0,EE,00FF1224,word,dfb10010 // ld	s1,16(sp)
+patch=0,EE,00FF1228,word,03200008 // jr	t9
+patch=0,EE,00FF122C,word,27bd0020 // addiu	sp,sp,32
+patch=0,EE,00FF1230,word,0004263c // dsll32	a0,a0,0x18
+patch=0,EE,00FF1234,word,26100001 // addiu	s0,s0,1
+patch=0,EE,00FF1238,word,0220f809 // jalr	s1
+patch=0,EE,00FF123C,word,0004263f // dsra32	a0,a0,0x18
+patch=0,EE,00FF1240,word,1000fff1 // b	ff1208 <puts(char const*)+0x1c>
+patch=0,EE,00FF1244,word,00000000 // nop
+
+// Function: etl_error_handler(etl::exception const&)
+patch=0,EE,00FF1248,word,27bdfff0 // addiu	sp,sp,-16
+patch=0,EE,00FF124C,word,8c840000 // lw	a0,0(a0)
+patch=0,EE,00FF1250,word,ffbf0008 // sd	ra,8(sp)
+patch=0,EE,00FF1254,word,0c3fc364 // jal	ff0d90 <etl::exception::what() const [clone .isra.0]>
+patch=0,EE,00FF1258,word,00000000 // nop
+patch=0,EE,00FF125C,word,00402025 // move	a0,v0
+patch=0,EE,00FF1260,word,dfbf0008 // ld	ra,8(sp)
+patch=0,EE,00FF1264,word,083fc47b // j	ff11ec <puts(char const*)>
+patch=0,EE,00FF1268,word,27bd0010 // addiu	sp,sp,16
+
+// Function: void etl::error_handler::function_stub<&(etl_error_handler(etl::exception const&))>(void*, etl::exception const&)
+patch=0,EE,00FF126C,word,083fc492 // j	ff1248 <etl_error_handler(etl::exception const&)>
+patch=0,EE,00FF1270,word,00a02025 // move	a0,a1
 
 // Function: hook(unsigned long, unsigned long)
-patch=0,EE,00FF0008,word,8c860000 // lw	a2,0(a0)
-patch=0,EE,00FF000C,word,3c0200ff // lui	v0,0xff
-patch=0,EE,00FF0010,word,8c830004 // lw	v1,4(a0)
-patch=0,EE,00FF0014,word,00052882 // srl	a1,a1,0x2
-patch=0,EE,00FF0018,word,ac4601e8 // sw	a2,488(v0)
-patch=0,EE,00FF001C,word,244201e8 // addiu	v0,v0,488
-patch=0,EE,00FF0020,word,ac430004 // sw	v1,4(v0)
-patch=0,EE,00FF0024,word,3c020800 // lui	v0,0x800
-patch=0,EE,00FF0028,word,00a22825 // or	a1,a1,v0
-patch=0,EE,00FF002C,word,ac800004 // sw	zero,4(a0)
-patch=0,EE,00FF0030,word,03e00008 // jr	ra
-patch=0,EE,00FF0034,word,ac850000 // sw	a1,0(a0)
+patch=0,EE,00FF1274,word,27bdffe0 // addiu	sp,sp,-32
+patch=0,EE,00FF1278,word,afa40000 // sw	a0,0(sp)
+patch=0,EE,00FF127C,word,03a02025 // move	a0,sp
+patch=0,EE,00FF1280,word,ffb00010 // sd	s0,16(sp)
+patch=0,EE,00FF1284,word,ffbf0018 // sd	ra,24(sp)
+patch=0,EE,00FF1288,word,0c3fc467 // jal	ff119c <etl::iflat_map<unsigned long, HookData, etl::less<unsigned long> >::operator[](unsigned long const&) [clone .constprop.0]>
+patch=0,EE,00FF128C,word,00a08025 // move	s0,a1
+patch=0,EE,00FF1290,word,ac500000 // sw	s0,0(v0)
+patch=0,EE,00FF1294,word,00108082 // srl	s0,s0,0x2
+patch=0,EE,00FF1298,word,8fa30000 // lw	v1,0(sp)
+patch=0,EE,00FF129C,word,8c640000 // lw	a0,0(v1)
+patch=0,EE,00FF12A0,word,ac440004 // sw	a0,4(v0)
+patch=0,EE,00FF12A4,word,8c640004 // lw	a0,4(v1)
+patch=0,EE,00FF12A8,word,ac440008 // sw	a0,8(v0)
+patch=0,EE,00FF12AC,word,3c020800 // lui	v0,0x800
+patch=0,EE,00FF12B0,word,02028025 // or	s0,s0,v0
+patch=0,EE,00FF12B4,word,dfbf0018 // ld	ra,24(sp)
+patch=0,EE,00FF12B8,word,ac700000 // sw	s0,0(v1)
+patch=0,EE,00FF12BC,word,ac600004 // sw	zero,4(v1)
+patch=0,EE,00FF12C0,word,dfb00010 // ld	s0,16(sp)
+patch=0,EE,00FF12C4,word,03e00008 // jr	ra
+patch=0,EE,00FF12C8,word,27bd0020 // addiu	sp,sp,32
 
-// Function: unhook(unsigned long, unsigned long*)
-patch=0,EE,00FF0038,word,8ca20000 // lw	v0,0(a1)
-patch=0,EE,00FF003C,word,ac820000 // sw	v0,0(a0)
-patch=0,EE,00FF0040,word,8ca20004 // lw	v0,4(a1)
-patch=0,EE,00FF0044,word,03e00008 // jr	ra
-patch=0,EE,00FF0048,word,ac820004 // sw	v0,4(a0)
+// Function: unhook(unsigned long)
+patch=0,EE,00FF12CC,word,27bdffe0 // addiu	sp,sp,-32
+patch=0,EE,00FF12D0,word,afa40000 // sw	a0,0(sp)
+patch=0,EE,00FF12D4,word,ffbf0018 // sd	ra,24(sp)
+patch=0,EE,00FF12D8,word,0c3fc467 // jal	ff119c <etl::iflat_map<unsigned long, HookData, etl::less<unsigned long> >::operator[](unsigned long const&) [clone .constprop.0]>
+patch=0,EE,00FF12DC,word,03a02025 // move	a0,sp
+patch=0,EE,00FF12E0,word,8c440004 // lw	a0,4(v0)
+patch=0,EE,00FF12E4,word,8fa30000 // lw	v1,0(sp)
+patch=0,EE,00FF12E8,word,ac640000 // sw	a0,0(v1)
+patch=0,EE,00FF12EC,word,8c420008 // lw	v0,8(v0)
+patch=0,EE,00FF12F0,word,dfbf0018 // ld	ra,24(sp)
+patch=0,EE,00FF12F4,word,ac620004 // sw	v0,4(v1)
+patch=0,EE,00FF12F8,word,03e00008 // jr	ra
+patch=0,EE,00FF12FC,word,27bd0020 // addiu	sp,sp,32
+
+// Function: rehook(unsigned long)
+patch=0,EE,00FF1300,word,27bdffe0 // addiu	sp,sp,-32
+patch=0,EE,00FF1304,word,afa40000 // sw	a0,0(sp)
+patch=0,EE,00FF1308,word,ffbf0018 // sd	ra,24(sp)
+patch=0,EE,00FF130C,word,0c3fc467 // jal	ff119c <etl::iflat_map<unsigned long, HookData, etl::less<unsigned long> >::operator[](unsigned long const&) [clone .constprop.0]>
+patch=0,EE,00FF1310,word,03a02025 // move	a0,sp
+patch=0,EE,00FF1314,word,8c420000 // lw	v0,0(v0)
+patch=0,EE,00FF1318,word,3c040800 // lui	a0,0x800
+patch=0,EE,00FF131C,word,00021082 // srl	v0,v0,0x2
+patch=0,EE,00FF1320,word,8fa30000 // lw	v1,0(sp)
+patch=0,EE,00FF1324,word,dfbf0018 // ld	ra,24(sp)
+patch=0,EE,00FF1328,word,00441025 // or	v0,v0,a0
+patch=0,EE,00FF132C,word,ac620000 // sw	v0,0(v1)
+patch=0,EE,00FF1330,word,ac600004 // sw	zero,4(v1)
+patch=0,EE,00FF1334,word,03e00008 // jr	ra
+patch=0,EE,00FF1338,word,27bd0020 // addiu	sp,sp,32
 
 // Function: replace_Startup()
-patch=0,EE,00FF004C,word,3c0500ff // lui	a1,0xff
-patch=0,EE,00FF0050,word,3c040019 // lui	a0,0x19
-patch=0,EE,00FF0054,word,27bdfff0 // addiu	sp,sp,-16
-patch=0,EE,00FF0058,word,24842770 // addiu	a0,a0,10096
-patch=0,EE,00FF005C,word,24a501e8 // addiu	a1,a1,488
-patch=0,EE,00FF0060,word,ffbf0008 // sd	ra,8(sp)
-patch=0,EE,00FF0064,word,0c3fc00e // jal	ff0038 <unhook(unsigned long, unsigned long*)>
-patch=0,EE,00FF0068,word,ffb00000 // sd	s0,0(sp)
-patch=0,EE,00FF006C,word,0080f809 // jalr	a0
-patch=0,EE,00FF0070,word,00808025 // move	s0,a0
-patch=0,EE,00FF0074,word,3c0500ff // lui	a1,0xff
-patch=0,EE,00FF0078,word,dfbf0008 // ld	ra,8(sp)
-patch=0,EE,00FF007C,word,02002025 // move	a0,s0
-patch=0,EE,00FF0080,word,24a5004c // addiu	a1,a1,76
-patch=0,EE,00FF0084,word,dfb00000 // ld	s0,0(sp)
-patch=0,EE,00FF0088,word,083fc002 // j	ff0008 <hook(unsigned long, unsigned long)>
-patch=0,EE,00FF008C,word,27bd0010 // addiu	sp,sp,16
+patch=0,EE,00FF133C,word,27bdfff0 // addiu	sp,sp,-16
+patch=0,EE,00FF1340,word,ffb00000 // sd	s0,0(sp)
+patch=0,EE,00FF1344,word,3c100019 // lui	s0,0x19
+patch=0,EE,00FF1348,word,ffbf0008 // sd	ra,8(sp)
+patch=0,EE,00FF134C,word,0c3fc4b3 // jal	ff12cc <unhook(unsigned long)>
+patch=0,EE,00FF1350,word,26042770 // addiu	a0,s0,10096
+patch=0,EE,00FF1354,word,3c0400ff // lui	a0,0xff
+patch=0,EE,00FF1358,word,24841588 // addiu	a0,a0,5512
+patch=0,EE,00FF135C,word,0c3fc47b // jal	ff11ec <puts(char const*)>
+patch=0,EE,00FF1360,word,36102770 // ori	s0,s0,0x2770
+patch=0,EE,00FF1364,word,0200f809 // jalr	s0
+patch=0,EE,00FF1368,word,00000000 // nop
+patch=0,EE,00FF136C,word,3c0400ff // lui	a0,0xff
+patch=0,EE,00FF1370,word,0c3fc47b // jal	ff11ec <puts(char const*)>
+patch=0,EE,00FF1374,word,24841598 // addiu	a0,a0,5528
+patch=0,EE,00FF1378,word,dfbf0008 // ld	ra,8(sp)
+patch=0,EE,00FF137C,word,02002025 // move	a0,s0
+patch=0,EE,00FF1380,word,dfb00000 // ld	s0,0(sp)
+patch=0,EE,00FF1384,word,083fc4c0 // j	ff1300 <rehook(unsigned long)>
+patch=0,EE,00FF1388,word,27bd0010 // addiu	sp,sp,16
 
 // Function: setup()
 // BOOTSTRAP
-patch=0,EE,00100008,word,083fc024 // jal	setup()
+patch=0,EE,00100008,word,083fc4e3 // jal	setup()
 patch=0,EE,0010000C,word,00000000 // nop
 // BOOTSTRAP END
-patch=0,EE,00FF0090,word,3c0500ff // lui	a1,0xff
-patch=0,EE,00FF0094,word,3c040019 // lui	a0,0x19
-patch=0,EE,00FF0098,word,27bdfff0 // addiu	sp,sp,-16
-patch=0,EE,00FF009C,word,24a5004c // addiu	a1,a1,76
-patch=0,EE,00FF00A0,word,ffbf0008 // sd	ra,8(sp)
-patch=0,EE,00FF00A4,word,0c3fc002 // jal	ff0008 <hook(unsigned long, unsigned long)>
-patch=0,EE,00FF00A8,word,24842770 // addiu	a0,a0,10096
-patch=0,EE,00FF00AC,word,3c033c02 // lui	v1,0x3c02
-patch=0,EE,00FF00B0,word,3c020010 // lui	v0,0x10
-patch=0,EE,00FF00B4,word,2463002a // addiu	v1,v1,42
-patch=0,EE,00FF00B8,word,ac430008 // sw	v1,8(v0)
-patch=0,EE,00FF00BC,word,3c033c03 // lui	v1,0x3c03
-patch=0,EE,00FF00C0,word,24630068 // addiu	v1,v1,104
-patch=0,EE,00FF00C4,word,dfbf0008 // ld	ra,8(sp)
-patch=0,EE,00FF00C8,word,ac43000c // sw	v1,12(v0)
-patch=0,EE,00FF00CC,word,24590008 // addiu	t9,v0,8
-patch=0,EE,00FF00D0,word,03200008 // jr	t9
-patch=0,EE,00FF00D4,word,27bd0010 // addiu	sp,sp,16
+patch=0,EE,00FF138C,word,27bdfff0 // addiu	sp,sp,-16
+patch=0,EE,00FF1390,word,3c0200ff // lui	v0,0xff
+patch=0,EE,00FF1394,word,24420008 // addiu	v0,v0,8
+patch=0,EE,00FF1398,word,ffbf0008 // sd	ra,8(sp)
+patch=0,EE,00FF139C,word,0040f809 // jalr	v0
+patch=0,EE,00FF13A0,word,00000000 // nop
+patch=0,EE,00FF13A4,word,0c3fc23a // jal	ff08e8 <void etl::error_handler::set_callback<&(etl_error_handler(etl::exception const&))>()>
+patch=0,EE,00FF13A8,word,3c0500ff // lui	a1,0xff
+patch=0,EE,00FF13AC,word,0c3fc23e // jal	ff08f8 <ta_init(void const*, void const*, unsigned int, unsigned int, unsigned int) [clone .constprop.0] [clone .isra.0]>
+patch=0,EE,00FF13B0,word,24a5133c // addiu	a1,a1,4924
+patch=0,EE,00FF13B4,word,3c040019 // lui	a0,0x19
+patch=0,EE,00FF13B8,word,0c3fc49d // jal	ff1274 <hook(unsigned long, unsigned long)>
+patch=0,EE,00FF13BC,word,24842770 // addiu	a0,a0,10096
+patch=0,EE,00FF13C0,word,3c033c02 // lui	v1,0x3c02
+patch=0,EE,00FF13C4,word,3c020010 // lui	v0,0x10
+patch=0,EE,00FF13C8,word,2463002a // addiu	v1,v1,42
+patch=0,EE,00FF13CC,word,ac430008 // sw	v1,8(v0)
+patch=0,EE,00FF13D0,word,3c033c03 // lui	v1,0x3c03
+patch=0,EE,00FF13D4,word,24630068 // addiu	v1,v1,104
+patch=0,EE,00FF13D8,word,dfbf0008 // ld	ra,8(sp)
+patch=0,EE,00FF13DC,word,ac43000c // sw	v1,12(v0)
+patch=0,EE,00FF13E0,word,24590008 // addiu	t9,v0,8
+patch=0,EE,00FF13E4,word,03200008 // jr	t9
+patch=0,EE,00FF13E8,word,27bd0010 // addiu	sp,sp,16
+patch=0,EE,00FF13EC,word,00000000 // nop
 
+// .rodata:
+patch=0,EE,00FF1488,word,73706564
+patch=0,EE,00FF148C,word,6c74652f
+patch=0,EE,00FF1490,word,636e692f
+patch=0,EE,00FF1494,word,6564756c
+patch=0,EE,00FF1498,word,6c74652f
+patch=0,EE,00FF149C,word,6f70692f
+patch=0,EE,00FF14A0,word,682e6c6f
+patch=0,EE,00FF14A4,word,00000000
+patch=0,EE,00FF14A8,word,6c6f6f70
+patch=0,EE,00FF14AC,word,656c653a
+patch=0,EE,00FF14B0,word,746e656d
+patch=0,EE,00FF14B4,word,7a697320
+patch=0,EE,00FF14B8,word,00000065
+patch=0,EE,00FF14BC,word,00000000
+patch=0,EE,00FF14C0,word,6c6f6f70
+patch=0,EE,00FF14C4,word,746f6e3a
+patch=0,EE,00FF14C8,word,206e6920
+patch=0,EE,00FF14CC,word,6c6f6f70
+patch=0,EE,00FF14D0,word,00000000
+patch=0,EE,00FF14D4,word,00000000
+patch=0,EE,00FF14D8,word,6c6f6f70
+patch=0,EE,00FF14DC,word,6c6c613a
+patch=0,EE,00FF14E0,word,7461636f
+patch=0,EE,00FF14E4,word,006e6f69
+patch=0,EE,00FF14E8,word,74616c66
+patch=0,EE,00FF14EC,word,70616d5f
+patch=0,EE,00FF14F0,word,7566203a
+patch=0,EE,00FF14F4,word,00006c6c
+patch=0,EE,00FF14F8,word,73706564
+patch=0,EE,00FF14FC,word,6c74652f
+patch=0,EE,00FF1500,word,636e692f
+patch=0,EE,00FF1504,word,6564756c
+patch=0,EE,00FF1508,word,6c74652f
+patch=0,EE,00FF150C,word,6972702f
+patch=0,EE,00FF1510,word,65746176
+patch=0,EE,00FF1514,word,6f76702f
+patch=0,EE,00FF1518,word,65766469
+patch=0,EE,00FF151C,word,726f7463
+patch=0,EE,00FF1520,word,0000682e
+patch=0,EE,00FF1524,word,00000000
+patch=0,EE,00FF1528,word,74636576
+patch=0,EE,00FF152C,word,663a726f
+patch=0,EE,00FF1530,word,006c6c75
+patch=0,EE,00FF1534,word,00000000
+patch=0,EE,00FF1538,word,73706564
+patch=0,EE,00FF153C,word,6c74652f
+patch=0,EE,00FF1540,word,636e692f
+patch=0,EE,00FF1544,word,6564756c
+patch=0,EE,00FF1548,word,6c74652f
+patch=0,EE,00FF154C,word,6665722f
+patch=0,EE,00FF1550,word,6e657265
+patch=0,EE,00FF1554,word,665f6563
+patch=0,EE,00FF1558,word,5f74616c
+patch=0,EE,00FF155C,word,2e70616d
+patch=0,EE,00FF1560,word,00000068
+patch=0,EE,00FF1564,word,00000000
+patch=0,EE,00FF1568,word,73706564
+patch=0,EE,00FF156C,word,6c74652f
+patch=0,EE,00FF1570,word,636e692f
+patch=0,EE,00FF1574,word,6564756c
+patch=0,EE,00FF1578,word,6c74652f
+patch=0,EE,00FF157C,word,616c662f
+patch=0,EE,00FF1580,word,616d5f74
+patch=0,EE,00FF1584,word,00682e70
+patch=0,EE,00FF1588,word,2d657250
+patch=0,EE,00FF158C,word,72617453
+patch=0,EE,00FF1590,word,00707574
+patch=0,EE,00FF1594,word,00000000
+patch=0,EE,00FF1598,word,74736f50
+patch=0,EE,00FF159C,word,6174532d
+patch=0,EE,00FF15A0,word,70757472
+patch=0,EE,00FF15A4,word,00000000

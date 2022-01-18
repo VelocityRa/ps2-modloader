@@ -72,6 +72,8 @@ def main():
 
     asm_path = obj_name + ".asm"
     asm_str_lines = read_file_lines(asm_path)
+    rodata_path = obj_name + ".rodata.txt"
+    rodata_str_lines = read_file_lines(rodata_path)
     # reloc_path = obj_name + ".reloc"
     # reloc_str_lines = read_file_lines(reloc_path)
 
@@ -87,7 +89,7 @@ def main():
     i = 0
     while i < len(asm_str_lines):
         line = asm_str_lines[i]
-        if line == "":
+        if line == "" or line == "\t...":
             pass
         elif line[9] == "<":
             read_func = line[10:-2]
@@ -107,7 +109,7 @@ def main():
 
         i += 1
 
-    print(parsed_asm_data)
+    # print(parsed_asm_data)
 
     # read_section = ""
     # SectionAndOffset = Tuple[str, int]
@@ -128,8 +130,6 @@ def main():
     #     i += 1
 
     # print(parsed_relocs)
-
-    # TODO: setup()
 
     # Emit pnach
 
@@ -186,7 +186,40 @@ def main():
 
         pnach_str += "\n"
 
-    print(pnach_str)
+
+    pnach_str += "// .rodata:\n"
+
+    rodata_re = re.compile("\s([0-9a-f]+)\s([0-9a-f]+)\s([0-9a-f]+)\s([0-9a-f]+)\s([0-9a-f]+)")
+    i = 4
+    while i < len(rodata_str_lines):
+        line = rodata_str_lines[i]
+        m = rodata_re.match(line)
+
+        addr = int(m.group(1), base=16)
+
+        def bswap_data(d: str):
+            if len(d) == 2:
+                print(f"data is {d}, aligning to 4")
+                return f"000000{d[0:2]}"
+            elif len(d) == 4:
+                print(f"data is {d}, aligning to 4")
+                return f"0000{d[2:4]}{d[0:2]}"
+            elif len(d) == 6:
+                print(f"data is {d}, aligning to 4")
+                return f"00{d[4:6]}{d[2:4]}{d[0:2]}"
+            return f"{d[6:8]}{d[4:6]}{d[2:4]}{d[0:2]}"
+
+        data0 = bswap_data(m.group(2))
+        data1 = bswap_data(m.group(3))
+        data2 = bswap_data(m.group(4))
+        data3 = bswap_data(m.group(5))
+        pnach_str += f"patch=0,EE,{addr+0x0:08X},word,{data0}\n"
+        pnach_str += f"patch=0,EE,{addr+0x4:08X},word,{data1}\n"
+        pnach_str += f"patch=0,EE,{addr+0x8:08X},word,{data2}\n"
+        pnach_str += f"patch=0,EE,{addr+0xC:08X},word,{data3}\n"
+        i += 1
+
+    # print(pnach_str)
 
     pnach_path = obj_name + ".pnach"
     with open(pnach_path, "w") as pnach_file:

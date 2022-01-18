@@ -6,7 +6,11 @@
 	],
 	"settings": {
 		"files.associations": {
-			"typeinfo": "cpp"
+			"typeinfo": "cpp",
+			"memory_resource": "cpp",
+			"array": "cpp",
+			"string_view": "cpp",
+			"ranges": "cpp"
 		}
 	}
 }

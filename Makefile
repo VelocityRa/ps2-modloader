@@ -3,20 +3,35 @@ CC=$(EE_PREFIX)-gcc
 CXX=$(EE_PREFIX)-g++
 LD=$(EE_PREFIX)-ld
 OBJDUMP=$(EE_PREFIX)-objdump
+OBJCOPY=$(EE_PREFIX)-objcopy
 
-CXXFLAGS=-I. -std=c++20 -Wall -Wextra -g0 -Os -fno-pie -no-pie -fno-inline -flto -fwhole-program -ffunction-sections -fdata-sections -ffat-lto-objects -nostartfiles
+CXXFLAGS:=-I. -Ideps/etl/include -Ideps/tinyalloc
+CXXFLAGS+=-std=c++20 -Wall -Wextra -g0 -Os
+CXXFLAGS+=-fno-pie -no-pie -fno-exceptions -fno-rtti -nostdlib
+CXXFLAGS+=-fwhole-program -flto -ffat-lto-objects
+CXXFLAGS+=-fno-use-cxa-atexit -fno-tree-loop-distribute-patterns -fno-threadsafe-statics
+CXXFLAGS+=-fno-inline # increases code size
+
+LDFLAGS=-Wl,-Ttext=0x00FF0000 -Wl,-Trodata=0x00FEE000
+
+# -fwhole-program -flto -ffat-lto-objects
+# -flto -fwhole-program -ffunction-sections -fdata-sections -ffat-lto-objects
+#  -Wl,--gc-sections -Wl,--print-gc-sections
+# -lstdc++
 # -ffunction-sections -Wl,--print-gc-sections -Wl,--gc-sections
 # --print-gc-sections --gc-sections
 #  --verbose
 
-OBJDUMPFLAGS=--disassembler-options=intel -C
+# cat main.out.asm
 
 make:
 	rm -f main.o main.out main.asm main.out.asm
-	$(CXX) $(CXXFLAGS) main.cpp -c -o main.o
-	$(LD) -Ttext=0x00FF0000 main.o -o main.out
-	$(OBJDUMP) $(OBJDUMPFLAGS) -d main.out > main.out.asm
-	cat main.out.asm
+	$(CXX) $(CXXFLAGS) $(LDFLAGS) main.cpp -o main.out
+	$(OBJDUMP) --disassembler-options=intel -C -d main.out > main.out.asm
+	$(OBJDUMP) -x main.out > main.out.x.txt
+	$(OBJDUMP) -t main.out > main.out.t.txt
+	$(OBJDUMP) -s main.out > main.out.s.txt
+	$(OBJDUMP) -s -j .rodata main.out > main.out.rodata.txt
 	python3 emit.py main.out.asm
 	cp main.out.pnach /mnt/c/Users/Nikos/Documents/PCSX2/cheats/515E82DE.test.pnach
 

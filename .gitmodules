@@ -1,0 +1,6 @@
+[submodule "deps/etl"]
+	path = deps/etl
+	url = https://github.com/ETLCPP/etl
+[submodule "deps/tinyalloc"]
+	path = deps/tinyalloc
+	url = https://github.com/thi-ng/tinyalloc
