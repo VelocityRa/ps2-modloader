@@ -9,10 +9,16 @@ CXXFLAGS:=-I. -Ideps/etl/include -Ideps/tinyalloc
 CXXFLAGS+=-std=c++20 -Wall -Wextra -g0 -Os
 CXXFLAGS+=-fno-pie -no-pie -fno-exceptions -fno-rtti -nostdlib
 CXXFLAGS+=-fwhole-program -flto -ffat-lto-objects
-CXXFLAGS+=-fno-use-cxa-atexit -fno-tree-loop-distribute-patterns -fno-threadsafe-statics
+CXXFLAGS+=-fno-use-cxa-atexit -fno-threadsafe-statics -mno-gpopt -fno-tree-loop-distribute-patterns
 CXXFLAGS+=-fno-inline # increases code size
+# CXXFLAGS+=-mabi=eabi -mfp32
+# CXXFLAGS+=-mgp32 -mabi=eabi
 
-LDFLAGS=-Wl,-Ttext=0x00FF0000 -Wl,-Trodata=0x00FEE000
+# LDFLAGS=-Wl,-Ttext=0x00FF0000 -Wl,-Trodata=0x00FEE000
+LDFLAGS=-Wl,-Ttext=0x01E5E000 -Wl,-Trodata=0x01F80000
+LDFLAGS+=-T link.ld
+LDFLAGS+=-Wl,--verbose
+# LDFLAGS+=-Wl,--verbose
 
 # -fwhole-program -flto -ffat-lto-objects
 # -flto -fwhole-program -ffunction-sections -fdata-sections -ffat-lto-objects
@@ -31,7 +37,7 @@ make:
 	$(OBJDUMP) -x main.out > main.out.x.txt
 	$(OBJDUMP) -t main.out > main.out.t.txt
 	$(OBJDUMP) -s main.out > main.out.s.txt
-	$(OBJDUMP) -s -j .rodata main.out > main.out.rodata.txt
+	$(OBJDUMP) -s -j .rodata -j .sdata -j .init_array -j .fini_array main.out > main.out.data.txt
 	python3 emit.py main.out.asm
 	cp main.out.pnach /mnt/c/Users/Nikos/Documents/PCSX2/cheats/515E82DE.test.pnach
 

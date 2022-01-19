@@ -66,14 +66,14 @@ def main():
 
     # obj_name = sys.argv[1]
 
-    obj_name = "main.out"
+    obj_name = "/mnt/c/Code/cpp/ps2modloader/main.out"
 
     # Parse input files
 
     asm_path = obj_name + ".asm"
     asm_str_lines = read_file_lines(asm_path)
-    rodata_path = obj_name + ".rodata.txt"
-    rodata_str_lines = read_file_lines(rodata_path)
+    data_path = obj_name + ".data.txt"
+    data_str_lines = read_file_lines(data_path)
     # reloc_path = obj_name + ".reloc"
     # reloc_str_lines = read_file_lines(reloc_path)
 
@@ -139,6 +139,8 @@ def main():
     addr_mapping: Dict[int, int] = {}
     func_mapping: Dict[str, int] = {}
 
+    # TODO: Could avoid parsing this and just emit like data sections?
+
     for (section, func), insns in parsed_asm_data.items():
         pnach_str += f"// Function: {func}\n"
 
@@ -187,26 +189,51 @@ def main():
         pnach_str += "\n"
 
 
-    pnach_str += "// .rodata:\n"
+    pnach_str += "// .rodata / .sdata / etc:\n"
 
-    rodata_re = re.compile("\s([0-9a-f]+)\s([0-9a-f]+)\s([0-9a-f]+)\s([0-9a-f]+)\s([0-9a-f]+)")
+    rodata_re = re.compile("\s([0-9a-f]+)\s([0-9a-f]{8})\s([0-9a-f]{8})\s([0-9a-f]{8})\s([0-9a-f]{8})")
+
     i = 4
-    while i < len(rodata_str_lines):
-        line = rodata_str_lines[i]
-        m = rodata_re.match(line)
+    while i < len(data_str_lines):
+        line_str = data_str_lines[i]
+        if line_str == "":
+            continue
+        if line_str.startswith("Contents"):
+            i += 1
+            continue
+
+        line = list(line_str)
+
+        # Need to fixup incomplete columns in objdunp's hexdump
+        s = "".join(line_str[1:]).find(' ') + 1 + 1
+        def fixup(start, end):
+            is_empty = False
+            for k in range(s+start, s+end):
+                if line[k] == ' ':
+                    print(f"fixup at line {i} start {start} k {k}")
+                    line[k] = '0'
+                    if k == s+start:
+                        is_empty = True
+                        print("true")
+            return is_empty
+        patch_ends_at = 4
+        if fixup(27, 35):
+            patch_ends_at = 3
+        if fixup(18, 26):
+            patch_ends_at = 2
+        if fixup(9, 17):
+            patch_ends_at = 1
+        if fixup(0, 8):
+            patch_ends_at = 0
+        line_str = "".join(line)
+
+        # Read section hexdump and emit to pnach
+
+        m = rodata_re.match(line_str)
 
         addr = int(m.group(1), base=16)
 
         def bswap_data(d: str):
-            if len(d) == 2:
-                print(f"data is {d}, aligning to 4")
-                return f"000000{d[0:2]}"
-            elif len(d) == 4:
-                print(f"data is {d}, aligning to 4")
-                return f"0000{d[2:4]}{d[0:2]}"
-            elif len(d) == 6:
-                print(f"data is {d}, aligning to 4")
-                return f"00{d[4:6]}{d[2:4]}{d[0:2]}"
             return f"{d[6:8]}{d[4:6]}{d[2:4]}{d[0:2]}"
 
         data0 = bswap_data(m.group(2))
@@ -214,13 +241,18 @@ def main():
         data2 = bswap_data(m.group(4))
         data3 = bswap_data(m.group(5))
         pnach_str += f"patch=0,EE,{addr+0x0:08X},word,{data0}\n"
-        pnach_str += f"patch=0,EE,{addr+0x4:08X},word,{data1}\n"
-        pnach_str += f"patch=0,EE,{addr+0x8:08X},word,{data2}\n"
-        pnach_str += f"patch=0,EE,{addr+0xC:08X},word,{data3}\n"
+        if patch_ends_at > 1:
+            pnach_str += f"patch=0,EE,{addr+0x4:08X},word,{data1}\n"
+        if patch_ends_at > 2:
+            pnach_str += f"patch=0,EE,{addr+0x8:08X},word,{data2}\n"
+        if patch_ends_at > 3:
+            pnach_str += f"patch=0,EE,{addr+0xC:08X},word,{data3}\n"
         i += 1
+
 
     # print(pnach_str)
 
+    # Finally, write pnach to disk
     pnach_path = obj_name + ".pnach"
     with open(pnach_path, "w") as pnach_file:
         pnach_file.write(pnach_str)

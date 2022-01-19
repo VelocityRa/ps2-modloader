@@ -1,126 +1,36 @@
-#include "types.hpp"
-
-#define ETL_NO_STL
-#define ETL_LOG_ERRORS
-#define ETL_DEBUG
-#define ETL_VERBOSE_ERRORS
-
 // #include <etl/string.h>
-#include <etl/flat_map.h>
+#include <etl/error_handler.h>
 #include <tinyalloc.h>
 
+#include "hook.hpp"
+#include "macro_helpers.hpp"
+#include "types.hpp"
 
-using namespace etl;
+#include "sly.hpp"
 
-#define USED __attribute__((used))
+// using namespace etl;
 
-// #define FUNC_ADDR(addr) __attribute__((section(".addr." #addr)))
-// #define FUNC_NAME(name) __attribute__((section(".name." #name)))
+constexpr u32 TEXT_BASE = 0x01e5e000;
 
-#define TEXT_SECTION __attribute__((section(".text")))
+// Injected functions
+DECLARE_FUNC(injc_crti, TEXT_BASE + 0x8, void);
 
-#define DECLARE_STATIC(name, type, address) \
-    type& name = (type&)*(type*)address;
-
-// struct vec_t {
-//     int x, y;
-// };
-// DECLARE_STATIC(myvec, vec_t, 0x10000000);
-
-void (* const orig__start)() = (void(*)())0x00100008;
-void (* const orig_Startup)() = (void(*)())0x00192770;
-void (* const orig_serialPutchar)(u64) = (void (*)(u64))0x002135f8;
-
-void USED puts(const char* str) {
-    while (*str) {
-        orig_serialPutchar(*str);
-        str++;
-    }
-    orig_serialPutchar('\n');
-}
-
-void USED etl_error_handler(const etl::exception& e) {
-    const char* err = e.what();
-    puts(err);
-}
-
-constexpr auto HOOKS_NUM = 5; // TODO: Increase
-
-struct HookData {
-    // u32 orig_func_addr;
-    u32 replace_func_addr;
-
-    u32 orig_code[2];
-};
-
-USED TEXT_SECTION
-    flat_map<address, HookData, HOOKS_NUM> g_hooks_data;
-
-void USED hook(address orig_func, address replace_func) {
-    HookData& hook_data = g_hooks_data[orig_func];
-    hook_data.replace_func_addr = replace_func;
-    u32* orig_code_ptr = (u32*)orig_func;
-    hook_data.orig_code[0] = orig_code_ptr[0];
-    hook_data.orig_code[1] = orig_code_ptr[1];
-
-    // Set up trampoline
-    orig_code_ptr[0] = 0x08000000 | (replace_func >> 2); // j
-    orig_code_ptr[1] = 0x00000000; // nop
-}
-
-void USED unhook(address orig_func) {
-    HookData& hook_data = g_hooks_data[orig_func];
-    u32* orig_code_ptr = (u32*)orig_func;
-    orig_code_ptr[0] = hook_data.orig_code[0];
-    orig_code_ptr[1] = hook_data.orig_code[1];
-}
-
-// rehook
-void USED rehook(address orig_func) {
-    HookData& hook_data = g_hooks_data[orig_func];
-    u32* orig_code_ptr = (u32*)orig_func;
-
-    // Set up trampoline
-    orig_code_ptr[0] = 0x08000000 | (hook_data.replace_func_addr >> 2); // j
-    orig_code_ptr[1] = 0x00000000; // nop
-}
-
-void USED replace_Startup() {
-    // temporarily unhook so we can call orig
-    // unhook((address)orig_Startup, g_orig_code);
-    unhook((address)orig_Startup);
-
-    puts("Pre-Startup");
-
-    // call orig
-    orig_Startup();
-
-    puts("Post-Startup");
-
-    // todo stuff
-
-    // re-hook
-    // hook((address)orig_Startup, (address)&replace_Startup);
-    rehook((address)orig_Startup);
-}
-
-void (* const crti)() = (void(*)())0x00ff0008;
+// 01E4E000 - 01F8A000 size 0013C000
 
 void USED setup() {
-    crti();
+    injc_crti();
 
     etl::error_handler::set_callback<etl_error_handler>();
 
-    const u32 base = 0x97000;
-    const u32 size = 0x2000;
-    const u32 limit = base + size;
-    ta_init((void*)base, (void*)limit, 256, 16, 4);
-
-    // u32* ayy = (u32*)ta_alloc(8);
-    // ayy[2] = 0x1337;
-    // ta_free(ayy);
+    const u32 heap_base = 0x01E4E000; // 0x97000;
+    const u32 heap_size = 0x2000;
+    const u32 heap_limit = heap_base + heap_size;
+    ta_init((void*)heap_base, (void*)heap_limit, 256, 16, 4);
 
     hook((address)orig_Startup, (address)&replace_Startup);
+
+    hook((address)orig_DrawPlayerSuck, (address)&replace_DrawPlayerSuck);
+    orig_g_fShowPlayerSuck = 1;
 
     // Setup epilogue
 
