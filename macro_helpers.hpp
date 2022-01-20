@@ -1,7 +1,7 @@
 #pragma once
 
 #define USED __attribute__((used))
-
+#define NOINLINE __attribute__((noinline))
 // #define FUNC_ADDR(addr) __attribute__((section(".addr." #addr)))
 // #define FUNC_NAME(name) __attribute__((section(".name." #name)))
 

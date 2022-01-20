@@ -11,7 +11,7 @@ Program Header:
     LOAD off    0x00010000 vaddr 0x00100000 paddr 0x00100000 align 2**16
          filesz 0x00000018 memsz 0x00000018 flags r--
     LOAD off    0x0001e000 vaddr 0x01e5e000 paddr 0x01e5e000 align 2**16
-         filesz 0x00001708 memsz 0x00001728 flags rwx
+         filesz 0x00001a60 memsz 0x00001a80 flags rwx
 private flags = 20920021: [abi=N32] [mips3] [not 32bitmode] [noreorder]
 
 MIPS ABI Flags Version: 0
@@ -29,47 +29,50 @@ FLAGS 2: 00000000
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .text         000015d8  01e5e000  01e5e000  0001e000  2**3
+  0 .text         00001878  01e5e000  01e5e000  0001e000  2**3
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
   1 .MIPS.abiflags 00000018  00100000  00100000  00010000  2**3
                   CONTENTS, ALLOC, LOAD, READONLY, DATA, LINK_ONCE_SAME_SIZE
-  2 .reginfo      00000018  00100018  00100018  0001f708  2**3
+  2 .reginfo      00000018  00100018  00100018  0001fa60  2**3
                   CONTENTS, READONLY, LINK_ONCE_SAME_SIZE
-  3 .rodata       00000128  01e5f5d8  01e5f5d8  0001f5d8  2**3
+  3 .rodata       00000148  01e5f878  01e5f878  0001f878  2**3
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  4 .init_array   00000004  01e5f700  01e5f700  0001f700  2**2
+  4 .init_array   00000004  01e5fa40  01e5fa40  0001fa40  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  5 .fini_array   00000004  01e5f704  01e5f704  0001f704  2**2
+  5 .fini_array   00000004  01e5fa44  01e5fa44  0001fa44  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  6 .sbss         00000020  01e5f708  01e5f708  0001f708  2**3
+  6 .data         00000018  01e5fa48  01e5fa48  0001fa48  2**3
+                  CONTENTS, ALLOC, LOAD, DATA
+  7 .sbss         00000020  01e5fa60  01e5fa60  0001fa60  2**3
                   ALLOC
-  7 .comment      00000012  00000000  00000000  0001f720  2**0
+  8 .comment      00000012  00000000  00000000  0001fa78  2**0
                   CONTENTS, READONLY
-  8 .pdr          00000e20  00000000  00000000  0001f734  2**2
+  9 .pdr          00000e60  00000000  00000000  0001fa8c  2**2
                   CONTENTS, READONLY
-  9 .gnu.attributes 00000010  00000000  00000000  00020554  2**0
+ 10 .gnu.attributes 00000010  00000000  00000000  000208ec  2**0
                   CONTENTS, READONLY
 SYMBOL TABLE:
 01e5e000 l    d  .text	00000000 .text
 00100000 l    d  .MIPS.abiflags	00000000 .MIPS.abiflags
 00100018 l    d  .reginfo	00000000 .reginfo
-01e5f5d8 l    d  .rodata	00000000 .rodata
-01e5f700 l    d  .init_array	00000000 .init_array
-01e5f704 l    d  .fini_array	00000000 .fini_array
-01e5f708 l    d  .sbss	00000000 .sbss
+01e5f878 l    d  .rodata	00000000 .rodata
+01e5fa40 l    d  .init_array	00000000 .init_array
+01e5fa44 l    d  .fini_array	00000000 .fini_array
+01e5fa48 l    d  .data	00000000 .data
+01e5fa60 l    d  .sbss	00000000 .sbss
 00000000 l    d  .comment	00000000 .comment
 00000000 l    d  .pdr	00000000 .pdr
 00000000 l    d  .gnu.attributes	00000000 .gnu.attributes
 00000000 l    df *ABS*	00000000 
 01e5e010 l     F .text	00000010 _ZN3etl9exceptionC2EPKcS2_i
 01e5e020 l     F .text	00000054 _ZL12insert_blockP5Block
-01e5f714 l     O .sbss	00000004 _ZL4heap
+01e5fa6c l     O .sbss	00000004 _ZL4heap
 01e5e074 l     F .text	00000038 _ZL14release_blocksP5BlockS0_
 01e5e0ac l     F .text	000000ec _ZL7compactv
 01e5e198 l     F .text	00000164 _ZL11alloc_blockj
-01e5f710 l     O .sbss	00000004 _ZL14heap_alignment
-01e5f70c l     O .sbss	00000004 _ZL10heap_limit
-01e5f708 l     O .sbss	00000004 _ZL17heap_split_thresh
+01e5fa68 l     O .sbss	00000004 _ZL14heap_alignment
+01e5fa64 l     O .sbss	00000004 _ZL10heap_limit
+01e5fa60 l     O .sbss	00000004 _ZL17heap_split_thresh
 01e5e2fc l     F .text	00000028 _Z8ta_allocj
 01e5e324 l     F .text	00000014 _ZN3etl11pvoidvector9push_backEPv
 01e5e338 l     F .text	00000014 _ZNK3etl11pvoidvector4sizeEv
@@ -77,129 +80,134 @@ SYMBOL TABLE:
 01e5e374 l     F .text	0000000c _ZN3etl11pvoidvector10initialiseEv
 01e5e380 l     F .text	00000008 _ZN3etl11pvoidvector5clearEv
 01e5e388 l     F .text	00000044 _ZNK3etl5ipool15is_item_in_poolEPKc
-01e5e420 l     F .text	00000008 _ZN3etl7forwardIRKmEEOT_RNS_16remove_referenceIS3_E4typeE
-01e5e420 l     F .text	00000008 _ZN3etl7forwardI8HookDataEEOT_RNS_16remove_referenceIS2_E4typeE
-01e5e420 l     F .text	00000008 _ZN3etl7forwardIRNS_19ireference_flat_mapIm8HookDataNS_4lessImEEE8iteratorEEEOT_RNS_16remove_referenceIS8_E4typeE
-01e5e420 l     F .text	00000008 _ZN3etl7forwardIbEEOT_RNS_16remove_referenceIS1_E4typeE
-01e5e420 l     F .text	00000008 _ZN3etl4moveIRNS_4pairIKm8HookDataEEEEONS_16remove_referenceIT_E4typeEOS7_
-01e5e420 l     F .text	00000008 _ZN3etl7forwardIKmEEOT_RNS_16remove_referenceIS2_E4typeE
-01e5e420 l     F .text	00000008 _ZN3etl7forwardINS_19ireference_flat_mapIm8HookDataNS_4lessImEEE8iteratorEEEOT_RNS_16remove_referenceIS7_E4typeE
-01e5e428 l     F .text	0000004c _ZN3etl4pairIKm8HookDataEC2IRS1_S2_EEONS0_IT_T0_EE
-01e5e428 l     F .text	0000004c _ZN3etl4pairIKm8HookDataEC1IRS1_S2_EEONS0_IT_T0_EE
-01e5e474 l     F .text	00000044 _ZN3etl4pairIRKm8HookDataEC2IS2_S3_EEOT_OT0_
-01e5e474 l     F .text	00000044 _ZN3etl4pairIRKm8HookDataEC1IS2_S3_EEOT_OT0_
-01e5e4b8 l     F .text	0000003c _ZN3etl9make_pairIRKm8HookDataEENS_4pairIT_T0_EEOS5_OS6_
-01e5e4f4 l     F .text	00000048 _ZN3etl4pairIKm8HookDataEC2IS1_S2_EEONS0_IT_T0_EE
-01e5e4f4 l     F .text	00000048 _ZN3etl4pairIKm8HookDataEC1IS1_S2_EEONS0_IT_T0_EE
-01e5e53c l     F .text	00000008 _ZN3etl9addressofINS_4pairIKm8HookDataEEEEPT_RS5_
-01e5e544 l     F .text	00000008 _ZN3etl7ivectorIPNS_4pairIKm8HookDataEEE9push_backES5_
-01e5e54c l     F .text	00000014 _ZN3etl19ireference_flat_mapIm8HookDataNS_4lessImEEE8iteratormmEv
-01e5e560 l     F .text	00000008 _ZN3etl19ireference_flat_mapIm8HookDataNS_4lessImEEE8iteratorC2EPPNS_4pairIKmS1_EE
-01e5e560 l     F .text	00000008 _ZN3etl19ireference_flat_mapIm8HookDataNS_4lessImEEE8iteratorC1EPPNS_4pairIKmS1_EE
-01e5e568 l     F .text	00000014 _ZN3etl19ireference_flat_mapIm8HookDataNS_4lessImEEE8iteratorppEv
-01e5e57c l     F .text	00000008 _ZN3etl7ivectorIPNS_4pairIKm8HookDataEEE5clearEv
-01e5e584 l     F .text	0000000c _ZN3etl19ireference_flat_mapIm8HookDataNS_4lessImEEE5clearEv.constprop.0
-01e5e590 l     F .text	0000004c _ZN3etl14advance_helperINS_19ireference_flat_mapIm8HookDataNS_4lessImEEE8iteratorEiEEvRT_T0_NS_26bidirectional_iterator_tagE.constprop.0
-01e5e5dc l     F .text	00000008 _ZN3etl7advanceINS_19ireference_flat_mapIm8HookDataNS_4lessImEEE8iteratorEiEEvRT_T0_
-01e5e5e4 l     F .text	0000000c _ZNK3etl19ireference_flat_mapIm8HookDataNS_4lessImEEE4fullEv.constprop.0
-01e5e5f0 l     F .text	00000008 _ZN3etl19ireference_flat_mapIm8HookDataNS_4lessImEEED2Ev.constprop.0
-01e5e5f8 l     F .text	00000008 _ZN3etl9iflat_mapIm8HookDataNS_4lessImEEED2Ev.constprop.0
-01e5e600 l     F .text	00000014 _ZN3etl19ireference_flat_mapIm8HookDataNS_4lessImEEEC2ERNS_7ivectorIPNS_4pairIKmS1_EEEE.constprop.0
-01e5e614 l     F .text	0000002c _ZN3etl9iflat_mapIm8HookDataNS_4lessImEEEC2ERNS_7ivectorIPNS_4pairIKmS1_EEEERNS_5ipoolE.constprop.0
-01e5e640 l     F .text	00000008 _ZN3etl5ipoolD2Ev.constprop.0
-01e5e648 l     F .text	00000008 _ZN3etl12generic_poolILj16ELj4ELj5EED2Ev.constprop.0
-01e5e650 l     F .text	00000008 _ZN3etl4poolINS_4pairIKm8HookDataEELj5EED2Ev.constprop.0
-01e5e658 l     F .text	00000030 _ZN3etl5ipoolC2EPcmm.constprop.0
-01e5e688 l     F .text	00000008 _ZN3etl12generic_poolILj16ELj4ELj5EEC2Ev.constprop.0
-01e5e690 l     F .text	00000008 _ZN3etl4poolINS_4pairIKm8HookDataEELj5EEC2Ev.constprop.0
-01e5e698 l     F .text	00000010 _ZN3etl14pool_exceptionC2EPKcS2_i.constprop.0
-01e5e6a8 l     F .text	00000010 _ZN3etl17pool_element_sizeC2EPKci.constprop.0
-01e5e6b8 l     F .text	00000010 _ZN3etl23pool_object_not_in_poolC2EPKci.constprop.0
-01e5e6c8 l     F .text	00000010 _ZN3etl18pool_no_allocationC2EPKci.constprop.0
-01e5e6d8 l     F .text	00000014 _ZN3etl18flat_map_exceptionC2EPKcS2_i.constprop.0
-01e5e6ec l     F .text	00000008 _ZN3etl13flat_map_fullC2EPKci
-01e5e6ec l     F .text	00000008 _ZN3etl13flat_map_fullC1EPKci
-01e5e6f4 l     F .text	00000008 _ZNK3etl11pvoidvector11to_iteratorEPKPv.constprop.0
-01e5e6fc l     F .text	00000008 _ZN3etl11vector_baseD2Ev.constprop.0
-01e5e704 l     F .text	00000008 _ZN3etl11pvoidvectorD2Ev.constprop.0
-01e5e70c l     F .text	00000008 _ZN3etl7ivectorIPNS_4pairIKm8HookDataEEED2Ev.constprop.0
-01e5e714 l     F .text	00000008 _ZN3etl6vectorIPNS_4pairIKm8HookDataEELj5EED2Ev.constprop.0
-01e5e71c l     F .text	00000010 _ZN3etl11vector_baseC2Ej.constprop.0
-01e5e72c l     F .text	00000034 _ZN3etl11pvoidvectorC2EPPvj.constprop.0
-01e5e760 l     F .text	00000008 _ZN3etl7ivectorIPNS_4pairIKm8HookDataEEEC2EPS5_j.constprop.0
-01e5e768 l     F .text	00000020 _ZN3etl6vectorIPNS_4pairIKm8HookDataEELj5EEC2Ev.constprop.0
-01e5e788 l     F .text	00000024 _ZN3etl8flat_mapIm8HookDataLj5ENS_4lessImEEEC2Ev.constprop.0
-01e5e7ac l     F .text	00000018 _ZN3etl16vector_exceptionC2EPKcS2_i.constprop.0
-01e5e7c4 l     F .text	00000008 _ZN3etl11vector_fullC2EPKci.constprop.0
-01e5e7cc l     F .text	00000014 _ZN3etl13error_handler18invocation_elementC2Ev.constprop.0
-01e5f718 l     O .sbss	00000008 _ZZN3etl13error_handler22get_invocation_elementEvE10invocation
-01e5e7e0 l     F .text	00000048 _ZN3etl13error_handler22get_invocation_elementEv
-01e5f720 l     O .sbss	00000008 _ZGVZN3etl13error_handler22get_invocation_elementEvE10invocation
-01e5e828 l     F .text	0000003c _ZN3etl13error_handler5errorERKNS_9exceptionE
-01e5e864 l     F .text	00000094 _ZN3etl5ipool13allocate_itemEv
-01e5e8f8 l     F .text	00000060 _ZN3etl5ipool12release_itemEPc
-01e5e958 l     F .text	00000008 _ZN3etl5ipool7releaseEPKv
-01e5e960 l     F .text	00000040 _ZN3etl5ipool8allocateINS_4pairIKm8HookDataEEEEPT_v
-01e5e9a0 l     F .text	0000002c _ZN3etl13error_handler6createEPvPFvS1_RKNS_9exceptionEE.constprop.0
-01e5f4b4 l     F .text	00000008 _ZN3etl13error_handler13function_stubIXadL_Z17etl_error_handlerRKNS_9exceptionEEEEEvPvS4_
-01e5e9cc l     F .text	00000008 _ZN3etl13error_handler12set_callbackIXadL_Z17etl_error_handlerRKNS_9exceptionEEEEEvv
-01e5e9d4 l     F .text	00000008 _ZnwjPv.constprop.0
-01e5e9dc l     F .text	00000078 _Z7ta_initPKvS0_jjj.constprop.0.isra.0
-01e5ea54 l     F .text	00000008 _ZNK3etl4lessImEclERKmS3_.constprop.0.isra.0
-01e5ea5c l     F .text	00000040 _ZNK3etl19ireference_flat_mapIm8HookDataNS_4lessImEEE14keys_are_equalERKmS6_.constprop.0.isra.0
-01e5ea9c l     F .text	00000008 _ZNK3etl19ireference_flat_mapIm8HookDataNS_4lessImEEE7CompareclERKNS_4pairIKmS1_EERS7_.isra.0
-01e5eaa4 l     F .text	00000008 _ZNK3etl19ireference_flat_mapIm8HookDataNS_4lessImEEE8iteratordeEv.isra.0
-01e5eaac l     F .text	00000008 _ZN3etl19ireference_flat_mapIm8HookDataNS_4lessImEEE8iteratoraSERKS5_.isra.0
-01e5eab4 l     F .text	00000040 _ZN3etl4pairINS_19ireference_flat_mapIm8HookDataNS_4lessImEEE8iteratorEbEaSEOS7_.isra.0
-01e5eaf4 l     F .text	00000008 _ZNK3etl19ireference_flat_mapIm8HookDataNS_4lessImEEE8iteratorptEv.isra.0
-01e5eafc l     F .text	0000000c _ZN3etleqERKNS_19ireference_flat_mapIm8HookDataNS_4lessImEEE8iteratorES7_.isra.0
-01e5eb08 l     F .text	00000024 _ZN3etlneERKNS_19ireference_flat_mapIm8HookDataNS_4lessImEEE8iteratorES7_.isra.0
-01e5eb2c l     F .text	0000004c _ZN3etl15distance_helperINS_19ireference_flat_mapIm8HookDataNS_4lessImEEE8iteratorEEENS_15iterator_traitsIT_E15difference_typeES8_S8_NS_26bidirectional_iterator_tagE.constprop.0
-01e5eb78 l     F .text	00000008 _ZN3etl19ireference_flat_mapIm8HookDataNS_4lessImEEE8iteratorC2ERKS5_.isra.0
-01e5eb80 l     F .text	0000003c _ZN3etl4pairINS_19ireference_flat_mapIm8HookDataNS_4lessImEEE8iteratorEbEC2IRS6_bEEOT_OT0_.constprop.0
-01e5ebbc l     F .text	0000003c _ZN3etl8distanceINS_19ireference_flat_mapIm8HookDataNS_4lessImEEE8iteratorEEENS_15iterator_traitsIT_E15difference_typeES8_S8_.isra.0
-01e5ebf8 l     F .text	000000b0 _ZN3etl11lower_boundINS_19ireference_flat_mapIm8HookDataNS_4lessImEEE8iteratorEmNS5_7CompareEEET_S8_S8_RKT0_T1_
-01e5eca8 l     F .text	00000008 _ZN3etl11pvoidvector3endEv.isra.0
-01e5ecb0 l     F .text	00000008 _ZN3etl7ivectorIPNS_4pairIKm8HookDataEEE3endEv
-01e5ecb8 l     F .text	00000030 _ZN3etl19ireference_flat_mapIm8HookDataNS_4lessImEEE3endEv.isra.0
-01e5ece8 l     F .text	00000024 _ZN3etl9iflat_mapIm8HookDataNS_4lessImEEE3endEv
-01e5ed0c l     F .text	00000008 _ZN3etl11pvoidvector5beginEv.isra.0
-01e5ed14 l     F .text	00000008 _ZN3etl7ivectorIPNS_4pairIKm8HookDataEEE5beginEv
-01e5ed1c l     F .text	00000030 _ZN3etl19ireference_flat_mapIm8HookDataNS_4lessImEEE5beginEv.isra.0
-01e5ed4c l     F .text	00000028 _ZN3etl9iflat_mapIm8HookDataNS_4lessImEEE5beginEv.constprop.0
-01e5ed74 l     F .text	0000007c _ZN3etl9iflat_mapIm8HookDataNS_4lessImEEE5clearEv.constprop.0
-01e5edf0 l     F .text	00000008 _ZN3etl8flat_mapIm8HookDataLj5ENS_4lessImEEED2Ev.constprop.0
-01e5edf8 l     F .text	0000001c _Z41__static_initialization_and_destruction_0ii.constprop.0
-01e5ee14 l     F .text	00000058 _ZN3etl19ireference_flat_mapIm8HookDataNS_4lessImEEE11lower_boundERKm.constprop.0
-01e5ee6c l     F .text	00000020 _ZN3etl9iflat_mapIm8HookDataNS_4lessImEEE11lower_boundERKm.constprop.0
-01e5ee8c l     F .text	00000068 _Z7ta_freePv.isra.0
-01e5eef4 l     F .text	00000074 _Z9mymemmovePvPKvj.isra.0
-01e5ef68 l     F .text	00000014 _ZN3etl13copy_backwardIPPvS2_EENS_9enable_ifIXaaaasrNS_10is_pointerIT_EE5valuesrNS4_IT0_EE5valuesrNS_21is_trivially_copyableINS_15iterator_traitsIS5_E10value_typeEEE5valueES7_E4typeES5_S5_S7_.isra.0
-01e5ef7c l     F .text	000000a0 _ZN3etl11pvoidvector6insertEPKPvS1_.isra.0
-01e5f01c l     F .text	00000008 _ZN3etl7ivectorIPNS_4pairIKm8HookDataEEE6insertEPKS5_S5_.isra.0
-01e5f024 l     F .text	00000158 _ZN3etl19ireference_flat_mapIm8HookDataNS_4lessImEEE9insert_atENS4_8iteratorERNS_4pairIKmS1_EE.constprop.0
-01e5f17c l     F .text	00000110 _ZN3etl9iflat_mapIm8HookDataNS_4lessImEEE6insertEONS_4pairIKmS1_EE.constprop.0
-01e5f28c l     F .text	00000050 _ZN3etl9iflat_mapIm8HookDataNS_4lessImEEEixERKm.constprop.0
-01e5f2dc l     F .text	00000008 _ZNK3etl9exception4whatEv.isra.0
+01e5e3cc l     F .text	00000008 _ZN3etl7forwardIRKmEEOT_RNS_16remove_referenceIS3_E4typeE
+01e5e3cc l     F .text	00000008 _ZN3etl7forwardI8HookDataEEOT_RNS_16remove_referenceIS2_E4typeE
+01e5e3cc l     F .text	00000008 _ZN3etl7forwardIRNS_19ireference_flat_mapIm8HookDataNS_4lessImEEE8iteratorEEEOT_RNS_16remove_referenceIS8_E4typeE
+01e5e3cc l     F .text	00000008 _ZN3etl7forwardIbEEOT_RNS_16remove_referenceIS1_E4typeE
+01e5e3cc l     F .text	00000008 _ZN3etl4moveIRNS_4pairIKm8HookDataEEEEONS_16remove_referenceIT_E4typeEOS7_
+01e5e3cc l     F .text	00000008 _ZN3etl7forwardIKmEEOT_RNS_16remove_referenceIS2_E4typeE
+01e5e3cc l     F .text	00000008 _ZN3etl7forwardINS_19ireference_flat_mapIm8HookDataNS_4lessImEEE8iteratorEEEOT_RNS_16remove_referenceIS7_E4typeE
+01e5e3d4 l     F .text	0000004c _ZN3etl4pairIKm8HookDataEC2IRS1_S2_EEONS0_IT_T0_EE
+01e5e3d4 l     F .text	0000004c _ZN3etl4pairIKm8HookDataEC1IRS1_S2_EEONS0_IT_T0_EE
+01e5e420 l     F .text	00000044 _ZN3etl4pairIRKm8HookDataEC2IS2_S3_EEOT_OT0_
+01e5e420 l     F .text	00000044 _ZN3etl4pairIRKm8HookDataEC1IS2_S3_EEOT_OT0_
+01e5e464 l     F .text	0000003c _ZN3etl9make_pairIRKm8HookDataEENS_4pairIT_T0_EEOS5_OS6_
+01e5e4a0 l     F .text	00000048 _ZN3etl4pairIKm8HookDataEC2IS1_S2_EEONS0_IT_T0_EE
+01e5e4a0 l     F .text	00000048 _ZN3etl4pairIKm8HookDataEC1IS1_S2_EEONS0_IT_T0_EE
+01e5e4e8 l     F .text	00000008 _ZN3etl9addressofINS_4pairIKm8HookDataEEEEPT_RS5_
+01e5e4f0 l     F .text	00000008 _ZN3etl7ivectorIPNS_4pairIKm8HookDataEEE9push_backES5_
+01e5e4f8 l     F .text	00000014 _ZN3etl19ireference_flat_mapIm8HookDataNS_4lessImEEE8iteratormmEv
+01e5e50c l     F .text	00000008 _ZN3etl19ireference_flat_mapIm8HookDataNS_4lessImEEE8iteratorC2EPPNS_4pairIKmS1_EE
+01e5e50c l     F .text	00000008 _ZN3etl19ireference_flat_mapIm8HookDataNS_4lessImEEE8iteratorC1EPPNS_4pairIKmS1_EE
+01e5e514 l     F .text	00000014 _ZN3etl19ireference_flat_mapIm8HookDataNS_4lessImEEE8iteratorppEv
+01e5e528 l     F .text	00000008 _ZN3etl7ivectorIPNS_4pairIKm8HookDataEEE5clearEv
+01e5e530 l     F .text	0000000c _ZN3etl19ireference_flat_mapIm8HookDataNS_4lessImEEE5clearEv.constprop.0
+01e5e53c l     F .text	0000004c _ZN3etl14advance_helperINS_19ireference_flat_mapIm8HookDataNS_4lessImEEE8iteratorEiEEvRT_T0_NS_26bidirectional_iterator_tagE.constprop.0
+01e5e588 l     F .text	00000008 _ZN3etl7advanceINS_19ireference_flat_mapIm8HookDataNS_4lessImEEE8iteratorEiEEvRT_T0_
+01e5e590 l     F .text	0000000c _ZNK3etl19ireference_flat_mapIm8HookDataNS_4lessImEEE4fullEv.constprop.0
+01e5e59c l     F .text	00000008 _ZN3etl19ireference_flat_mapIm8HookDataNS_4lessImEEED2Ev.constprop.0
+01e5e5a4 l     F .text	00000008 _ZN3etl9iflat_mapIm8HookDataNS_4lessImEEED2Ev.constprop.0
+01e5e5ac l     F .text	00000014 _ZN3etl19ireference_flat_mapIm8HookDataNS_4lessImEEEC2ERNS_7ivectorIPNS_4pairIKmS1_EEEE.constprop.0
+01e5e5c0 l     F .text	0000002c _ZN3etl9iflat_mapIm8HookDataNS_4lessImEEEC2ERNS_7ivectorIPNS_4pairIKmS1_EEEERNS_5ipoolE.constprop.0
+01e5e5ec l     F .text	00000008 _ZN3etl5ipoolD2Ev.constprop.0
+01e5e5f4 l     F .text	00000008 _ZN3etl12generic_poolILj16ELj4ELj5EED2Ev.constprop.0
+01e5e5fc l     F .text	00000008 _ZN3etl4poolINS_4pairIKm8HookDataEELj5EED2Ev.constprop.0
+01e5e604 l     F .text	00000030 _ZN3etl5ipoolC2EPcmm.constprop.0
+01e5e634 l     F .text	00000008 _ZN3etl12generic_poolILj16ELj4ELj5EEC2Ev.constprop.0
+01e5e63c l     F .text	00000008 _ZN3etl4poolINS_4pairIKm8HookDataEELj5EEC2Ev.constprop.0
+01e5e644 l     F .text	00000010 _ZN3etl14pool_exceptionC2EPKcS2_i.constprop.0
+01e5e654 l     F .text	00000010 _ZN3etl17pool_element_sizeC2EPKci.constprop.0
+01e5e664 l     F .text	00000010 _ZN3etl23pool_object_not_in_poolC2EPKci.constprop.0
+01e5e674 l     F .text	00000010 _ZN3etl18pool_no_allocationC2EPKci.constprop.0
+01e5e684 l     F .text	00000014 _ZN3etl18flat_map_exceptionC2EPKcS2_i.constprop.0
+01e5e698 l     F .text	00000008 _ZN3etl13flat_map_fullC2EPKci
+01e5e698 l     F .text	00000008 _ZN3etl13flat_map_fullC1EPKci
+01e5e6a0 l     F .text	00000008 _ZNK3etl11pvoidvector11to_iteratorEPKPv.constprop.0
+01e5e6a8 l     F .text	00000008 _ZN3etl11vector_baseD2Ev.constprop.0
+01e5e6b0 l     F .text	00000008 _ZN3etl11pvoidvectorD2Ev.constprop.0
+01e5e6b8 l     F .text	00000008 _ZN3etl7ivectorIPNS_4pairIKm8HookDataEEED2Ev.constprop.0
+01e5e6c0 l     F .text	00000008 _ZN3etl6vectorIPNS_4pairIKm8HookDataEELj5EED2Ev.constprop.0
+01e5e6c8 l     F .text	00000010 _ZN3etl11vector_baseC2Ej.constprop.0
+01e5e6d8 l     F .text	00000034 _ZN3etl11pvoidvectorC2EPPvj.constprop.0
+01e5e70c l     F .text	00000008 _ZN3etl7ivectorIPNS_4pairIKm8HookDataEEEC2EPS5_j.constprop.0
+01e5e714 l     F .text	00000020 _ZN3etl6vectorIPNS_4pairIKm8HookDataEELj5EEC2Ev.constprop.0
+01e5e734 l     F .text	00000024 _ZN3etl8flat_mapIm8HookDataLj5ENS_4lessImEEEC2Ev.constprop.0
+01e5e758 l     F .text	00000018 _ZN3etl16vector_exceptionC2EPKcS2_i.constprop.0
+01e5e770 l     F .text	00000008 _ZN3etl11vector_fullC2EPKci.constprop.0
+01e5e778 l     F .text	00000008 _ZnwjPv.constprop.0
+01e5e780 l     F .text	00000014 _ZN3etl13error_handler18invocation_elementC2Ev.constprop.0
+01e5fa70 l     O .sbss	00000008 _ZZN3etl13error_handler22get_invocation_elementEvE10invocation
+01e5e794 l     F .text	00000048 _ZN3etl13error_handler22get_invocation_elementEv
+01e5fa78 l     O .sbss	00000008 _ZGVZN3etl13error_handler22get_invocation_elementEvE10invocation
+01e5e7dc l     F .text	0000003c _ZN3etl13error_handler5errorERKNS_9exceptionE
+01e5e818 l     F .text	00000094 _ZN3etl5ipool13allocate_itemEv
+01e5e8ac l     F .text	00000060 _ZN3etl5ipool12release_itemEPc
+01e5e90c l     F .text	00000008 _ZN3etl5ipool7releaseEPKv
+01e5e914 l     F .text	00000040 _ZN3etl5ipool8allocateINS_4pairIKm8HookDataEEEEPT_v
+01e5e954 l     F .text	0000002c _ZN3etl13error_handler6createEPvPFvS1_RKNS_9exceptionEE.constprop.0
+01e5f4f8 l     F .text	00000008 _ZN3etl13error_handler13function_stubIXadL_Z17etl_error_handlerRKNS_9exceptionEEEEEvPvS4_
+01e5e980 l     F .text	00000008 _ZN3etl13error_handler12set_callbackIXadL_Z17etl_error_handlerRKNS_9exceptionEEEEEvv
+01e5e988 l     F .text	00000098 _ZZ22replace_DrawPlayerSuckvENUlvE_clEv.constprop.0
+01e5fa4c l     O .data	00000004 _ZZ22replace_DrawPlayerSuckvE10velocity_x
+01e5fa48 l     O .data	00000004 _ZZ22replace_DrawPlayerSuckvE10velocity_y
+01e5ea20 l     F .text	00000078 _Z7ta_initPKvS0_jjj.constprop.0.isra.0
+01e5ea98 l     F .text	00000008 _ZNK3etl4lessImEclERKmS3_.constprop.0.isra.0
+01e5eaa0 l     F .text	00000040 _ZNK3etl19ireference_flat_mapIm8HookDataNS_4lessImEEE14keys_are_equalERKmS6_.constprop.0.isra.0
+01e5eae0 l     F .text	00000008 _ZNK3etl19ireference_flat_mapIm8HookDataNS_4lessImEEE7CompareclERKNS_4pairIKmS1_EERS7_.isra.0
+01e5eae8 l     F .text	00000008 _ZNK3etl19ireference_flat_mapIm8HookDataNS_4lessImEEE8iteratordeEv.isra.0
+01e5eaf0 l     F .text	00000008 _ZN3etl19ireference_flat_mapIm8HookDataNS_4lessImEEE8iteratoraSERKS5_.isra.0
+01e5eaf8 l     F .text	00000040 _ZN3etl4pairINS_19ireference_flat_mapIm8HookDataNS_4lessImEEE8iteratorEbEaSEOS7_.isra.0
+01e5eb38 l     F .text	00000008 _ZNK3etl19ireference_flat_mapIm8HookDataNS_4lessImEEE8iteratorptEv.isra.0
+01e5eb40 l     F .text	0000000c _ZN3etleqERKNS_19ireference_flat_mapIm8HookDataNS_4lessImEEE8iteratorES7_.isra.0
+01e5eb4c l     F .text	00000024 _ZN3etlneERKNS_19ireference_flat_mapIm8HookDataNS_4lessImEEE8iteratorES7_.isra.0
+01e5eb70 l     F .text	0000004c _ZN3etl15distance_helperINS_19ireference_flat_mapIm8HookDataNS_4lessImEEE8iteratorEEENS_15iterator_traitsIT_E15difference_typeES8_S8_NS_26bidirectional_iterator_tagE.constprop.0
+01e5ebbc l     F .text	00000008 _ZN3etl19ireference_flat_mapIm8HookDataNS_4lessImEEE8iteratorC2ERKS5_.isra.0
+01e5ebc4 l     F .text	0000003c _ZN3etl4pairINS_19ireference_flat_mapIm8HookDataNS_4lessImEEE8iteratorEbEC2IRS6_bEEOT_OT0_.constprop.0
+01e5ec00 l     F .text	0000003c _ZN3etl8distanceINS_19ireference_flat_mapIm8HookDataNS_4lessImEEE8iteratorEEENS_15iterator_traitsIT_E15difference_typeES8_S8_.isra.0
+01e5ec3c l     F .text	000000b0 _ZN3etl11lower_boundINS_19ireference_flat_mapIm8HookDataNS_4lessImEEE8iteratorEmNS5_7CompareEEET_S8_S8_RKT0_T1_
+01e5ecec l     F .text	00000008 _ZN3etl11pvoidvector3endEv.isra.0
+01e5ecf4 l     F .text	00000008 _ZN3etl7ivectorIPNS_4pairIKm8HookDataEEE3endEv
+01e5ecfc l     F .text	00000030 _ZN3etl19ireference_flat_mapIm8HookDataNS_4lessImEEE3endEv.isra.0
+01e5ed2c l     F .text	00000024 _ZN3etl9iflat_mapIm8HookDataNS_4lessImEEE3endEv
+01e5ed50 l     F .text	00000008 _ZN3etl11pvoidvector5beginEv.isra.0
+01e5ed58 l     F .text	00000008 _ZN3etl7ivectorIPNS_4pairIKm8HookDataEEE5beginEv
+01e5ed60 l     F .text	00000030 _ZN3etl19ireference_flat_mapIm8HookDataNS_4lessImEEE5beginEv.isra.0
+01e5ed90 l     F .text	00000028 _ZN3etl9iflat_mapIm8HookDataNS_4lessImEEE5beginEv.constprop.0
+01e5edb8 l     F .text	0000007c _ZN3etl9iflat_mapIm8HookDataNS_4lessImEEE5clearEv.constprop.0
+01e5ee34 l     F .text	00000008 _ZN3etl8flat_mapIm8HookDataLj5ENS_4lessImEEED2Ev.constprop.0
+01e5ee3c l     F .text	0000001c _Z41__static_initialization_and_destruction_0ii.constprop.0
+01e5ee58 l     F .text	00000058 _ZN3etl19ireference_flat_mapIm8HookDataNS_4lessImEEE11lower_boundERKm.constprop.0
+01e5eeb0 l     F .text	00000020 _ZN3etl9iflat_mapIm8HookDataNS_4lessImEEE11lower_boundERKm.constprop.0
+01e5eed0 l     F .text	00000068 _Z7ta_freePv.isra.0
+01e5ef38 l     F .text	00000074 _Z9mymemmovePvPKvj.isra.0
+01e5efac l     F .text	00000014 _ZN3etl13copy_backwardIPPvS2_EENS_9enable_ifIXaaaasrNS_10is_pointerIT_EE5valuesrNS4_IT0_EE5valuesrNS_21is_trivially_copyableINS_15iterator_traitsIS5_E10value_typeEEE5valueES7_E4typeES5_S5_S7_.isra.0
+01e5efc0 l     F .text	000000a0 _ZN3etl11pvoidvector6insertEPKPvS1_.isra.0
+01e5f060 l     F .text	00000008 _ZN3etl7ivectorIPNS_4pairIKm8HookDataEEE6insertEPKS5_S5_.isra.0
+01e5f068 l     F .text	00000158 _ZN3etl19ireference_flat_mapIm8HookDataNS_4lessImEEE9insert_atENS4_8iteratorERNS_4pairIKmS1_EE.constprop.0
+01e5f1c0 l     F .text	00000110 _ZN3etl9iflat_mapIm8HookDataNS_4lessImEEE6insertEONS_4pairIKmS1_EE.constprop.0
+01e5f2d0 l     F .text	00000050 _ZN3etl9iflat_mapIm8HookDataNS_4lessImEEEixERKm.constprop.0
+01e5f320 l     F .text	00000008 _ZNK3etl9exception4whatEv.isra.0
+01e5fa50 l     O .data	00000010 _ZZ22replace_DrawPlayerSuckvE1r
 01e5e008 l     F .text	00000008 _GLOBAL__sub_I__Z7ta_initPKvS0_jjj
 01e5e000 l     F .text	00000008 _GLOBAL__sub_D__Z7ta_initPKvS0_jjj
 00000000 l    df *ABS*	00000000 
-01e67700 l       .sbss	00000000 _gp
-01e5f708 g       .fini_array	00000000 _fdata
-01e5f4bc g     F .text	00000084 _Z5setupv
+01e67a50 l       .sbss	00000000 _gp
+01e5fa48 g       .data	00000000 _fdata
+01e5f75c g     F .text	00000084 _Z5setupv
 00000000         *UND*	00000000 __start
 01e5e000 g       .text	00000000 _ftext
-01e5f708 g       .sbss	00000000 __bss_start
-01e5f370 g     F .text	0000003c _Z6rehookm
-01e5f490 g     F .text	00000024 _Z17etl_error_handlerRKN3etl9exceptionE
-01e5f438 g     F .text	00000058 _Z15replace_Startupv
-01e5f3ac g     F .text	0000008c _Z8ps2_putsPKcb
-01e5f33c g     F .text	00000034 _Z6unhookm
-01e5f540 g     O .text	00000098 g_hooks_data
-01e5f708 g       .sbss	00000000 _edata
-01e5f728 g       .sbss	00000000 _end
-01e5f2e4 g     F .text	00000058 _Z4hookmm
-01e5e3cc g     F .text	00000054 _Z22replace_DrawPlayerSuckv
-01e5f708 g       .sbss	00000000 _fbss
+01e5f500 g     F .text	0000003c _Z19wrap_FillScreenRectiiiiffffm
+01e5fa60 g       .sbss	00000000 __bss_start
+01e5f3b4 g     F .text	0000003c _Z6rehookm
+01e5f4d4 g     F .text	00000024 _Z17etl_error_handlerRKN3etl9exceptionE
+01e5f47c g     F .text	00000058 _Z15replace_Startupv
+01e5f3f0 g     F .text	0000008c _Z8ps2_putsPKcb
+01e5f380 g     F .text	00000034 _Z6unhookm
+01e5f7e0 g     O .text	00000098 g_hooks_data
+01e5fa60 g       .sbss	00000000 _edata
+01e5fa80 g       .sbss	00000000 _end
+01e5f328 g     F .text	00000058 _Z4hookmm
+01e5f53c g     F .text	00000220 _Z22replace_DrawPlayerSuckv
+01e5fa60 g       .sbss	00000000 _fbss
 
 
