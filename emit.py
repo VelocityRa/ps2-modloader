@@ -189,7 +189,9 @@ def main():
         pnach_str += "\n"
 
 
-    pnach_str += "// .rodata / .sdata / etc:\n"
+    # Emit data sections
+
+    pnach_str += "// .data / .rodata / .sdata / etc:\n"
 
     rodata_re = re.compile("\s([0-9a-f]+)\s([0-9a-f]{8})\s([0-9a-f]{8})\s([0-9a-f]{8})\s([0-9a-f]{8})")
 

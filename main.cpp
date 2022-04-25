@@ -32,6 +32,9 @@ void USED setup() {
     hook((address)orig_DrawPlayerSuck, (address)&replace_DrawPlayerSuck);
     orig_g_fShowPlayerSuck = 1;
 
+    hook((address)orig_OnCoinSmack, (address)&replace_OnCoinSmack);
+
+
     // Setup epilogue
 
     // Restore orig bytes

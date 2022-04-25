@@ -5,12 +5,10 @@
 
 #include <etl/flat_map.h>
 
-constexpr auto HOOKS_NUM = 5; // TODO: Increase
+constexpr auto HOOKS_NUM = 10;
 
 struct HookData {
-    // u32 orig_func_addr;
     u32 replace_func_addr;
-
     u32 orig_code[2];
 };
 

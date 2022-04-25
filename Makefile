@@ -12,7 +12,6 @@ CXXFLAGS+=-fwhole-program -flto -ffat-lto-objects
 CXXFLAGS+=-fno-use-cxa-atexit -fno-threadsafe-statics -mno-gpopt -fno-tree-loop-distribute-patterns
 CXXFLAGS+=-fno-inline # increases code size
 # CXXFLAGS+=-mabi=eabi -mgp32 -mfp32
-# CXXFLAGS+=-mabi=eabi -mfp32
 # CXXFLAGS+=-mgp32 -mabi=eabi
 
 # LDFLAGS:=-Wl,-Ttext=0x00FF0000 -Wl,-Trodata=0x00FEE000
@@ -20,6 +19,7 @@ LDFLAGS:=-Wl,-Ttext=0x01E5E000 -Wl,-Trodata=0x01F80000
 # LDFLAGS+=-T link.ld
 # LDFLAGS+=-Wl,--verbose
 
+# nostartfiles
 # -fwhole-program -flto -ffat-lto-objects
 # -flto -fwhole-program -ffunction-sections -fdata-sections -ffat-lto-objects
 #  -Wl,--gc-sections -Wl,--print-gc-sections
@@ -27,9 +27,6 @@ LDFLAGS:=-Wl,-Ttext=0x01E5E000 -Wl,-Trodata=0x01F80000
 # -ffunction-sections -Wl,--print-gc-sections -Wl,--gc-sections
 # --print-gc-sections --gc-sections
 #  --verbose
-
-# cat main.out.asm
-
 make:
 	rm -f main.o main.out main.asm main.out.asm
 	$(CXX) $(CXXFLAGS) $(LDFLAGS) main.cpp -o main.out

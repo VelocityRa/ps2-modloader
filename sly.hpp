@@ -4,19 +4,33 @@
 #include "macro_helpers.hpp"
 #include "types.hpp"
 
-#include <etl/string.h>
-#include <etl/to_string.h>
+#include <tinyalloc.h>
+// #include <etl/string.h>
+#include <etl/vector.h>
+// #include <etl/to_string.h>
 
 #include <math.h>
 
-struct GIFS{};
+struct orig_GIFS{};
+struct orig_CFont{};
+struct orig_COIN{};
+
+// Original structs
+struct orig_CTextBox {
+    float x, y, dx, dy;
+    u32 rgba;
+    float jh, jv;
+};
+static_assert(sizeof(orig_CTextBox) == 0x1C);
 
 // Original functions
 DECLARE_FUNC(orig__start, 0x00100008, void);
 DECLARE_FUNC(orig_Startup, 0x00192770, void);
 DECLARE_FUNC(orig_serialPutchar, 0x002135F8, void, u64 c);
-DECLARE_FUNC(orig_FillScreenRect, 0x001AF498, void, int r, int g, int b, int alpha, float xLeft, float yTop, float xRight, float yBottom, GIFS *pgifs);
+DECLARE_FUNC(orig_FillScreenRect, 0x001AF498, void, int r, int g, int b, int alpha, float xLeft, float yTop, float xRight, float yBottom, orig_GIFS *pgifs);
+DECLARE_FUNC(orig_CFont_DrawPchz, 0x00164340, void, orig_CFont* this_, char *pchz, orig_CTextBox *ptbx, orig_CTextBox *ptbxClip, orig_GIFS* pgifs);
 DECLARE_FUNC(orig_DrawPlayerSuck, 0x001bd898, void);
+DECLARE_FUNC(orig_OnCoinSmack, 0x0014dbc0, void, orig_COIN* coin);
 DECLARE_FUNC(orig_sinf, 0x00221db0, float, float);
 DECLARE_FUNC(orig_fabsf, 0x00221ca8, float, float);
 DECLARE_FUNC(orig_fmodf, 0x00222250, float, float, float);
@@ -25,8 +39,10 @@ DECLARE_FUNC(orig_rand, 0x00212a90, int, void);
 // Original statics
 DECLARE_STATIC(orig_g_fShowPlayerSuck, u32, 0x002890f0);
 // DECLARE_STATIC(orig_pgifs, GIFS*, 0x002760e0);
+DECLARE_STATIC(orig_g_gifs, orig_GIFS, 0x002760e0);
+DECLARE_STATIC(orig_g_pfont, orig_CFont*, 0x002760d0);
 DECLARE_STATIC(orig_clock, float, 0x20274B20);
-
+DECLARE_STATIC(orig_coin_count, u32, 0x002775D8);
 
 // Utilities
 
@@ -63,9 +79,9 @@ void USED replace_Startup() {
     rehook((address)orig_Startup);
 }
 
-USED NOINLINE void wrap_FillScreenRect(int r,int g,int b,int alpha, float xLeft,
-    float yTop, float xRight, float yBottom, address pgifs) {
-        // Reconcile for ABI / calling conventions differences
+void USED NOINLINE wrap_FillScreenRect(int r,int g,int b,int alpha, float xLeft,
+    float yTop, float xRight, float yBottom, orig_GIFS* pgifs) {
+        // Reconcile ABI / calling conventions differences
         // The rest of the args are untouched
     asm (
         "mov.S $f12, $f16\n\t"
@@ -92,83 +108,158 @@ USED NOINLINE void wrap_FillScreenRect(int r,int g,int b,int alpha, float xLeft,
     );
 }
 
+// void USED NOINLINE wrap_CFont_DrawPchz(
+//     orig_CFont* this_, char *pchz, orig_CTextBox *ptbx, orig_CTextBox *ptbxClip, orig_GIFS* pgifs) {
+//         // Reconcile for ABI / calling conventions differences
+//         // The rest of the args are untouched
+//     asm (
+//         // "lw $a4, 16($sp)\n\t"
+//         "jal %[aCFont_DrawPchz]\n\t"
+//         "nop"
+//         : /* no outputs */
+//         : /* inputs, not used in asm but are here to force call sites to
+//              actually pass them */
+//         [athis_] "r" (this_),
+//         [apchz] "r" (pchz),
+//         [aptbx] "r" (ptbx),
+//         [aptbxClip] "r" (ptbxClip),
+//         [apgifs] "r" (pgifs),
+//         [aCFont_DrawPchz] "r" ((address)orig_CFont_DrawPchz)
+//         : "t0", "ra", "memory"
+//     );
+// }
+
+const float& time = orig_clock;
+const auto sin_ = orig_sinf;
+const auto abs_ = orig_fabsf;
+const auto mod_ = orig_fmodf;
+
+// [0, 1]
+float USED randf() {
+    return float(orig_rand()) / float(0x7FFFFFFF);
+}
+
+constexpr float screen_w = 640.f;
+constexpr float screen_h = 488.f;
+constexpr float ratio_fix = (16.f / 9.f) / (4.f / 3.f);
+
+struct rect_t {
+    float x;
+    float y;
+    float sz;
+    float dsz;
+    float vx;
+    float vy;
+    u8 cr, cg, cb, ca;
+    float dcr, dcg, dcb, dca;
+    u8 dir_x : 1;
+    u8 dir_y : 1;
+
+    rect_t() {
+        x = randf() * screen_w;
+        y = randf() * screen_h;
+        dir_x = orig_rand() & 1;
+        dir_y = orig_rand() & 1;
+        dcr = 0.1f + randf() * 2.f;
+        dcg = 0.1f + randf() * 2.f;
+        dcb = 0.1f + randf() * 2.f;
+        dsz = 0.1f + randf();
+        dca = 0.1f + randf();
+        randomize_velocity();
+    }
+    void randomize_velocity() {
+        vx = 3.3f + (randf() - 0.5f) * 2.f;
+        vy = 3.3f + (randf() - 0.5f) * 2.f;
+    }
+    void update_draw() {
+        sz = 80 + (sin_(time * dsz) * 50.f);
+        cr = 0xFF * abs_(sin_(time * dcr));
+        cg = 0xFF * abs_(sin_(time * dcg));
+        cb = 0xFF * abs_(sin_(time * dcb));
+        ca = 0x80 * abs_(sin_(time * dca));
+        if (dir_x) {
+            x = x + vx;
+            if (x >= screen_w - sz) {
+                dir_x = 0;
+                randomize_velocity();
+            }
+        } else {
+            x = x - vx;
+            if (x <= 0) {
+                dir_x = 1;
+                randomize_velocity();
+            }
+        }
+        if (dir_y) {
+            y = y + vy;
+            if (y >= screen_h - sz) {
+                dir_y = 0;
+                randomize_velocity();
+            }
+        } else {
+            y = y - vy;
+            if (y <= 0) {
+                dir_y = 1;
+                randomize_velocity();
+            }
+        }
+
+        const float xLeft = x;
+        const float yTop = y;
+        const float xRight = x + sz;
+        const float yBottom = y + sz;
+
+        wrap_FillScreenRect(cr, cg, cb, ca, xLeft, yTop, xRight, yBottom, &orig_g_gifs);
+    }
+};
+
+orig_CTextBox textbox{0, 0, screen_w, screen_h, 0xFFFFFFFF, 1, 1};
+
+constexpr int RECT_COUNT = 100;
+etl::vector<rect_t, RECT_COUNT> rects;
 
 void USED replace_DrawPlayerSuck() {
+    // static bool rects_inited{};
+    // if (!rects_inited) {
+    //     for (int i = 0; i < RECT_COUNT; ++i)
+    //         rects.emplace_back();
+    //     rects_inited = true;
+    // }
+
+    if (orig_coin_count < 4) {
+        if (orig_coin_count > 0) {
+            textbox.dy = screen_h / 3;
+            orig_CFont_DrawPchz(orig_g_pfont, "get", &textbox, nullptr, &orig_g_gifs);
+        }
+        if (orig_coin_count > 1) {
+            textbox.dy = screen_h / 3 * 2;
+            orig_CFont_DrawPchz(orig_g_pfont, "owned", &textbox, nullptr, &orig_g_gifs);
+        }
+        if (orig_coin_count > 2) {
+            textbox.dy = screen_h;
+            orig_CFont_DrawPchz(orig_g_pfont, "lmao", &textbox, nullptr, &orig_g_gifs);
+        }
+    }
+    if (orig_coin_count > 3) {
+        for (auto& r : rects) {
+            r.update_draw();
+        }
+    }
+
     // unhook((address)orig_DrawPlayerSuck);
-
-    // orig_FillScreenRect(0xFF, 0x00, 0x00, 0xFF, 10.f, 10.f, 100.f, 100.f, orig_pgifs);
-    // wrap_FillScreenRect(0x00, 0xFF, 0x00, 0xFF, 10.f, 10.f, 100.f, 100.f, orig_pgifs);
-
-    const float time = orig_clock;
-
-    const auto sin_ = orig_sinf;
-    const auto abs_ = orig_fabsf;
-    const auto mod_ = orig_fmodf;
-
-    const int col_r = 0xFF * abs_(sin_(time));
-    const int col_g = 0xFF * abs_(sin_(time * 0.6f));
-    const int col_b = 0xFF * abs_(sin_(time * 1.39f));
-
-    constexpr float screen_x = 640.f;
-    constexpr float screen_y = 488.f;
-    constexpr float ratio_fix = (16.f / 9.f) / (4.f / 3.f);
-
-    struct rect_t {
-        float x, y, s;
-        u8 dir_x : 1;
-        u8 dir_y : 1;
-        // float x, y, w, h;
-    };
-    static rect_t r{ 0, 0, 100, 1, 1 };
-
-    static float velocity_x = 3.7f;
-    static float velocity_y = 3.1f;
-
-    // Update
-    auto randomize_velocity = [&]() mutable {
-        velocity_x = 3.f + (float(orig_rand() / 0xFFFFFFFF) - 0.5f) * 2.f;
-        velocity_y = 3.f + (float(orig_rand() / 0xFFFFFFFF) - 0.5f) * 2.f;
-    };
-    r.s = 100 + (sin_(time * 0.74f) * 50.f);
-    if (r.dir_x) {
-        r.x = r.x + velocity_x;
-        if (r.x >= screen_x - r.s) {
-            r.dir_x = 0;
-            randomize_velocity();
-        }
-    } else {
-        r.x = r.x - velocity_x;
-        if (r.x <= 0) {
-            r.dir_x = 1;
-            randomize_velocity();
-        }
-    }
-    if (r.dir_y) {
-        r.y = r.y + velocity_y;
-        if (r.y >= screen_y - r.s) {
-            r.dir_y = 0;
-            randomize_velocity();
-        }
-    } else {
-        r.y = r.y - velocity_y;
-        if (r.y <= 0) {
-            r.dir_y = 1;
-            randomize_velocity();
-        }
-    }
-
-    // Draw
-    const float xLeft = r.x;
-    const float yTop = r.y;
-    const float xRight = r.x + r.s;
-    const float yBottom = r.y + r.s;
-
-    const int alpha = 0xFF;
-    wrap_FillScreenRect(col_r, col_g, col_b, alpha, xLeft, yTop, xRight, yBottom, 0x002760e0);
-
-    // ps2_puts("DrawPlayerSuck");
-
     // orig_DrawPlayerSuck();
-
     // rehook((address)orig_DrawPlayerSuck);
+}
+
+void USED replace_OnCoinSmack(orig_COIN* coin) {
+    if (orig_coin_count > 3) {
+        for (int i = 0; i < 7; i++) {
+            if (rects.size() < rects.capacity())
+                rects.emplace_back();
+        }
+    }
+
+    unhook((address)orig_OnCoinSmack);
+    orig_OnCoinSmack(coin);
+    rehook((address)orig_OnCoinSmack);
 }
